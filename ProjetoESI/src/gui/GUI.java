@@ -18,9 +18,11 @@ public class GUI {
 	private void createAndShowGUI() {
 		frame = new JFrame();
 		frame.setTitle("Projeto ES1");
+		frame.setSize(900, 900);
 		frame.setLayout(new FlowLayout());
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		
 
 		JLabel dci = new JLabel("DCI");
 		frame.add(dci);
