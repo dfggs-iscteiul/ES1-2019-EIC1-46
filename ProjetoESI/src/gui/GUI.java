@@ -2,11 +2,17 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class GUI {
 
@@ -75,7 +81,27 @@ public class GUI {
 		frame.add(rowPanel2);
 		frame.add(rowPanel3);
 		frame.add(rowPanel4);
+		
+		JButton button = new JButton("Importar ficheiro");
+		button.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser filechooser = new JFileChooser("Importar ficheiro");
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel file", "xls", "xlsx");
+				filechooser.setFileFilter(filter);
+				int returnVal = filechooser.showOpenDialog(null);
+				if(returnVal == JFileChooser.APPROVE_OPTION) {
+				   System.out.println("Escolheu abrir o ficheiro: " +
+						   filechooser.getSelectedFile().getName());
+				}
+			}
+		});
+		
+		frame.add(button);
+		
 		frame.pack();
+		
 	}
 
 	public static void main(String[] args) {
