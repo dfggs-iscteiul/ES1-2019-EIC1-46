@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -34,7 +35,7 @@ public class GUI {
 		JLabel dii = new JLabel("DII");
 		JLabel adci = new JLabel("ADCI");
 		JLabel addi = new JLabel("ADII");
-		
+
 		JTextField textField1 = new JTextField("");
 		JTextField textField2 = new JTextField("");
 		JTextField textField3 = new JTextField("");
@@ -44,7 +45,7 @@ public class GUI {
 		textField2.setPreferredSize(new Dimension(80, 20));
 		textField3.setPreferredSize(new Dimension(80, 20));
 		textField4.setPreferredSize(new Dimension(80, 20));
-		
+
 		textField4.setEditable(false);
 		textField1.setEditable(false);
 		textField2.setEditable(false);
@@ -54,13 +55,13 @@ public class GUI {
 		JPanel rowPanel2 = new JPanel();
 		JPanel rowPanel3 = new JPanel();
 		JPanel rowPanel4 = new JPanel();
-		
+
 		rowPanel1.add(dci);
 		rowPanel1.add(textField1);
-		
+
 		rowPanel2.add(dii);
 		rowPanel2.add(textField2);
-		
+
 		rowPanel3.add(adci);
 		rowPanel3.add(textField3);
 
@@ -82,6 +83,7 @@ public class GUI {
 		frame.add(rowPanel3);
 		frame.add(rowPanel4);
 		JButton button = new JButton("Importar ficheiro");
+
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -90,8 +92,8 @@ public class GUI {
 				filechooser.setFileFilter(filter);
 				int returnVal = filechooser.showOpenDialog(null);
 				if(returnVal == JFileChooser.APPROVE_OPTION) {
-				   System.out.println("Escolheu abrir o ficheiro: " +
-						   filechooser.getSelectedFile().getName());
+					File ficheiro = filechooser.getSelectedFile();
+					System.out.println("Escolheu abrir o ficheiro: " + ficheiro.getName());
 				}
 			}
 		});
