@@ -81,10 +81,8 @@ public class GUI {
 		frame.add(rowPanel2);
 		frame.add(rowPanel3);
 		frame.add(rowPanel4);
-		
 		JButton button = new JButton("Importar ficheiro");
 		button.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser filechooser = new JFileChooser("Importar ficheiro");
@@ -97,11 +95,8 @@ public class GUI {
 				}
 			}
 		});
-		
 		frame.add(button);
-		
 		frame.pack();
-		
 	}
 
 	public static void main(String[] args) {
