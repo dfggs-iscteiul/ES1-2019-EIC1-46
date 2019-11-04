@@ -12,63 +12,71 @@ public class GUI {
 
 	private JFrame frame;
 
-	//Modificar depois o titulo
-	//Nao especifiquei o size porque ainda faltam acrescentar thresholds, visualização de dados ,etc
+	// Modificar depois o titulo
+	// Nao especifiquei o size porque ainda faltam acrescentar thresholds,
+	// visualização de dados ,etc
 
 	private void createAndShowGUI() {
 		frame = new JFrame();
 		frame.setTitle("Projeto ES1");
-		frame.setSize(900, 900);
+		frame.setPreferredSize(new Dimension(900, 900));
 		frame.setLayout(new FlowLayout());
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		
 
 		JLabel dci = new JLabel("DCI");
-		frame.add(dci);
-		JTextField textField1 = new JTextField("");
-		textField1.setPreferredSize(new Dimension(80, 20));
-		textField1.setEditable(false);
-		frame.add(textField1);
-		JPanel rowPanel1 = new JPanel();
-		rowPanel1.add( dci );
-		rowPanel1.add( textField1 );
-		frame.add( rowPanel1 );
 		JLabel dii = new JLabel("DII");
-		frame.add(dii);
-		JTextField textField2 = new JTextField("");
-		textField2.setPreferredSize(new Dimension(80, 20));
-		textField2.setEditable(false);
-		frame.add(textField2);
-		JPanel rowPanel2 = new JPanel();
-		rowPanel2.add( dii );
-		rowPanel2.add( textField2 );
-		frame.add( rowPanel2 );
 		JLabel adci = new JLabel("ADCI");
-		frame.add(adci);
-		JTextField textField3 = new JTextField("");
-		textField3.setPreferredSize(new Dimension(80, 20));
-		textField3.setEditable(false);
-		frame.add(textField3);
-		JPanel rowPanel3 = new JPanel();
-		rowPanel3.add( adci );
-		rowPanel3.add( textField3 );
-		frame.add( rowPanel3 );
 		JLabel addi = new JLabel("ADII");
-		frame.add(addi);
+		
+		JTextField textField1 = new JTextField("");
+		JTextField textField2 = new JTextField("");
+		JTextField textField3 = new JTextField("");
 		JTextField textField4 = new JTextField("");
+
+		textField1.setPreferredSize(new Dimension(80, 20));
+		textField2.setPreferredSize(new Dimension(80, 20));
+		textField3.setPreferredSize(new Dimension(80, 20));
 		textField4.setPreferredSize(new Dimension(80, 20));
+		
 		textField4.setEditable(false);
-		frame.add(textField4);
+		textField1.setEditable(false);
+		textField2.setEditable(false);
+		textField3.setEditable(false);
+
+		JPanel rowPanel1 = new JPanel();
+		JPanel rowPanel2 = new JPanel();
+		JPanel rowPanel3 = new JPanel();
 		JPanel rowPanel4 = new JPanel();
-		rowPanel4.add( dii );
-		rowPanel4.add( textField4 );
-		frame.add( rowPanel2 );
-		frame.add( rowPanel3 );
-		frame.add( rowPanel4 );
+		
+		rowPanel1.add(dci);
+		rowPanel1.add(textField1);
+		
+		rowPanel2.add(dii);
+		rowPanel2.add(textField2);
+		
+		rowPanel3.add(adci);
+		rowPanel3.add(textField3);
+
+		rowPanel4.add(dii);
+		rowPanel4.add(textField4);
+
+		frame.add(dci);
+		frame.add(textField1);
+		frame.add(rowPanel1);
+		frame.add(dii);
+		frame.add(textField2);
+		frame.add(rowPanel2);
+		frame.add(adci);
+		frame.add(textField3);
+		frame.add(rowPanel3);
+		frame.add(addi);
+		frame.add(textField4);
+		frame.add(rowPanel2);
+		frame.add(rowPanel3);
+		frame.add(rowPanel4);
 		frame.pack();
 	}
-
 
 	public static void main(String[] args) {
 		GUI gui = new GUI();
