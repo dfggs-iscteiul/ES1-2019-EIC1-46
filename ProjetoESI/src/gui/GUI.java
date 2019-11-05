@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import code.BuildObjetsFromExcel;
+
 public class GUI {
 
 	private JFrame frame;
@@ -91,8 +93,10 @@ public class GUI {
 				filechooser.setFileFilter(filter);
 				int returnVal = filechooser.showOpenDialog(null);
 				if(returnVal == JFileChooser.APPROVE_OPTION) {
+					
 					file = filechooser.getSelectedFile();
 					System.out.println("Escolheu abrir o ficheiro: " + file.getName());
+					BuildObjetsFromExcel dados = new BuildObjetsFromExcel(file);
 				}
 			}
 		});
