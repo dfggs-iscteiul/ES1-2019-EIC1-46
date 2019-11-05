@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -37,6 +38,11 @@ public class GUI {
 		JLabel dii = new JLabel("DII");
 		JLabel adci = new JLabel("ADCI");
 		JLabel addi = new JLabel("ADII");
+		JLabel thresholds = new JLabel("Thresholds");
+		JLabel loc = new JLabel("LOC");
+		JLabel cyclo = new JLabel("CYCLO");
+		JLabel atfd = new JLabel("ATFD");
+		JLabel laa = new JLabel("LAA");
 
 		JTextField textField1 = new JTextField("");
 		JTextField textField2 = new JTextField("");
@@ -69,6 +75,8 @@ public class GUI {
 
 		rowPanel4.add(dii);
 		rowPanel4.add(textField4);
+		
+		
 
 		frame.add(dci);
 		frame.add(textField1);
@@ -84,7 +92,6 @@ public class GUI {
 		frame.add(rowPanel2);
 		frame.add(rowPanel3);
 		frame.add(rowPanel4);
-		
 		JButton button = new JButton("Importar ficheiro");
 
 		button.addActionListener(new ActionListener() {
