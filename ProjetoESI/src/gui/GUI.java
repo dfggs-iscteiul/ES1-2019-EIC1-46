@@ -38,21 +38,22 @@ public class GUI {
 		JLabel dii = new JLabel("DII");
 		JLabel adci = new JLabel("ADCI");
 		JLabel addi = new JLabel("ADII");
-		JLabel thresholds = new JLabel("Thresholds");
+//		JLabel thresholds = new JLabel("Thresholds");
 //		JLabel loc = new JLabel("LOC");
 //		JLabel cyclo = new JLabel("CYCLO");
 //		JLabel atfd = new JLabel("ATFD");
 //		JLabel laa = new JLabel("LAA");
-
-		JTextField textField1 = new JTextField("");
-		JTextField textField2 = new JTextField("");
-		JTextField textField3 = new JTextField("");
-		JTextField textField4 = new JTextField("");
+		JTextField
+			textField1 = new JTextField(""),
+			textField2 = new JTextField(""),
+			textField3 = new JTextField(""),
+			textField4 = new JTextField("");
 		
-		JPanel rowPanel1 = new JPanel();
-		JPanel rowPanel2 = new JPanel();
-		JPanel rowPanel3 = new JPanel();
-		JPanel rowPanel4 = new JPanel();
+		JPanel
+		rowPanel1 = new JPanel(),
+		rowPanel2 = new JPanel(),
+		rowPanel3 = new JPanel(),
+		rowPanel4 = new JPanel();
 
 		textField1.setPreferredSize(new Dimension(80, 20));
 		textField2.setPreferredSize(new Dimension(80, 20));
@@ -73,22 +74,10 @@ public class GUI {
 		rowPanel3.add(adci);
 		rowPanel3.add(textField3);
 
-		rowPanel4.add(dii);
+		rowPanel4.add(addi);
 		rowPanel4.add(textField4);
 		
-		
-
-		frame.add(dci);
-		frame.add(textField1);
 		frame.add(rowPanel1);
-		frame.add(dii);
-		frame.add(textField2);
-		frame.add(rowPanel2);
-		frame.add(adci);
-		frame.add(textField3);
-		frame.add(rowPanel3);
-		frame.add(addi);
-		frame.add(textField4);
 		frame.add(rowPanel2);
 		frame.add(rowPanel3);
 		frame.add(rowPanel4);
