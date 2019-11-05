@@ -2,15 +2,23 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class GUI {
 
 	private JFrame frame;
+	private File file;
 
 	// Modificar depois o titulo
 	// Nao especifiquei o size porque ainda faltam acrescentar thresholds,
@@ -29,7 +37,7 @@ public class GUI {
 		JLabel dii = new JLabel("DII");
 		JLabel adci = new JLabel("ADCI");
 		JLabel addi = new JLabel("ADII");
-		
+
 		JTextField textField1 = new JTextField("");
 		JTextField textField2 = new JTextField("");
 		JTextField textField3 = new JTextField("");
@@ -44,7 +52,7 @@ public class GUI {
 		textField2.setPreferredSize(new Dimension(80, 20));
 		textField3.setPreferredSize(new Dimension(80, 20));
 		textField4.setPreferredSize(new Dimension(80, 20));
-		
+
 		textField4.setEditable(false);
 		textField1.setEditable(false);
 		textField2.setEditable(false);
@@ -52,10 +60,10 @@ public class GUI {
 
 		rowPanel1.add(dci);
 		rowPanel1.add(textField1);
-		
+
 		rowPanel2.add(dii);
 		rowPanel2.add(textField2);
-		
+
 		rowPanel3.add(adci);
 		rowPanel3.add(textField3);
 
@@ -76,6 +84,23 @@ public class GUI {
 		frame.add(rowPanel2);
 		frame.add(rowPanel3);
 		frame.add(rowPanel4);
+		
+		JButton button = new JButton("Importar ficheiro");
+
+		button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser filechooser = new JFileChooser("Importar ficheiro");
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel file", "xls", "xlsx");
+				filechooser.setFileFilter(filter);
+				int returnVal = filechooser.showOpenDialog(null);
+				if(returnVal == JFileChooser.APPROVE_OPTION) {
+					file = filechooser.getSelectedFile();
+					System.out.println("Escolheu abrir o ficheiro: " + file.getName());
+				}
+			}
+		});
+		frame.add(button);
 		frame.pack();
 	}
 
