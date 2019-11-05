@@ -11,9 +11,11 @@ public class BuildObjetsFromExcel {
 	
 		public void BuildObjects() {
 			try {
-				String caminhoPasta = System.getProperty("user.dir");
-				String caminhoArquivo = caminhoPasta + "//src/DataEs1.csv";
-				BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo));
+				//fetches the directory or path of the workspace for the current project
+				String pathWorkspace = System.getProperty("user.dir");
+				
+				String finalPath = pathWorkspace + "/src/DataEs1.csv";
+				BufferedReader br = new BufferedReader(new FileReader(finalPath));
 				
 				//Primeira Linha do Excel
 				String linhaExcel = br.readLine();
