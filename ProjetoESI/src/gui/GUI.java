@@ -15,6 +15,7 @@ public class GUI {
 	// Modificar depois o titulo
 	// Nao especifiquei o size porque ainda faltam acrescentar thresholds,
 	// visualização de dados ,etc
+	// a
 
 	private void createAndShowGUI() {
 		frame = new JFrame();
