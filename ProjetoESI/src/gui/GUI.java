@@ -33,6 +33,11 @@ public class GUI {
 		JTextField textField2 = new JTextField("");
 		JTextField textField3 = new JTextField("");
 		JTextField textField4 = new JTextField("");
+		
+		JPanel rowPanel1 = new JPanel();
+		JPanel rowPanel2 = new JPanel();
+		JPanel rowPanel3 = new JPanel();
+		JPanel rowPanel4 = new JPanel();
 
 		textField1.setPreferredSize(new Dimension(80, 20));
 		textField2.setPreferredSize(new Dimension(80, 20));
@@ -44,11 +49,6 @@ public class GUI {
 		textField2.setEditable(false);
 		textField3.setEditable(false);
 
-		JPanel rowPanel1 = new JPanel();
-		JPanel rowPanel2 = new JPanel();
-		JPanel rowPanel3 = new JPanel();
-		JPanel rowPanel4 = new JPanel();
-		
 		rowPanel1.add(dci);
 		rowPanel1.add(textField1);
 		
