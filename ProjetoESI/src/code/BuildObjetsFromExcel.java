@@ -17,22 +17,29 @@ public class BuildObjetsFromExcel {
 				
 				//Primeira Linha do Excel
 				String linhaExcel = br.readLine();
-				//Segunda Linha do excel é a partir daqui que nos interessa criar os objetos
+				//Segunda Linha do excel é a partir daqui que nos interessa criar os objetos			
 				linhaExcel = br.readLine();
 				
 				while (linhaExcel != null) {
+
 					String[] linha = linhaExcel.split(",");
 					vectorToDataEntry(linha);
 					linhaExcel = br.readLine();
 				
 				}
 				br.close();
-				for (DataEntry x : dataEntry) {
-					System.out.println(x.toString());
-				}
+				
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+			finally{				
+				for (DataEntry x : dataEntry) {
+					System.out.println(x.toString());
+				}
+			}
+			
 		}
 
 		public void vectorToDataEntry(String[] linhaExcel) {
@@ -54,6 +61,8 @@ public class BuildObjetsFromExcel {
 					PMD, Is_Feature_Envy);
 			
 			dataEntry.add(de);
+			
+			
 		}
 
 		public static void main(String[] args) {

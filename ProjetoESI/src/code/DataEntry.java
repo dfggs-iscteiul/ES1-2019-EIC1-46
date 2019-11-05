@@ -31,8 +31,7 @@ public class DataEntry {
 		this.IPlasma=IPlasma;
 		this.PMD=PMD;
 		this.Is_Feature_Envy=Is_Feature_Envy;
-		System.out.println("Data Entry with the Method ID: "+this.MethodId+""
-				+ " was successfully created!");
+		
 	}
 	
 	public int getEntryMethodId() {
