@@ -31,7 +31,8 @@ public class DataEntry {
 		this.IPlasma=IPlasma;
 		this.PMD=PMD;
 		this.Is_Feature_Envy=Is_Feature_Envy;
-		System.out.println("Data Entry with the Method ID: "+this.MethodId+" was successfully created!");
+		System.out.println("Data Entry with the Method ID: "+this.MethodId+""
+				+ " was successfully created!");
 	}
 	
 	public int getEntryMethodId() {
@@ -80,6 +81,14 @@ public class DataEntry {
 
 	public boolean Is_Feature_Envy() {
 		return Is_Feature_Envy;
+	}
+
+	@Override
+	public String toString() {
+		return "DataEntry [MethodId=" + MethodId + ", Package=" + Package + ", Class=" + Class + ", Method=" + Method
+				+ ", LOC=" + LOC + ", CYCLO=" + CYCLO + ", ATFD=" + ATFD + ", LAA=" + LAA + ", Is_Long_Method="
+				+ Is_Long_Method + ", IPlasma=" + IPlasma + ", PMD=" + PMD + ", Is_Feature_Envy=" + Is_Feature_Envy
+				+ "]";
 	}
 
 	
