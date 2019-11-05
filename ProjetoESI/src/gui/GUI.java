@@ -23,7 +23,8 @@ public class GUI {
 	// Modificar depois o titulo
 	// Nao especifiquei o size porque ainda faltam acrescentar thresholds,
 	// visualização de dados ,etc
-	// Thresholds estão no código mas ainda não foram adicionados à frame
+	// Thresholds estão no código mas ainda não foram adicionados à frame,
+	// Deixei comentado por agora, isto provavelmente vai ter que ser feito de outra forma e numa bar
 
 	private void createAndShowGUI() {
 		frame = new JFrame();
@@ -38,10 +39,10 @@ public class GUI {
 		JLabel adci = new JLabel("ADCI");
 		JLabel addi = new JLabel("ADII");
 		JLabel thresholds = new JLabel("Thresholds");
-		JLabel loc = new JLabel("LOC");
-		JLabel cyclo = new JLabel("CYCLO");
-		JLabel atfd = new JLabel("ATFD");
-		JLabel laa = new JLabel("LAA");
+//		JLabel loc = new JLabel("LOC");
+//		JLabel cyclo = new JLabel("CYCLO");
+//		JLabel atfd = new JLabel("ATFD");
+//		JLabel laa = new JLabel("LAA");
 
 		JTextField textField1 = new JTextField("");
 		JTextField textField2 = new JTextField("");
