@@ -24,7 +24,13 @@ public class LerDadosExcel {
 			e.printStackTrace();
 		}
 		
-		XSSFWorkbook workbook = new XSSFWorkbook();
+		XSSFWorkbook workbook=null;
+		try {
+			workbook = new XSSFWorkbook(fis);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		XSSFSheet sheet = workbook.getSheetAt(0);
 		
