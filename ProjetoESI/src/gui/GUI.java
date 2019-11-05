@@ -18,6 +18,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class GUI {
 
 	private JFrame frame;
+	private File file;
 
 	// Modificar depois o titulo
 	// Nao especifiquei o size porque ainda faltam acrescentar thresholds,
@@ -82,6 +83,7 @@ public class GUI {
 		frame.add(rowPanel2);
 		frame.add(rowPanel3);
 		frame.add(rowPanel4);
+		
 		JButton button = new JButton("Importar ficheiro");
 
 		button.addActionListener(new ActionListener() {
@@ -92,8 +94,8 @@ public class GUI {
 				filechooser.setFileFilter(filter);
 				int returnVal = filechooser.showOpenDialog(null);
 				if(returnVal == JFileChooser.APPROVE_OPTION) {
-					File ficheiro = filechooser.getSelectedFile();
-					System.out.println("Escolheu abrir o ficheiro: " + ficheiro.getName());
+					file = filechooser.getSelectedFile();
+					System.out.println("Escolheu abrir o ficheiro: " + file.getName());
 				}
 			}
 		});
