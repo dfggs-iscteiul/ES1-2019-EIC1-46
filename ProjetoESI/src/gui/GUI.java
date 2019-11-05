@@ -26,7 +26,7 @@ public class GUI {
 	// Thresholds estão no código mas ainda não foram adicionados à frame,
 	// Deixei comentado por agora, isto provavelmente vai ter que ser feito de outra forma e numa bar
 
-	private void createAndShowGUI() {
+	public void createAndShowGUI() {
 		frame = new JFrame();
 		frame.setTitle("Projeto ES1");
 		frame.setPreferredSize(new Dimension(900, 900));
@@ -110,10 +110,4 @@ public class GUI {
 		frame.add(button);
 		frame.pack();
 	}
-
-	public static void main(String[] args) {
-		GUI gui = new GUI();
-		gui.createAndShowGUI();
-	}
-
 }
