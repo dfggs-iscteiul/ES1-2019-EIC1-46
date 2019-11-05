@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -24,7 +23,7 @@ public class GUI {
 	// Modificar depois o titulo
 	// Nao especifiquei o size porque ainda faltam acrescentar thresholds,
 	// visualização de dados ,etc
-	// a
+	// Thresholds estão no código mas ainda não foram adicionados à frame
 
 	private void createAndShowGUI() {
 		frame = new JFrame();
