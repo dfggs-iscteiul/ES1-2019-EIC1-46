@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -10,6 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
@@ -23,10 +27,6 @@ public class GUI {
 	private File file;
 
 	// Modificar depois o titulo
-	// Nao especifiquei o size porque ainda faltam acrescentar thresholds,
-	// visualização de dados ,etc
-	// Thresholds estão no código mas ainda não foram adicionados à frame,
-	// Deixei comentado por agora, isto provavelmente vai ter que ser feito de outra forma e numa bar
 
 	public void createAndShowGUI() {
 		frame = new JFrame();
@@ -36,15 +36,12 @@ public class GUI {
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 
-		JLabel dci = new JLabel("DCI");
-		JLabel dii = new JLabel("DII");
-		JLabel adci = new JLabel("ADCI");
-		JLabel addi = new JLabel("ADII");
-//		JLabel thresholds = new JLabel("Thresholds");
-//		JLabel loc = new JLabel("LOC");
-//		JLabel cyclo = new JLabel("CYCLO");
-//		JLabel atfd = new JLabel("ATFD");
-//		JLabel laa = new JLabel("LAA");
+		JLabel
+			dci = new JLabel("DCI"),
+			dii = new JLabel("DII"),
+			adci = new JLabel("ADCI"),
+			addi = new JLabel("ADII");
+
 		JTextField
 			textField1 = new JTextField(""),
 			textField2 = new JTextField(""),
@@ -52,10 +49,11 @@ public class GUI {
 			textField4 = new JTextField("");
 		
 		JPanel
-		rowPanel1 = new JPanel(),
-		rowPanel2 = new JPanel(),
-		rowPanel3 = new JPanel(),
-		rowPanel4 = new JPanel();
+			rowPanel1 = new JPanel(),
+			rowPanel2 = new JPanel(),
+			rowPanel3 = new JPanel(),
+			rowPanel4 = new JPanel(),
+			controlPanel = new JPanel();
 
 		textField1.setPreferredSize(new Dimension(80, 20));
 		textField2.setPreferredSize(new Dimension(80, 20));
@@ -79,10 +77,6 @@ public class GUI {
 		rowPanel4.add(addi);
 		rowPanel4.add(textField4);
 		
-		frame.add(rowPanel1);
-		frame.add(rowPanel2);
-		frame.add(rowPanel3);
-		frame.add(rowPanel4);
 		JButton button = new JButton("Importar ficheiro");
 
 		button.addActionListener(new ActionListener() {
@@ -100,7 +94,23 @@ public class GUI {
 				}
 			}
 		});
-		frame.add(button);
+		
+        controlPanel.add(rowPanel1);
+        controlPanel.add(rowPanel2);
+        controlPanel.add(rowPanel3);
+        controlPanel.add(rowPanel4);
+        controlPanel.add(button);
+		
+		JMenuBar mb = new JMenuBar();
+        JMenu m1 = new JMenu("Definir Thresholds");
+        mb.add(m1);
+        JMenuItem m11 = new JMenuItem("LOC");
+        JMenuItem m22 = new JMenuItem("CYCLO");
+        m1.add(m11);
+        m1.add(m22);
+		
+        frame.getContentPane().add(BorderLayout.NORTH, mb);
+        frame.getContentPane().add(BorderLayout.CENTER,controlPanel);	
 		frame.pack();
 	}
 }
