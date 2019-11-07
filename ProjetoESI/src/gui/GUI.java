@@ -1,11 +1,13 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -90,7 +92,15 @@ public class GUI {
 					
 					file = filechooser.getSelectedFile();
 					System.out.println("Escolheu abrir o ficheiro: " + file.getName());
-					BuildObjetsFromExcel dados = new BuildObjetsFromExcel(file);
+					//BuildObjetsFromExcel dados = new BuildObjetsFromExcel(file);
+					
+					File excel = new File(file.getPath().toString()); 
+					try {
+						Desktop.getDesktop().open(excel);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
