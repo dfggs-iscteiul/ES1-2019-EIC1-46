@@ -1,5 +1,7 @@
 package code;
-
+/** 
+ *  Represents the Data from the Excel file.
+ */
 public class DataEntry {
 
 	private int MethodId;

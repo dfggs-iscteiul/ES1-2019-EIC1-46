@@ -3,27 +3,36 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
-
+/**
+ * Builds DataEntry Objects from the Excel file.
+ * 
+ *
+ */
 public class BuildObjetsFromExcel {
 
-
+	/**
+	 * Database of the conversion.
+	 */
 	private ArrayList<DataEntry> dataEntry = new ArrayList<DataEntry>();
 
-
-	public BuildObjetsFromExcel() { //Caminho default
+/**
+ * Default path. Opens Excel file and converts it into DataEntry objects.
+ */
+	public BuildObjetsFromExcel() { 
 		try {
-			//fetches the directory or path of the workspace for the current project
+			 //Fetches the directory or path of the workspace for the current project.
 			String pathWorkspace = System.getProperty("user.dir");
 
 			String finalPath = pathWorkspace + "/src/DataEs1.csv";
 			BufferedReader br = new BufferedReader(new FileReader(finalPath));
 
-			//Primeira Linha do Excel
+			 //First line of Excel
 			String linhaExcel = br.readLine();
 
-			//Segunda Linha do excel é a partir daqui que nos interessa criar os objetos			
+			 //Second line of Excel, from here creating objects matters.
 			linhaExcel = br.readLine();
 
+			 //Converts all Excel lines to DataEntry.
 			while (linhaExcel != null) {
 				String[] linha = linhaExcel.split(",");
 				vectorToDataEntry(linha);
@@ -36,24 +45,27 @@ public class BuildObjetsFromExcel {
 			e.printStackTrace();
 		}
 
-		finally{				
-			for (DataEntry x : dataEntry) {
-				System.out.println(x.toString());
-			}
+		finally{
+			printDataEntries();
 		}
 
 	}
-
-	public BuildObjetsFromExcel(File ficheiroExcel) { // recebe o ficheiro para ler
+/**
+ * Choose File path. Opens Excel file and converts it into DataEntry objects.
+ * @param ficheiroExcel File to read.
+ */
+	public BuildObjetsFromExcel(File ficheiroExcel) { 
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(ficheiroExcel)); //TODO Ficheiro enviado pela GUI não abre bem aqui.
-
-			//Primeira Linha do Excel
+			 //File opened by GUI, doesn't open really well.
+			BufferedReader br = new BufferedReader(new FileReader(ficheiroExcel));
+			
+			 //First line of Excel
 			String linhaExcel = br.readLine();
 
-			//Segunda Linha do excel é a partir daqui que nos interessa criar os objetos			
+			 //Second line of Excel, from here creating objects matters.	
 			linhaExcel = br.readLine();
-
+			
+			// Converts all Excel lines to DataEntry.
 			while (linhaExcel != null) {
 				String[] linha = linhaExcel.split(",");
 				vectorToDataEntry(linha);
@@ -70,7 +82,11 @@ public class BuildObjetsFromExcel {
 		}
 
 	}
-
+	
+	/**
+	 * Converts each column to the correspondent data and then converts the line into DataEntry.
+	 * @param linhaExcel Line from Excel
+	 */
 	public void vectorToDataEntry(String[] linhaExcel) {
 		
 		//System.out.println(linhaExcel[1]);
@@ -95,12 +111,22 @@ public class BuildObjetsFromExcel {
 		dataEntry.add(de);
 	}
 
+	/**
+	 * Prints the conversion.
+	 * Future Objective --Puts the conversion into the GUI.
+	 */
 	public void printDataEntries() {
 		for (DataEntry x : dataEntry) {
 			System.out.println(x.toString());
 		}
 	}
 
+	 /** 
+     * This is the main method  
+     * which is very important for  
+     * execution for a java program.
+     * @param args None.
+     */
 	public static void main(String[] args) {
 		BuildObjetsFromExcel bofe = new BuildObjetsFromExcel();
 	}
