@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * 
  *
  */
-public class BuildObjetsFromExcel {
+public class BuildObjectsFromExcel {
 
 	/**
 	 * Database of the conversion.
@@ -18,7 +18,7 @@ public class BuildObjetsFromExcel {
 /**
  * Default path. Opens Excel file and converts it into DataEntry objects.
  */
-	public BuildObjetsFromExcel() { 
+	public BuildObjectsFromExcel() { 
 		try {
 			 //Fetches the directory or path of the workspace for the current project.
 			String pathWorkspace = System.getProperty("user.dir");
@@ -27,16 +27,16 @@ public class BuildObjetsFromExcel {
 			BufferedReader br = new BufferedReader(new FileReader(finalPath));
 
 			 //First line of Excel
-			String linhaExcel = br.readLine();
+			String ExcelLine = br.readLine();
 
 			 //Second line of Excel, from here creating objects matters.
-			linhaExcel = br.readLine();
+			ExcelLine = br.readLine();
 
 			 //Converts all Excel lines to DataEntry.
-			while (linhaExcel != null) {
-				String[] linha = linhaExcel.split(",");
-				vectorToDataEntry(linha);
-				linhaExcel = br.readLine();
+			while (ExcelLine != null) {
+				String[] line = ExcelLine.split(",");
+				vectorToDataEntry(line);
+				ExcelLine = br.readLine();
 			}
 			br.close();
 
@@ -54,22 +54,22 @@ public class BuildObjetsFromExcel {
  * Choose File path. Opens Excel file and converts it into DataEntry objects.
  * @param ficheiroExcel File to read.
  */
-	public BuildObjetsFromExcel(File ficheiroExcel) { 
+	public BuildObjectsFromExcel(File ficheiroExcel) { 
 		try {
 			 //File opened by GUI, doesn't open really well.
 			BufferedReader br = new BufferedReader(new FileReader(ficheiroExcel));
 			
 			 //First line of Excel
-			String linhaExcel = br.readLine();
+			String ExcelLine = br.readLine();
 
 			 //Second line of Excel, from here creating objects matters.	
-			linhaExcel = br.readLine();
+			ExcelLine = br.readLine();
 			
 			// Converts all Excel lines to DataEntry.
-			while (linhaExcel != null) {
-				String[] linha = linhaExcel.split(",");
-				vectorToDataEntry(linha);
-				linhaExcel = br.readLine();
+			while (ExcelLine != null) {
+				String[] line = ExcelLine.split(",");
+				vectorToDataEntry(line);
+				ExcelLine = br.readLine();
 			}
 			br.close();
 
@@ -85,23 +85,23 @@ public class BuildObjetsFromExcel {
 	
 	/**
 	 * Converts each column to the correspondent data and then converts the line into DataEntry.
-	 * @param linhaExcel Line from Excel
+	 * @param ExcelLine Line from Excel
 	 */
-	public void vectorToDataEntry(String[] linhaExcel) {
+	public void vectorToDataEntry(String[] ExcelLine) {
 		
 		//System.out.println(linhaExcel[1]);
-		int MethodId = Integer.parseInt(linhaExcel[0]);
-		String Package = linhaExcel[1];
-		String Class = linhaExcel[2];
-		String method = linhaExcel[3];
-		int LOC = Integer.parseInt(linhaExcel[4]);
-		int CYCLO = Integer.parseInt(linhaExcel[5]);
-		int ATFD = Integer.parseInt(linhaExcel[6]);
-		float LAA = Float.parseFloat(linhaExcel[7]);
-		boolean Is_Long_Method = Boolean.parseBoolean(linhaExcel[8]);
-		boolean IPlasma = Boolean.parseBoolean(linhaExcel[9]);
-		boolean PMD = Boolean.parseBoolean(linhaExcel[10]);
-		boolean Is_Feature_Envy = Boolean.parseBoolean(linhaExcel[11]);
+		int MethodId = Integer.parseInt(ExcelLine[0]);
+		String Package = ExcelLine[1];
+		String Class = ExcelLine[2];
+		String method = ExcelLine[3];
+		int LOC = Integer.parseInt(ExcelLine[4]);
+		int CYCLO = Integer.parseInt(ExcelLine[5]);
+		int ATFD = Integer.parseInt(ExcelLine[6]);
+		float LAA = Float.parseFloat(ExcelLine[7]);
+		boolean Is_Long_Method = Boolean.parseBoolean(ExcelLine[8]);
+		boolean IPlasma = Boolean.parseBoolean(ExcelLine[9]);
+		boolean PMD = Boolean.parseBoolean(ExcelLine[10]);
+		boolean Is_Feature_Envy = Boolean.parseBoolean(ExcelLine[11]);
 
 		DataEntry de = new DataEntry(
 				MethodId, Package, Class, method,
@@ -128,7 +128,7 @@ public class BuildObjetsFromExcel {
      * @param args None.
      */
 	public static void main(String[] args) {
-		BuildObjetsFromExcel bofe = new BuildObjetsFromExcel();
+		BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
 	}
 
 }

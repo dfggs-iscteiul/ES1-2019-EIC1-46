@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import code.BuildObjetsFromExcel;
+import code.BuildObjectsFromExcel;
 
 public class GUI {
 
