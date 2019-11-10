@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -92,9 +93,9 @@ public class GUI {
 					
 					file = filechooser.getSelectedFile();
 					System.out.println("Escolheu abrir o ficheiro: " + file.getName());
-					//BuildObjetsFromExcel dados = new BuildObjetsFromExcel(file);
-					
-					File excel = new File(file.getPath().toString()); 
+					new BuildObjetsFromExcel();
+	
+					File excel = new File(file.toString()); 
 					try {
 						Desktop.getDesktop().open(excel);
 					} catch (IOException e1) {
