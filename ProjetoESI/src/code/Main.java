@@ -6,8 +6,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		GUI janela = new GUI();
-		janela.createAndShowGUI();
+		GUI window = new GUI();
+		window.createAndShowGUI();
 		System.out.println("Janela aberta!");
 	}
 

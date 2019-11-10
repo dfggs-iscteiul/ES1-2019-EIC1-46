@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import code.BuildObjetsFromExcel;
+import code.BuildObjectsFromExcel;
 
 public class GUI {
 
@@ -93,7 +93,7 @@ public class GUI {
 					
 					file = filechooser.getSelectedFile();
 					System.out.println("Escolheu abrir o ficheiro: " + file.getName());
-					new BuildObjetsFromExcel();
+					//new BuildObjetsFromExcel();
 	
 					File excel = new File(file.toString()); 
 					try {
