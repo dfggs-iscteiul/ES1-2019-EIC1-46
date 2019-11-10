@@ -60,16 +60,16 @@ public class BuildObjectsFromExcel {
 			BufferedReader br = new BufferedReader(new FileReader(ficheiroExcel));
 			
 			 //First line of Excel
-			String ExcelLine = br.readLine();
+			String excelLine = br.readLine();
 
 			 //Second line of Excel, from here creating objects matters.	
-			ExcelLine = br.readLine();
+			excelLine = br.readLine();
 			
 			// Converts all Excel lines to DataEntry.
-			while (ExcelLine != null) {
-				String[] line = ExcelLine.split(",");
+			while (excelLine != null) {
+				String[] line = excelLine.split(",");
 				vectorToDataEntry(line);
-				ExcelLine = br.readLine();
+				excelLine = br.readLine();
 			}
 			br.close();
 
