@@ -93,7 +93,14 @@ public class GUI {
 					
 					file = filechooser.getSelectedFile();
 					System.out.println("Escolheu abrir o ficheiro: " + file.getName());
-					//new BuildObjetsFromExcel();
+					try {
+						BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
+						bofe.buildObjects(file);
+						
+					} catch (FileNotFoundException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
 	
 					File excel = new File(file.toString()); 
 					try {

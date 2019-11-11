@@ -1,8 +1,19 @@
 package code;
-import java.io.BufferedReader;
+
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 /**
  * Builds DataEntry Objects from the Excel file.
  * 
@@ -15,105 +26,109 @@ public class BuildObjectsFromExcel {
 	 */
 	private ArrayList<DataEntry> dataEntry = new ArrayList<DataEntry>();
 
-/**
- * Default path. Opens Excel file and converts it into DataEntry objects.
- */
-	public BuildObjectsFromExcel() { 
-		try {
-			 //Fetches the directory or path of the workspace for the current project.
-			String pathWorkspace = System.getProperty("user.dir");
-
-			String finalPath = pathWorkspace + "/src/DataEs1.csv";
-			BufferedReader br = new BufferedReader(new FileReader(finalPath));
-
-			 //First line of Excel
-			String ExcelLine = br.readLine();
-
-			 //Second line of Excel, from here creating objects matters.
-			ExcelLine = br.readLine();
-
-			 //Converts all Excel lines to DataEntry.
-			while (ExcelLine != null) {
-				String[] line = ExcelLine.split(",");
-				vectorToDataEntry(line);
-				ExcelLine = br.readLine();
-			}
-			br.close();
-
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		finally{
-			printDataEntries();
-		}
-
-	}
-/**
- * Choose File path. Opens Excel file and converts it into DataEntry objects.
- * @param ficheiroExcel File to read.
- */
-	public BuildObjectsFromExcel(File ficheiroExcel) { 
-		try {
-			 //File opened by GUI, doesn't open really well.
-			BufferedReader br = new BufferedReader(new FileReader(ficheiroExcel));
-			
-			 //First line of Excel
-			String excelLine = br.readLine();
-
-			 //Second line of Excel, from here creating objects matters.	
-			excelLine = br.readLine();
-			
-			// Converts all Excel lines to DataEntry.
-			while (excelLine != null) {
-				String[] line = excelLine.split(",");
-				vectorToDataEntry(line);
-				excelLine = br.readLine();
-			}
-			br.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		finally{
-			printDataEntries();
-		}
-
-	}
-	
 	/**
-	 * Converts each column to the correspondent data and then converts the line into DataEntry.
-	 * @param ExcelLine Line from Excel
+	 * Default path. Opens Excel file and converts it into DataEntry objects.
+	 * 
+	 * @return
+	 * @return
 	 */
-	public void vectorToDataEntry(String[] ExcelLine) {
-		
-		//System.out.println(linhaExcel[1]);
-		int MethodId = Integer.parseInt(ExcelLine[0]);
-		String Package = ExcelLine[1];
-		String Class = ExcelLine[2];
-		String method = ExcelLine[3];
-		int LOC = Integer.parseInt(ExcelLine[4]);
-		int CYCLO = Integer.parseInt(ExcelLine[5]);
-		int ATFD = Integer.parseInt(ExcelLine[6]);
-		float LAA = Float.parseFloat(ExcelLine[7]);
-		boolean Is_Long_Method = Boolean.parseBoolean(ExcelLine[8]);
-		boolean IPlasma = Boolean.parseBoolean(ExcelLine[9]);
-		boolean PMD = Boolean.parseBoolean(ExcelLine[10]);
-		boolean Is_Feature_Envy = Boolean.parseBoolean(ExcelLine[11]);
 
-		DataEntry de = new DataEntry(
-				MethodId, Package, Class, method,
-				LOC, CYCLO, ATFD, LAA, Is_Long_Method, IPlasma,
+	public void buildObjects(File file) throws FileNotFoundException {
+
+		FileInputStream fis = null;
+		String linhaExcel = "";
+
+		try {
+
+			fis = new FileInputStream(file);
+			XSSFWorkbook workbook = new XSSFWorkbook(fis);
+			XSSFSheet sheet = workbook.getSheetAt(0);
+			Iterator<Row> rowIterator = sheet.iterator();
+
+			// ler primeira linha pois esta nao interessa
+			rowIterator.next();
+
+			while (rowIterator.hasNext()) {
+
+				// linha dois
+				Row row2 = rowIterator.next();
+
+				Iterator<Cell> cellIterator = row2.iterator();
+
+				while (cellIterator.hasNext()) {
+
+					Cell cell = cellIterator.next();
+					linhaExcel += cell.toString() + ";";
+
+				}
+
+				linhaExcel += '\n';
+			}
+
+			
+			helper(linhaExcel);
+
+		} catch (FileNotFoundException ex) {
+			Logger.getLogger(BuildObjectsFromExcel.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (IOException ex) {
+			Logger.getLogger(BuildObjectsFromExcel.class.getName()).log(Level.SEVERE, null, ex);
+
+		}
+
+		finally {
+
+			try {
+				fis.close();
+			}
+
+			catch (IOException ex) {
+				Logger.getLogger(BuildObjectsFromExcel.class.getName()).log(Level.SEVERE, null, ex);
+
+			}
+		}
+
+	}
+
+	public void helper(String excelLines) throws IOException {
+
+		String[] linhas = excelLines.split("\n");
+
+		for (int i = 0; i < linhas.length; i++) {
+			vectorToDataEntry(linhas[i].split(";"));
+		}
+
+		printDataEntries();
+
+	}
+
+	public void vectorToDataEntry(String[] vec) {
+
+		double auxiliar = Double.parseDouble(vec[0]);
+		String Package = vec[1];
+		String Class = vec[2];
+		String method = vec[3];
+		double auxiliar1 = Double.parseDouble(vec[4]);
+		double auxiliar2 = Double.parseDouble(vec[5]);
+		double auxiliar3 = Double.parseDouble(vec[6]);
+		float LAA = Float.parseFloat(vec[7]);
+		boolean Is_Long_Method = Boolean.parseBoolean(vec[8]);
+		boolean IPlasma = Boolean.parseBoolean(vec[9]);
+		boolean PMD = Boolean.parseBoolean(vec[10]);
+		boolean Is_Feature_Envy = Boolean.parseBoolean(vec[11]);
+
+		int MethodId = (int) auxiliar;
+		int LOC = (int) auxiliar1;
+		int CYCLO = (int) auxiliar2;
+		int ATFD = (int) auxiliar3;
+
+		DataEntry de = new DataEntry(MethodId, Package, Class, method, LOC, CYCLO, ATFD, LAA, Is_Long_Method, IPlasma,
 				PMD, Is_Feature_Envy);
 
 		dataEntry.add(de);
 	}
 
 	/**
-	 * Prints the conversion.
-	 * Future Objective --Puts the conversion into the GUI.
+	 * Prints the conversion. Future Objective --Puts the conversion into the GUI.
 	 */
 	public void printDataEntries() {
 		for (DataEntry x : dataEntry) {
@@ -121,16 +136,13 @@ public class BuildObjectsFromExcel {
 		}
 	}
 
-	 /** 
-     * This is the main method  
-     * which is very important for  
-     * execution for a java program.
-     * @param args None.
-     */
+	/**
+	 * This is the main method which is very important for execution for a java
+	 * program.
+	 * 
+	 * @param args None.
+	 */
 	public static void main(String[] args) {
-		BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
 	}
 
 }
-
-
