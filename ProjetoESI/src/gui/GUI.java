@@ -105,17 +105,10 @@ public class GUI {
 						bofe.buildObjects(file);
 						
 					} catch (FileNotFoundException e2) {
-						// TODO Auto-generated catch block
 						e2.printStackTrace();
 					}
 	
 					File excel = new File(file.toString()); 
-					try {
-						Desktop.getDesktop().open(excel);
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
 				}
 			}
 		});
