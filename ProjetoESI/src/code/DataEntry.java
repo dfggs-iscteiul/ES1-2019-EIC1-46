@@ -35,55 +35,105 @@ public class DataEntry {
 		this.Is_Feature_Envy=Is_Feature_Envy;
 		
 	}
-	
+	/**
+	 * Getter of the ID of the method of Java Project.
+	 * @return Identification of the method of Java Project.
+	 */
 	public int getEntryMethodId() {
 		return MethodId;
 	}
 
+	/**
+	 * Getter of the  ID of the method of Java Project.
+	 * @return Identification of the package where the method is.
+	 */
 	public String getEntryPackage() {
 		return Package;
 	}
 
+	/**
+	 * Getter of the ID of the class where the method is.
+	 * @return Identification of the class where the method is.
+	 */
 	public String getEntryClass() {
 		return Class;
 	}
 
+	/**
+	 * Getter of the name of the method.
+	 * @return The name of the method.
+	 */
 	public String getEntryMethod() {
 		return Method;
 	}
 
+	/**
+	 * Getter of the number of coding lines of the method.
+	 * @return The number of coding lines of the method.
+	 */
 	public int getEntryLOC() {
 		return LOC;
 	}
 
+	/**
+	 * Getter of the cyclomatic complexity of the method.
+	 * @return The cyclomatic complexity of the method.
+	 */
 	public int getEntryCYCLO() {
 		return CYCLO;
 	}
 
+	/**
+	 * Getter of the number of accesses that the method do to methods of other classes.
+	 * @return The accesses that the method do to methods of other classes.
+	 */
 	public int getEntryATFD() {
 		return ATFD;
 	}
 
+	/**
+	 * Getter of the number of accesses that the method do to attributes of the own class.
+	 * @return The accesses that the method do to attributes of the own class.
+	 */
 	public float getEntryLAA() {
 		return LAA;
 	}
 
+	/**
+	 * Checks is_long_method.
+	 * @return Checks if is_long_method is present.
+	 */
 	public boolean Is_Long_Method() {
 		return Is_Long_Method;
 	}
 
+	/**
+	 * Checks IPlasma.
+	 * @return Checks if IPlasma is present on long_method.
+	 */
 	public boolean IPlasma() {
 		return IPlasma;
 	}
 
+	/**
+	 * Checks PMD.
+	 * @return Checks if PMD is present on long_method.
+	 */
 	public boolean PMD() {
 		return PMD;
 	}
 
+	/**
+	 * Checks is_feature_envy.
+	 * @return Checks if is_feature_envy is present.
+	 */
 	public boolean Is_Feature_Envy() {
 		return Is_Feature_Envy;
 	}
 
+	/**
+	 * Converts the object DataEntry to String.
+	 */
 	@Override
 	public String toString() {
 		return "DataEntry [MethodId=" + MethodId + ", Package=" + Package + ", Class=" + Class + ", Method=" + Method

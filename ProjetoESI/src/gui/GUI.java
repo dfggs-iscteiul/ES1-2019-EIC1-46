@@ -24,6 +24,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import code.BuildObjectsFromExcel;
 
+/**
+ * Represents the Interface of the program.
+ *
+ */
 public class GUI {
 
 	private JFrame frame;
@@ -31,6 +35,9 @@ public class GUI {
 
 	// Modificar depois o titulo
 
+	/**
+	 * Builds the structure of the interface and adds button listeners.
+	 */
 	public void createAndShowGUI() {
 		frame = new JFrame();
 		frame.setTitle("Projeto ES1");

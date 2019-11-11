@@ -21,18 +21,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class BuildObjectsFromExcel {
 
-	/**
-	 * Database of the conversion.
-	 */
 	private ArrayList<DataEntry> dataEntry = new ArrayList<DataEntry>();
 
 	/**
-	 * Default path. Opens Excel file and converts it into DataEntry objects.
-	 * 
-	 * @return
-	 * @return
+	 * Opens Excel file and converts it into DataEntry objects.
+	 * @param file Excel file
+	 * @throws FileNotFoundException if the specified pathname does not exist or if it is inaccessible. 
 	 */
-
 	public void buildObjects(File file) throws FileNotFoundException {
 
 		FileInputStream fis = null;
@@ -89,6 +84,11 @@ public class BuildObjectsFromExcel {
 
 	}
 
+	/**
+	 * Splits the excel lines and converts them into DataEntry objects.
+	 * @param excelLines All of the excel lines.
+	 * @throws IOException if the connection is no longer available.
+	 */
 	public void helper(String excelLines) throws IOException {
 
 		String[] linhas = excelLines.split("\n");
@@ -101,6 +101,10 @@ public class BuildObjectsFromExcel {
 
 	}
 
+	/**
+	 * Converts into DataEntry objects.
+	 * @param vec Line of excel in array
+	 */
 	public void vectorToDataEntry(String[] vec) {
 
 		double auxiliar = Double.parseDouble(vec[0]);
@@ -136,12 +140,6 @@ public class BuildObjectsFromExcel {
 		}
 	}
 
-	/**
-	 * This is the main method which is very important for execution for a java
-	 * program.
-	 * 
-	 * @param args None.
-	 */
 	public static void main(String[] args) {
 	}
 
