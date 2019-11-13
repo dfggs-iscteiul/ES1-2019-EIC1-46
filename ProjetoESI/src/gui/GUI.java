@@ -1,14 +1,13 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -23,6 +22,7 @@ import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import code.BuildObjectsFromExcel;
+import code.DataEntry;
 
 /**
  * Represents the Interface of the program.
@@ -103,6 +103,11 @@ public class GUI {
 					try {
 						BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
 						bofe.buildObjects(file);
+						
+						ArrayList<DataEntry> dados = bofe.objects();
+						for (DataEntry a: dados) {
+							//TODO a. mostrar informação na GUI
+						}
 						
 					} catch (FileNotFoundException e2) {
 						e2.printStackTrace();
