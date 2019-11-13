@@ -139,6 +139,10 @@ public class BuildObjectsFromExcel {
 			System.out.println(x.toString());
 		}
 	}
+	
+	public ArrayList<DataEntry> objects() {
+		return dataEntry;
+	}
 
 	public static void main(String[] args) {
 	}
