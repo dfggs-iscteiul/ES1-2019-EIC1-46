@@ -12,6 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+//Ainda faltam acrescentam algumas coisas
+//Isto ainda tem que ser otimizado
+
 public class GUITest {
 
 	private JFrame frame;
