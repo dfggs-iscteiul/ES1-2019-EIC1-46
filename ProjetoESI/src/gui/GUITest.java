@@ -54,7 +54,7 @@ public class GUITest {
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		frame.add(c2,gbc);
-		JLabel label2 = new JLabel("LOC");
+		JLabel label2 = new JLabel("CYCLO");
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		frame.add(label2, gbc);
@@ -73,7 +73,7 @@ public class GUITest {
 		gbc.gridx = 4;
 		gbc.gridy = 0;
 		frame.add(c3,gbc);
-		JLabel label3 = new JLabel("LOC");
+		JLabel label3 = new JLabel("AFTD");
 		gbc.gridx = 5;
 		gbc.gridy = 0;
 		frame.add(label3, gbc);
@@ -92,7 +92,7 @@ public class GUITest {
 		gbc.gridx = 4;
 		gbc.gridy = 1;
 		frame.add(c4,gbc);
-		JLabel label4 = new JLabel("LOC");
+		JLabel label4 = new JLabel("LAA");
 		gbc.gridx = 5;
 		gbc.gridy = 1;
 		frame.add(label4, gbc);
