@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Integrations">
+	<item key="azureActive" value="true"/>
+	<item key="namespaceName" value="iscte-iul-eclipse-plugin"/>
+	<item key="eventHubName" value="process-mining"/>
+	<item key="sasKeyName" value="eclipse-plugin-access-key"/>
+	<item key="sasKey" value="tzB5SsgY2wYyyglDXC+HaM1Njql7Pt2Iz/AdFfk2InQ="/>
+	<item key="kafkaActive" value="false"/>
+	<item key="kafkaServers" value="localhost:9092"/>
+	<item key="kafkaTopic" value="sdpm"/>
+	<item key="trelloActive" value="true"/>
+	<item key="trelloKey" value="7b80e6c527adc13311549b1bb90dc228"/>
+	<item key="trelloUsername" value="put_your_trello_user_here"/>
+	<item key="trelloToken" value="c931d493d3873dd43e4022b8ef156d767cd2d07ab067339e665cf5c3b06ce6d6"/>
+	<item key="trelloPrefixCode" value="ES1-2019"/>
+</section>
