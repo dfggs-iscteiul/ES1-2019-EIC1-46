@@ -1,5 +1,6 @@
 package code;
 
+import gui.GUITest;
 import gui.GUI;
 /**
  * Main class, it runs the program.
