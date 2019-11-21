@@ -43,8 +43,10 @@ public class CalculateAccuracyRule {
 					try {
 						while ((linha = br.readLine()) != null) {
 							String[] vec = linha.split(";");
+							System.out.println(String.valueOf(y.Is_Long_Method()));
 							if (vec[vec.length - 1].equals(String.valueOf(y.Is_Long_Method()))) {
 								equalLines++;
+								
 							}
 							break;
 						}

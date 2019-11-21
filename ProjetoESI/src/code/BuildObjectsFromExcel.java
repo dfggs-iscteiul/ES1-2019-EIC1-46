@@ -97,7 +97,7 @@ public class BuildObjectsFromExcel {
 			vectorToDataEntry(linhas[i].split(";"));
 		}
 
-		printDataEntries();
+		//printDataEntries();
 
 	}
 

@@ -29,7 +29,7 @@ public class DataEntry {
 		this.CYCLO=CYCLO;
 		this.ATFD=ATFD;
 		this.LAA=LAA;
-		this.Is_Long_Method=Is_Long_Method();
+		this.Is_Long_Method=Is_Long_Method;
 		this.IPlasma=IPlasma;
 		this.PMD=PMD;
 		this.Is_Feature_Envy=Is_Feature_Envy;
