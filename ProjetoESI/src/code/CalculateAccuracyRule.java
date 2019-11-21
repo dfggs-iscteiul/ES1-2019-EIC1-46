@@ -55,7 +55,7 @@ public class CalculateAccuracyRule {
 						e.printStackTrace();
 					}
 				} 
-			this.accuracyNewRule = (equalLines / objs.size()) * 100;
+			this.accuracyNewRule = (equalLines * 100)/objs.size();
 			System.out.printf("Accuracy = %.2f %n", accuracyNewRule);
 
 
@@ -70,7 +70,7 @@ public class CalculateAccuracyRule {
 
 	public static void main(String[] args) {
 		String folderPath = System.getProperty("user.dir");
-		String filePath = folderPath + "/rule1_04715_21102019.txt";
+		String filePath = folderPath + "/1_215916_21102019.txt";
 		File f = new File(filePath);
 		CalculateAccuracyRule car = new CalculateAccuracyRule(f);
 	}
