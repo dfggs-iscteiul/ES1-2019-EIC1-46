@@ -1,87 +1,76 @@
 package code;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CalculateAccuracyRule {
 
-	private CustomRule cr;
-	private BuildObjectsFromExcel bofe;
-	private ArrayList<DataEntry> listExcel;
-	private ArrayList<CustomDataEntry> listNewRule;
+	private File fileChoosen;
 	private double accuracyNewRule;
 
-	public CalculateAccuracyRule(BuildObjectsFromExcel bofe, CustomRule cr) {
-		this.cr = cr;
-		this.bofe = bofe;
-		this.listExcel = bofe.objects();
-		this.listNewRule = cr.getCustomRuleData();
+	public CalculateAccuracyRule(File fileChoosen) {
+		this.fileChoosen = fileChoosen;
+		calcAccuracy();
 	}
 
 	public void calcAccuracy() {
+		File excelFile = new File("Long-Method.xlsx");
+		BuildObjectsFromExcel helper = new BuildObjectsFromExcel();
+		try {
+			helper.buildObjects(excelFile);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
+		ArrayList<DataEntry> objs = helper.objects();
 		double equalLines = 0;
-		double lengthFile = listExcel.size();
+		BufferedReader br = null;
 		
-		if (listExcel.size() == listNewRule.size()) {
-				for(CustomDataEntry y : listNewRule) {
-					for(DataEntry x : listExcel) {
-					if(y.getEntryMethodId()==x.getEntryMethodId() 
-					&& y.Is_CustomRule() == x.Is_Long_Method()) {
+		try {
+			br = new BufferedReader(new FileReader(fileChoosen));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+			for (DataEntry y : objs) {
+				String linha;
+					try {
+						while ((linha = br.readLine()) != null) {
+							String[] vec = linha.split(";");
+							if (vec[vec.length - 1].equals(String.valueOf(y.Is_Long_Method()))) {
 								equalLines++;
+							}
+							break;
+						}
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-					break;
-				}
-			}
+				} 
+			this.accuracyNewRule = (equalLines / objs.size()) * 100;
+			System.out.printf("Accuracy = %.2f %n", accuracyNewRule);
 
-		this.accuracyNewRule = (equalLines/lengthFile)*100;
-		System.out.printf("Accuracy = %.2f %n",accuracyNewRule);
-				
+
+		try {
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		else {
-			System.out.println("Os ficheiros têm tamanhos diferentes");
-		}
 
 	}
 
-	public CustomRule getCr() {
-		return cr;
-	}
-
-	public void setCr(CustomRule cr) {
-		this.cr = cr;
-	}
-
-	public BuildObjectsFromExcel getBofe() {
-		return bofe;
-	}
-
-	public void setBofe(BuildObjectsFromExcel bofe) {
-		this.bofe = bofe;
-	}
-
-	public ArrayList<DataEntry> getListExcel() {
-		return listExcel;
-	}
-
-	public void setListExcel(ArrayList<DataEntry> listExcel) {
-		this.listExcel = listExcel;
-	}
-
-	public ArrayList<CustomDataEntry> getListNewRule() {
-		return listNewRule;
-	}
-
-	public void setListNewRule(ArrayList<CustomDataEntry> listNewRule) {
-		this.listNewRule = listNewRule;
-	}
-
-	public double getAccuracyNewRule() {
-		return accuracyNewRule;
-	}
-
-	public void setAccuracyNewRule(double accuracyNewRule) {
-		this.accuracyNewRule = accuracyNewRule;
+	public static void main(String[] args) {
+		String folderPath = System.getProperty("user.dir");
+		String filePath = folderPath + "/rule1_04715_21102019.txt";
+		File f = new File(filePath);
+		CalculateAccuracyRule car = new CalculateAccuracyRule(f);
 	}
 
 }

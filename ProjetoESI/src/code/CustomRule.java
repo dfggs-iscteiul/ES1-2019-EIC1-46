@@ -177,8 +177,7 @@ public class CustomRule {
 			e.printStackTrace();
 		}
 		
-		CalculateAccuracyRule calc = new CalculateAccuracyRule(bofe,cr);
-		calc.calcAccuracy();
+		
 	}
 	
 
