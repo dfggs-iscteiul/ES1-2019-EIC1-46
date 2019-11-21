@@ -22,6 +22,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import code.BuildObjectsFromExcel;
 import code.DataEntry;
+import code.ExcelAccuracy;
 
 //Ainda faltam acrescentam algumas coisas
 //Isto ainda tem que ser otimizado
@@ -175,7 +176,7 @@ public class GUI {
 				try {
 					BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
 					bofe.buildObjects(file);
-					
+					ExcelAccuracy accuracy = new ExcelAccuracy(bofe);
 					ArrayList<DataEntry> dados = bofe.objects();
 					for (DataEntry a: dados) {
 						//TODO a. mostrar informação na GUI

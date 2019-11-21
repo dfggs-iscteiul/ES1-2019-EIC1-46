@@ -20,7 +20,7 @@ public class CustomRule {
 	private String ATFD_Max;
 	private String LAA_Min;
 	private String LAA_Max;
-	private ArrayList<CustomDataEntry> CustomRuleData;
+	private ArrayList<CustomDataEntry> customRuleData;
 	
 	public CustomRule(String name, String LOC_Max, String LOC_Min, String CYCLO_Max, 
 		String CYCLO_Min, String ATFD_Min, String ATFD_Max, String LAA_Min, String LAA_Max) {
@@ -41,8 +41,8 @@ public class CustomRule {
 	}
 	
 	public void applyCustomRule(ArrayList<DataEntry> ExcelData ) throws FileNotFoundException{
-		CustomRuleData=new ArrayList<CustomDataEntry>();
-		File CustomRuleDataFile = new File(this.name+".txt");
+		customRuleData = new ArrayList<CustomDataEntry>();
+		File CustomRuleDataFile = new File(this.name + ".txt");
 		PrintWriter printWriter = new PrintWriter(CustomRuleDataFile);
 		String[] checklist = new String[16];
 			for(DataEntry d: ExcelData) {
@@ -120,7 +120,7 @@ public class CustomRule {
 					i++;
 				}
 			boolean check = true;
-			for(int a=0; a<checklist.length; a++) {
+			for (int a = 0; a < checklist.length; a++) {
 				if(checklist[a]=="false") {
 					check = false;
 				}
@@ -129,7 +129,7 @@ public class CustomRule {
 				CustomDataEntry c = new CustomDataEntry(d.getEntryMethodId(),d.getEntryPackage(), 
 						d.getEntryClass(), d.getEntryMethod(), d.getEntryLOC(), 
 						d.getEntryCYCLO(), d.getEntryATFD(), d.getEntryLAA(),true);
-				CustomRuleData.add(c);
+				customRuleData.add(c);
 				printWriter.println(c.getEntryMethodId()+";"+d.getEntryPackage()+";"
 						+c.getEntryClass()+";"+c.getEntryMethod()+";"+c.getEntryLOC()
 						+";"+c.getEntryCYCLO()+";"+c.getEntryATFD()+";"+c.getEntryLAA()
@@ -139,7 +139,7 @@ public class CustomRule {
 				CustomDataEntry c = new CustomDataEntry(d.getEntryMethodId(),d.getEntryPackage(), 
 						d.getEntryClass(), d.getEntryMethod(), d.getEntryLOC(), 
 						d.getEntryCYCLO(), d.getEntryATFD(), d.getEntryLAA(),false);
-				CustomRuleData.add(c);
+				customRuleData.add(c);
 				printWriter.println(c.getEntryMethodId()+";"+d.getEntryPackage()+";"
 						+c.getEntryClass()+";"+c.getEntryMethod()+";"+c.getEntryLOC()
 						+";"+c.getEntryCYCLO()+";"+c.getEntryATFD()+";"+c.getEntryLAA()
@@ -152,7 +152,7 @@ public class CustomRule {
 	
 	
 	public ArrayList<CustomDataEntry> getCustomRuleData() {
-		return CustomRuleData;
+		return customRuleData;
 	}
 	
 
@@ -169,8 +169,7 @@ public class CustomRule {
 		ArrayList<DataEntry> l = bofe.objects();
 		CustomRule cr = null;
 		try {
-		cr = new CustomRule(args[0], args[1], args[2], args[3], args[4], args[5], 
-				args[6], args[7], args[8]);
+		cr = new CustomRule("1", "5", "2", "2", "0", "-1", "1", "0", "2");
 		cr.applyCustomRule(l);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
