@@ -7,19 +7,20 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CalculateAccuracyRule {
+public class RuleAccuracy {
 
 	private File fileChoosen;
+	private BuildObjectsFromExcel helper;
 	private double accuracyNewRule;
 
-	public CalculateAccuracyRule(File fileChoosen) {
+	public RuleAccuracy(File fileChoosen, BuildObjectsFromExcel helper ) {
 		this.fileChoosen = fileChoosen;
+		this.helper = helper;
 		calcAccuracy();
 	}
 
 	public void calcAccuracy() {
 		File excelFile = new File("Long-Method.xlsx");
-		BuildObjectsFromExcel helper = new BuildObjectsFromExcel();
 		try {
 			helper.buildObjects(excelFile);
 		} catch (FileNotFoundException e1) {
@@ -43,7 +44,7 @@ public class CalculateAccuracyRule {
 					try {
 						while ((linha = br.readLine()) != null) {
 							String[] vec = linha.split(";");
-							System.out.println(String.valueOf(y.Is_Long_Method()));
+							System.out.println(vec[vec.length - 1]);
 							if (vec[vec.length - 1].equals(String.valueOf(y.Is_Long_Method()))) {
 								equalLines++;
 								
@@ -69,10 +70,11 @@ public class CalculateAccuracyRule {
 	}
 
 	public static void main(String[] args) {
+		BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
 		String folderPath = System.getProperty("user.dir");
 		String filePath = folderPath + "/1_215916_21102019.txt";
 		File f = new File(filePath);
-		CalculateAccuracyRule car = new CalculateAccuracyRule(f);
+		RuleAccuracy car = new RuleAccuracy(f,bofe);
 	}
 
 }
