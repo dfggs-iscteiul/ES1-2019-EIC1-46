@@ -22,7 +22,7 @@ public class ExcelAccuracy {
 				iPlasmaCerto++;
 			if (entrada.Is_Long_Method() == entrada.PMD())
 				pmdCerto++;
-			if (entrada.Is_Long_Method() == entrada.IPlasma() == entrada.PMD())
+			if (entrada.Is_Long_Method() == entrada.IPlasma() && entrada.Is_Long_Method() == entrada.PMD())
 				entradaCerta++;
 		}
 
