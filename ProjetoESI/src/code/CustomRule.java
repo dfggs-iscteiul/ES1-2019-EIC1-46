@@ -26,7 +26,8 @@ public class CustomRule {
 		String CYCLO_Min, String ATFD_Min, String ATFD_Max, String LAA_Min, String LAA_Max) {
 		Calendar calendar = Calendar.getInstance();
 		SimpleDateFormat formatter = new SimpleDateFormat(" HH:mm:ss dd-MM-yyyy");
-		this.name=name+"_"+calendar.get(calendar.HOUR_OF_DAY)+calendar.get(calendar.MINUTE)+calendar.get(calendar.SECOND)+"_"+
+		this.name=name+"_"+calendar.get(calendar.HOUR_OF_DAY)+calendar.get(calendar.MINUTE)
+		+calendar.get(calendar.SECOND)+"_"+
 		calendar.get(calendar.DAY_OF_MONTH)+calendar.get(calendar.MONTH)+calendar.get(calendar.YEAR);
 		this.LOC_Max=LOC_Max;
 		this.LOC_Min=LOC_Min;
@@ -150,11 +151,11 @@ public class CustomRule {
 	}
 	
 	
+	public ArrayList<CustomDataEntry> getCustomRuleData() {
+		return CustomRuleData;
+	}
 	
-	
-	
-	
-	
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		File f = new File("Long-Method.xlsx");
@@ -166,12 +167,18 @@ public class CustomRule {
 			e1.printStackTrace();
 		}
 		ArrayList<DataEntry> l = bofe.objects();
+		CustomRule cr = null;
 		try {
-			new CustomRule(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]).applyCustomRule(l);
+		cr = new CustomRule(args[0], args[1], args[2], args[3], args[4], args[5], 
+				args[6], args[7], args[8]);
+		cr.applyCustomRule(l);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		CalculateAccuracyRule calc = new CalculateAccuracyRule(bofe,cr);
+		calc.calcAccuracy();
 	}
 	
 
