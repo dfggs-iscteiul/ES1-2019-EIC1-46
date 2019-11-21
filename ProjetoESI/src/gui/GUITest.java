@@ -26,6 +26,10 @@ import code.DataEntry;
 //Ainda faltam acrescentam algumas coisas
 //Isto ainda tem que ser otimizado
 
+/**
+ * Represents the Interface of the program.
+ *
+ */
 public class GUITest {
 
 	private JFrame frame;
@@ -33,6 +37,9 @@ public class GUITest {
 	private GridBagConstraints gbc = new GridBagConstraints();
 	String[] operadores = { "<", ">", "=", "<=", ">=" };
 
+	/**
+	 * Builds the structure of the interface and adds button listeners.
+	 */
 	public void createandShowGUI() {
 		frame = new JFrame();
 		frame.setTitle("Projeto ES1");
