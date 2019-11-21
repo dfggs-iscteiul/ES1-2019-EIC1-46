@@ -1,6 +1,5 @@
 package code;
 
-import gui.GUITest;
 import gui.GUI;
 /**
  * Main class, it runs the program.
@@ -15,7 +14,7 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		GUI window = new GUI();
-		window.createAndShowGUI();
+		window.createandShowGUI();
 		System.out.println("Janela aberta!");
 	}
 
