@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -18,14 +18,17 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.TableModel;
 
 import code.BuildObjectsFromExcel;
 import code.DataEntry;
-import code.ExcelAccuracy;
 
 //Isto ainda tem que ser otimizado
 //1ºTab -> Criação de Thresholds
@@ -53,17 +56,17 @@ public class GUI {
 	public void createandShowGUI() {
 		frame = new JFrame();
 		frame.setTitle("Projeto ES1");
-		frame.setSize(700, 300);
+		frame.setSize(700, 500);
 		frame.setLayout(new FlowLayout());
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setResizable(false);
-		
+
 		jTabbedPane = new JTabbedPane();
 		jPanel1 = new JPanel(new GridBagLayout());
 		jPanel2 = new JPanel(new GridBagLayout());
-		
+
 		gbc.insets = new Insets(5, 5, 5, 5);
-		
+
 		JLabel label00 = new JLabel("Regra ativa");
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -80,7 +83,7 @@ public class GUI {
 		gbc.gridx = 3;
 		gbc.gridy = 0;
 		jPanel1.add(label03, gbc);
-		
+
 		JLabel label10 = new JLabel("Regra ativa");
 		gbc.gridx = 4;
 		gbc.gridy = 0;
@@ -116,7 +119,7 @@ public class GUI {
 		gbc.gridx = 3;
 		gbc.gridy = 1;
 		jPanel1.add(tField1, gbc);
-		
+
 		JCheckBox c2 = new JCheckBox();
 		gbc.gridx = 0;
 		gbc.gridy = 2;
@@ -135,7 +138,7 @@ public class GUI {
 		gbc.gridx = 3;
 		gbc.gridy = 2;
 		jPanel1.add(tField2, gbc);
-		
+
 		JCheckBox c3 = new JCheckBox();
 		gbc.gridx = 4;
 		gbc.gridy = 1;
@@ -154,7 +157,7 @@ public class GUI {
 		gbc.gridx = 7;
 		gbc.gridy = 1;
 		jPanel1.add(tField3, gbc);
-	
+
 		JCheckBox c4 = new JCheckBox();
 		gbc.gridx = 4;
 		gbc.gridy = 2;
@@ -173,54 +176,66 @@ public class GUI {
 		gbc.gridx = 7;
 		gbc.gridy = 2;
 		jPanel1.add(tField4, gbc);
-		
+
 		JButton button = new JButton("Importar ficheiro");
 		button.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			JFileChooser filechooser = new JFileChooser("Importar ficheiro");
-			FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel file", "xls", "xlsx");
-			filechooser.setFileFilter(filter);
-			int returnVal = filechooser.showOpenDialog(null);
-			if(returnVal == JFileChooser.APPROVE_OPTION) {
-				
-				file = filechooser.getSelectedFile();
-				System.out.println("Escolheu abrir o ficheiro: " + file.getName());
-				try {
-					BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
-					bofe.buildObjects(file);
-					ExcelAccuracy accuracy = new ExcelAccuracy(bofe);
-					ArrayList<DataEntry> dados = bofe.objects();
-					for (DataEntry a: dados) {
-						//TODO a. mostrar informaÃ§Ã£o na GUI
-					}
-					
-				} catch (FileNotFoundException e2) {
-					e2.printStackTrace();
-				}
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser filechooser = new JFileChooser("Importar ficheiro");
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel file", "xls", "xlsx");
+				filechooser.setFileFilter(filter);
+				int returnVal = filechooser.showOpenDialog(null);
+				if(returnVal == JFileChooser.APPROVE_OPTION) {
 
-				File excel = new File(file.toString()); 
+					file = filechooser.getSelectedFile();
+					System.out.println("Escolheu abrir o ficheiro: " + file.getName());
+
+					File excel = new File(file.toString()); 
+
+					BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
+
+					try {
+						bofe.buildObjects(excel);
+					} catch (FileNotFoundException ex) {
+						ex.printStackTrace();
+					}
+
+					List<DataEntry> entries = bofe.objects();
+					TableModel model = new DataEntryTableModel(entries);
+					JTable table = new JTable(model);
+
+					JScrollPane jScrollPane = new JScrollPane(table);
+
+					gbc.gridx = 0;
+					gbc.gridy = 1;
+					jPanel2.add(jScrollPane,gbc);
+					SwingUtilities.updateComponentTreeUI(frame);
+
+				}
 			}
-		}
-	});
+		});
 		JButton button2 = new JButton("Criar regra");
 		gbc.gridx = 0;
 		gbc.gridy = 3;
 		jPanel1.add(button2,gbc);
-		
+
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-//		gbc.gridwidth = 8;
-//		gbc.fill = GridBagConstraints.HORIZONTAL;
+		//		gbc.gridwidth = 8;
+		//		gbc.fill = GridBagConstraints.HORIZONTAL;
 		jPanel2.add(button,gbc);
-		
+
+
 		jTabbedPane.addTab("TAB PARA CRIAÇÃO DE REGRAS", jPanel1);
 		jTabbedPane.addTab("IMPORTAR/APLICAR/RESULTADOS",jPanel2);
-		
+
+
 		frame.add(jTabbedPane);
-		
+
+
 		frame.setVisible(true);
 	}
+
 
 	public static void main(String[] args) {
 		GUI gui = new GUI();
