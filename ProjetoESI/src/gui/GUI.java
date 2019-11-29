@@ -209,6 +209,7 @@ public class GUI {
 					gbc.gridx = 0;
 					gbc.gridy = 1;
 					jPanel2.add(jScrollPane,gbc);
+					frame.pack();
 					SwingUtilities.updateComponentTreeUI(frame);
 
 				}
@@ -232,7 +233,7 @@ public class GUI {
 
 		frame.add(jTabbedPane);
 
-
+		frame.pack();
 		frame.setVisible(true);
 	}
 
