@@ -37,6 +37,14 @@ public class Thresholds {
 	}
 	
 	private void calcThresholds() {
+		File abc = new File("thresh.txt");
+		PrintWriter printWriter = null;
+		try {
+			printWriter = new PrintWriter(abc);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		for(DataEntry input:inputs) {
 			if(rule1 && rule2) {
 				if(logicalOperator1 == "AND") {
@@ -82,7 +90,8 @@ public class Thresholds {
 					input.setIs_Feature_Envy(true);
 				input.setIs_Feature_Envy(false);
 			}
-			System.out.println(input.toString());
+			System.out.println(input.Is_Long_Method());
+			printWriter.println(input.toString());
 		}
 
 	}
@@ -96,8 +105,7 @@ public class Thresholds {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		String ananas;
 		Thresholds ct= null;
-		ct= new Thresholds(bofe, true,true,false,false,"AND", "AND", 80,10,0,0);
+		ct= new Thresholds(bofe, true,true,false,false,"AND", "AND", 0,0,0,0);
 	}
 }
