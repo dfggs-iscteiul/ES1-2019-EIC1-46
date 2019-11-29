@@ -35,6 +35,7 @@ public class DataEntry {
 		this.Is_Feature_Envy=Is_Feature_Envy;
 		
 	}
+
 	/**
 	 * Getter of the ID of the method of Java Project.
 	 * @return Identification of the method of Java Project.
@@ -130,7 +131,20 @@ public class DataEntry {
 	public boolean Is_Feature_Envy() {
 		return Is_Feature_Envy;
 	}
-
+	/**
+	 * Setter for is_long_method
+	 * @param is_Long_Method
+	 */
+	public void setIs_Long_Method(boolean is_Long_Method) {
+		Is_Long_Method = is_Long_Method;
+	}
+	/**
+	 * Setter for is_feature_envy
+	 * @param is_Feature_Envy
+	 */
+	public void setIs_Feature_Envy(boolean is_Feature_Envy) {
+		Is_Feature_Envy = is_Feature_Envy;
+	}
 	/**
 	 * Converts the object DataEntry to String.
 	 */
