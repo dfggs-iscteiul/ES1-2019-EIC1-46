@@ -60,7 +60,7 @@ public class BuildObjectsFromExcel {
 				linhaExcel += '\n';
 			}
 
-			
+			System.out.println(linhaExcel);
 			helper(linhaExcel);
 
 		} catch (FileNotFoundException ex) {
@@ -145,6 +145,16 @@ public class BuildObjectsFromExcel {
 	}
 
 	public static void main(String[] args) {
+		BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
+		File excel = new File("Long-Method.xlsx");
+		try {
+			bofe.buildObjects(excel);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 }

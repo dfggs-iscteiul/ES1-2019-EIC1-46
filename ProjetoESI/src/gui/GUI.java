@@ -201,7 +201,7 @@ public class GUI {
 					}
 
 					List<DataEntry> entries = bofe.objects();
-					TableModel model = new DataEntryTableModel(entries);
+					TableModel model = new DataEntryTableModel(entries);		
 					JTable table = new JTable(model);
 
 					JScrollPane jScrollPane = new JScrollPane(table);

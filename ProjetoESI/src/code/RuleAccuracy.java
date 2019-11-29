@@ -56,7 +56,7 @@ public class RuleAccuracy {
 						e.printStackTrace();
 					}
 				} 
-			this.accuracyNewRule = (equalLines * 100)/objs.size();
+			this.accuracyNewRule = ((equalLines * 100)/objs.size());
 			System.out.printf("Accuracy = %.2f %n", accuracyNewRule);
 
 
