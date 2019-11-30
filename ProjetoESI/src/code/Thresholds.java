@@ -12,15 +12,15 @@ public class Thresholds {
 	private boolean rule2;// 2- CYCLO
 	private boolean rule3;// 3- ATFD
 	private boolean rule4;// 4- LAA
-	private String logicalOperator1;//AND ou OR para is_long_method
-	private String logicalOperator2;//"" para is_feature_envy
+	private boolean logicalOperator1;//AND ou OR para is_long_method, AND = TRUE
+	private boolean logicalOperator2;//"" para is_feature_envy
 	private int LOCVal;
 	private int CYCLOVal;
 	private int AFTDVal;
 	private float LAAVal;
 
 	public Thresholds(BuildObjectsFromExcel bofe, boolean rule1, boolean rule2, boolean rule3,
-			boolean rule4, String logicalOperator1, String logicalOperator2, int LOCVal, int CYCLOVal,
+			boolean rule4, boolean logicalOperator1, boolean logicalOperator2, int LOCVal, int CYCLOVal,
 			int AFTDVal, float LAAVal) {
 		inputs = bofe.objects();
 		this.rule1=rule1;
@@ -35,9 +35,11 @@ public class Thresholds {
 		this.LAAVal=LAAVal;
 		calcThresholds();
 	}
-	
+
 	private void calcThresholds() {
-		File abc = new File("thresh.txt");
+		String folderPath = System.getProperty("user.dir");
+		String filePath = folderPath + "/thresholds.txt";
+		File abc = new File(filePath);
 		PrintWriter printWriter = null;
 		try {
 			printWriter = new PrintWriter(abc);
@@ -47,55 +49,62 @@ public class Thresholds {
 		}
 		for(DataEntry input:inputs) {
 			if(rule1 && rule2) {
-				if(logicalOperator1 == "AND") {
+				if(logicalOperator1) {
 					if(input.getEntryLOC() > LOCVal && input.getEntryCYCLO() > CYCLOVal)
 						input.setIs_Long_Method(true);
-					input.setIs_Long_Method(false);
+					else
+						input.setIs_Long_Method(false);
 				}
-				if(logicalOperator1 == "OR") {
+				else{
 					if(input.getEntryLOC() > LOCVal || input.getEntryCYCLO() > CYCLOVal)
 						input.setIs_Long_Method(true);
-					input.setIs_Long_Method(false);
+					else
+						input.setIs_Long_Method(false);
 				}
 			}
 			if(rule1 && !rule2) {
 				if(input.getEntryLOC()> LOCVal)
 					input.setIs_Long_Method(true);
-				input.setIs_Long_Method(false);
+				else
+					input.setIs_Long_Method(false);
 			}
 			if(!rule1 && rule2) {
 				if(input.getEntryCYCLO() > CYCLOVal)
 					input.setIs_Long_Method(true);
-				input.setIs_Long_Method(false);
+				else
+					input.setIs_Long_Method(false);
 			}
 			if(rule3 && rule4) {
-				if(logicalOperator1 == "AND") {
+				if(logicalOperator1) {
 					if(input.getEntryATFD() > AFTDVal && input.getEntryLAA() < LAAVal)
 						input.setIs_Feature_Envy(true);
-					input.setIs_Feature_Envy(false);
+					else
+						input.setIs_Feature_Envy(false);
 				}
-				if(logicalOperator1 == "OR") {
+				else {
 					if(input.getEntryATFD() > AFTDVal || input.getEntryLAA() < LAAVal)
 						input.setIs_Feature_Envy(true);
-					input.setIs_Feature_Envy(false);
+					else
+						input.setIs_Feature_Envy(false);
 				}
 			}
 			if(rule3 && !rule4) {
 				if(input.getEntryATFD()> AFTDVal)
 					input.setIs_Feature_Envy(true);
-				input.setIs_Feature_Envy(false);
+				else
+					input.setIs_Feature_Envy(false);
 			}
 			if(!rule3 && rule4) {
 				if(input.getEntryLAA() < LAAVal)
 					input.setIs_Feature_Envy(true);
-				input.setIs_Feature_Envy(false);
+				else
+					input.setIs_Feature_Envy(false);
 			}
 			System.out.println(input.Is_Long_Method());
 			printWriter.println(input.toString());
 		}
-
 	}
-	
+
 	public static void main(String[] args) {
 		File f = new File("Long-Method.xlsx");
 		BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
@@ -106,6 +115,6 @@ public class Thresholds {
 			e1.printStackTrace();
 		}
 		Thresholds ct= null;
-		ct= new Thresholds(bofe, true,true,false,false,"AND", "AND", 0,0,0,0);
+		ct= new Thresholds(bofe, true,true,false,false,true,false,4,2,0,0);
 	}
 }
