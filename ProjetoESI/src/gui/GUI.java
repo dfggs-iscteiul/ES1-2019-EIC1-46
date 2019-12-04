@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -29,6 +30,7 @@ import javax.swing.table.TableModel;
 
 import code.BuildObjectsFromExcel;
 import code.DataEntry;
+import code.Thresholds;
 
 //Isto ainda tem que ser otimizado
 //1ºTab -> Criação de Thresholds
@@ -45,10 +47,12 @@ public class GUI {
 	private JFrame frame;
 	private File file;
 	private GridBagConstraints gbc = new GridBagConstraints();
-	String[] operadores = { "<", ">", "=", "<=", ">=" };
+	private String[] operadores = { "<", ">", "=", "<=", ">=" };
+	private String[] operadores1 = { "AND", "OR" };
 	private JTabbedPane jTabbedPane;
 	private JPanel jPanel1;
 	private JPanel jPanel2;
+	private JLabel fileStatus;
 
 	/**
 	 * Builds the structure of the interface and adds button listeners.
@@ -207,28 +211,96 @@ public class GUI {
 					JScrollPane jScrollPane = new JScrollPane(table);
 
 					gbc.gridx = 0;
-					gbc.gridy = 1;
+					gbc.gridy = 0;
 					jPanel2.add(jScrollPane,gbc);
+					fileStatus.setText("FICHEIRO IMPORTADO COM SUCESSO!");
+					fileStatus.setForeground(Color.GREEN);
 					frame.pack();
 					SwingUtilities.updateComponentTreeUI(frame);
 
 				}
 			}
 		});
-		JButton button2 = new JButton("Criar regra");
+
+		
+		gbc.gridx = 1;
+		gbc.gridy = 4;
+		jPanel1.add(button,gbc);
+		
+		JLabel labelOp1 = new JLabel("Operador Long Method");
 		gbc.gridx = 0;
 		gbc.gridy = 3;
-		jPanel1.add(button2,gbc);
+		jPanel1.add(labelOp1, gbc);
+		
+		JComboBox<String> listaOperadoresMethod1 = new JComboBox<>(operadores1);
+		gbc.gridx = 1;
+		gbc.gridy = 3;
+		jPanel1.add(listaOperadoresMethod1, gbc);
+		String operadorLM = (String) listaOperadoresMethod1.getSelectedItem();
+		
+		JLabel labelOp2 = new JLabel("Operador Feature Envy");
+		gbc.gridx = 2;
+		gbc.gridy = 3;
+		jPanel1.add(labelOp2, gbc);
+		
+		JComboBox<String> listaOperadoresMethod2 = new JComboBox<>(operadores1);
+		gbc.gridx = 3;
+		gbc.gridy = 3;
+		jPanel1.add(listaOperadoresMethod2, gbc);
+		String operadorFE = (String) listaOperadoresMethod2.getSelectedItem();
+		
+		fileStatus = new JLabel("FICHEIRO AINDA NÃO IMPORTADO");
+		fileStatus.setForeground(Color.RED);
+		gbc.gridx = 2;
+		gbc.gridy = 4;
+		jPanel1.add(fileStatus, gbc);
+		
+		JButton button2 = new JButton("Criar threshold");
+		button2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					
+				File excel = new File(file.toString()); 
 
+				BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
+
+				try {
+					bofe.buildObjects(excel);
+				} catch (FileNotFoundException ex) {
+					ex.printStackTrace();
+				}
+				boolean logicalOperator1;
+				boolean logicalOperator2;
+				
+				if(operadorLM.equals("AND"))
+					logicalOperator1 = true;
+				else
+					logicalOperator1 = false;
+				if(operadorFE.equals("AND"))
+					logicalOperator2 = true;
+				else
+					logicalOperator2 = false;
+				
+				Thresholds th = new Thresholds(bofe, c1.isEnabled(),
+						c2.isEnabled(), c3.isEnabled(), c4.isEnabled(), logicalOperator1, 
+						logicalOperator2, Integer.parseInt(tField1.getText())
+						, Integer.parseInt(tField2.getText()), 
+						Integer.parseInt(tField3.getText()), 
+						Float.parseFloat(tField4.getText()));
+			}
+		});
 		gbc.gridx = 0;
-		gbc.gridy = 0;
+		gbc.gridy = 4;
+		jPanel1.add(button2,gbc);
+		
+
 		//		gbc.gridwidth = 8;
 		//		gbc.fill = GridBagConstraints.HORIZONTAL;
-		jPanel2.add(button,gbc);
 
 
-		jTabbedPane.addTab("TAB PARA CRIAÇÃO DE REGRAS", jPanel1);
-		jTabbedPane.addTab("IMPORTAR/APLICAR/RESULTADOS",jPanel2);
+		jTabbedPane.addTab("Criar Threshold", jPanel1);
+		jTabbedPane.addTab("Visualizar dados",jPanel2);
 
 
 		frame.add(jTabbedPane);
