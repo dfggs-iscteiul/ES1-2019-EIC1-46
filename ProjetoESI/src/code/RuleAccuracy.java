@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * fields of a file and an excel file.
  * 
  * Date: Dec 03-2019
+ * 
  * @author Guilherme Ferreira
  * @version 1.0
  *
@@ -104,9 +105,9 @@ public class RuleAccuracy {
 				e.printStackTrace();
 			}
 		}
-		//accuracy calculation
+		// accuracy calculation
 		this.accuracyNewRule = ((equalLines * 100) / objs.size());
-		//prints accuracy calculation
+		// prints accuracy calculation
 		System.out.printf("Accuracy = %.2f %n", accuracyNewRule);
 
 		try {
@@ -119,40 +120,40 @@ public class RuleAccuracy {
 	}
 
 	/**
-	 * Main of the program used to create instances of the RuleAccuracy class
-	 * and test methods of it.
+	 * Main of the program used to create instances of the RuleAccuracy class and
+	 * test methods of it.
 	 * 
 	 * @param args String[] args
 	 */
 
-	public static void main(String[] args) {
-		/*
-		 * Creates a BuildObjectsFromExcel instance that will help reading excel
-		 */
-		BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
-
-		/*
-		 * filePath in String that you will use to build the file
-		 */
-		String folderPath = System.getProperty("user.dir");
-		String filePath = folderPath + "/1_215916_21102019.txt";
-
-		/*
-		 * Creates the file with its path
-		 */
-		File f = new File(filePath);
-
-		/*
-		 * creates an instance of RuleAccuracy passing as arguments for objects (File)
-		 * and bofe (BuildObjectsFromExcel).
-		 */
-		RuleAccuracy car = new RuleAccuracy(f, bofe);
-
-		/*
-		 * finally using the calcAccuracy () method we calculate the accuracy
-		 */
-		car.calcAccuracy();
-
-	}
+//	public static void main(String[] args) {
+//		/*
+//		 * Creates a BuildObjectsFromExcel instance that will help reading excel
+//		 */
+//		BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
+//
+//		/*
+//		 * filePath in String that you will use to build the file
+//		 */
+//		String folderPath = System.getProperty("user.dir");
+//		String filePath = folderPath + "/1_215916_21102019.txt";
+//
+//		/*
+//		 * Creates the file with its path
+//		 */
+//		File f = new File(filePath);
+//
+//		/*
+//		 * creates an instance of RuleAccuracy passing as arguments for objects (File)
+//		 * and bofe (BuildObjectsFromExcel).
+//		 */
+//		RuleAccuracy car = new RuleAccuracy(f, bofe);
+//
+//		/*
+//		 * finally using the calcAccuracy () method we calculate the accuracy
+//		 */
+//		car.calcAccuracy();
+//	
+//        }
 
 }

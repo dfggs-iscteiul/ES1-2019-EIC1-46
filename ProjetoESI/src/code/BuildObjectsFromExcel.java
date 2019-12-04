@@ -121,6 +121,8 @@ public class BuildObjectsFromExcel {
 
 			}
 		}
+		
+		printDataEntries();
 
 	}
 
@@ -212,22 +214,22 @@ public class BuildObjectsFromExcel {
 	 * @param args String[] args
 	 */
 
-	public static void main(String[] args) {
-		
-		//Creates a BuildObjectsFromExcel instance t
-		BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
-		
-		//Creates the file excel
-		File excel = new File("Long-Method.xlsx");
-		
-		//try to read and convert your information to DataEntry objects
-		try {
-			bofe.buildObjects(excel);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
+//	public static void main(String[] args) {
+//		
+//		//Creates a BuildObjectsFromExcel instance t
+//		BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
+//		
+//		//Creates the file excel
+//		File excel = new File("Long-Method.xlsx");
+//		
+//		//try to read and convert your information to DataEntry objects
+//		try {
+//			bofe.buildObjects(excel);
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//	}
 
 }
