@@ -28,10 +28,10 @@ public class ExcelAccuracy {
 
 
 		iPlasmaAccuracy = (iPlasmaCerto * 100 / entradas.size());
-		System.out.printf("iPlasmaAccuracy = %.2f%%%n", iPlasmaAccuracy);
+		//System.out.printf("iPlasmaAccuracy = %.2f%%%n", iPlasmaAccuracy);
 
 		PMDAccuracy = (pmdCerto * 100 / entradas.size());
-		System.out.printf("PMD Accuracy = %.2f%%%n", PMDAccuracy);
+		//System.out.printf("PMD Accuracy = %.2f%%%n", PMDAccuracy);
 
 		this.entryAccuracy = (entradaCerta * 100 / entradas.size());
 	}
@@ -40,7 +40,7 @@ public class ExcelAccuracy {
 		return (iPlasmaAccuracy + PMDAccuracy) / 2;
 	}
 
-	private double getEntryAccuracy() {
+	public double getEntryAccuracy() {
 		return entryAccuracy;
 	}
 
