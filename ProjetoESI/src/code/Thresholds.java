@@ -5,20 +5,37 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+/**
+ * Sets new Thresholds for the Excel file.
+ *
+ */
 public class Thresholds {
 
 	private ArrayList<DataEntry> inputs;
-	private boolean rule1; // active or inactive , 1- LOC
-	private boolean rule2;// 2- CYCLO
-	private boolean rule3;// 3- ATFD
-	private boolean rule4;// 4- LAA
-	private boolean logicalOperator1;//AND ou OR para is_long_method, AND = TRUE
-	private boolean logicalOperator2;//"" para is_feature_envy
+	private boolean rule1;
+	private boolean rule2;
+	private boolean rule3;
+	private boolean rule4;
+	private boolean logicalOperator1;
+	private boolean logicalOperator2;
 	private int LOCVal;
 	private int CYCLOVal;
 	private int AFTDVal;
 	private float LAAVal;
-
+/**
+ * Creates the Threshold with the specific parameters.
+ * @param bofe Is an object of type BuildObjetsFromExcel that helps reading the excel file
+ * @param rule1 Active(true) or inactive(false) for LOC.
+ * @param rule2 Active or inactive for CYCLO.
+ * @param rule3 Active or inactive for AFTD.
+ * @param rule4 Active or inactive for LAA.
+ * @param logicalOperator1 AND(true) or OR(false) for is_long_method.
+ * @param logicalOperator2 AND or OR for is_feature_envy.
+ * @param LOCVal value of LOC threshold.
+ * @param CYCLOVal value of CYCLO threshold.
+ * @param AFTDVal value of AFTD threshold.
+ * @param LAAVal value of LAA threshold.
+ */
 	public Thresholds(BuildObjectsFromExcel bofe, boolean rule1, boolean rule2, boolean rule3,
 			boolean rule4, boolean logicalOperator1, boolean logicalOperator2, int LOCVal, int CYCLOVal,
 			int AFTDVal, float LAAVal) {
@@ -35,7 +52,9 @@ public class Thresholds {
 		this.LAAVal=LAAVal;
 		calcThresholds();
 	}
-
+/**
+ * Cross-checks the new Thresholds with the Excel file and changes the is_long_method and is_feature_envy if needed.
+ */
 	private void calcThresholds() {
 		String folderPath = System.getProperty("user.dir");
 		String filePath = folderPath + "/thresholds.txt";
@@ -105,16 +124,16 @@ public class Thresholds {
 		}
 	}
 
-	public static void main(String[] args) {
-		File f = new File("Long-Method.xlsx");
-		BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
-		try {
-			bofe.buildObjects(f);
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		Thresholds ct= null;
-		ct= new Thresholds(bofe, true,true,false,false,true,false,4,2,0,0);
-	}
+//	public static void main(String[] args) {
+//		File f = new File("Long-Method.xlsx");
+//		BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
+//		try {
+//			bofe.buildObjects(f);
+//		} catch (FileNotFoundException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		Thresholds ct= null;
+//		ct= new Thresholds(bofe, true,true,false,false,true,false,4,2,0,0);
+//	}
 }
