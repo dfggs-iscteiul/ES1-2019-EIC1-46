@@ -222,45 +222,45 @@ public class GUI {
 			}
 		});
 
-		
+
 		gbc.gridx = 1;
 		gbc.gridy = 4;
 		jPanel1.add(button,gbc);
-		
+
 		JLabel labelOp1 = new JLabel("Operador Long Method");
 		gbc.gridx = 0;
 		gbc.gridy = 3;
 		jPanel1.add(labelOp1, gbc);
-		
+
 		JComboBox<String> listaOperadoresMethod1 = new JComboBox<>(operadores1);
 		gbc.gridx = 1;
 		gbc.gridy = 3;
 		jPanel1.add(listaOperadoresMethod1, gbc);
 		String operadorLM = (String) listaOperadoresMethod1.getSelectedItem();
-		
+
 		JLabel labelOp2 = new JLabel("Operador Feature Envy");
 		gbc.gridx = 2;
 		gbc.gridy = 3;
 		jPanel1.add(labelOp2, gbc);
-		
+
 		JComboBox<String> listaOperadoresMethod2 = new JComboBox<>(operadores1);
 		gbc.gridx = 3;
 		gbc.gridy = 3;
 		jPanel1.add(listaOperadoresMethod2, gbc);
 		String operadorFE = (String) listaOperadoresMethod2.getSelectedItem();
-		
+
 		fileStatus = new JLabel("FICHEIRO AINDA NÃO IMPORTADO");
 		fileStatus.setForeground(Color.RED);
 		gbc.gridx = 2;
 		gbc.gridy = 4;
 		jPanel1.add(fileStatus, gbc);
-		
+
 		JButton button2 = new JButton("Criar threshold");
 		button2.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					
+
 				File excel = new File(file.toString()); 
 
 				BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
@@ -272,7 +272,26 @@ public class GUI {
 				}
 				boolean logicalOperator1;
 				boolean logicalOperator2;
-				
+				int text1;
+				int text2;
+				int text3;
+				float text4;
+				if(c1.isSelected()) 
+					text1 = Integer.parseInt(tField1.getText());
+				else 
+					text1 = 0;
+				if(c2.isSelected())
+					text2 = Integer.parseInt(tField2.getText());
+				else 
+					text2 = 0;
+				if(c3.isSelected()) 
+					text3 = Integer.parseInt(tField3.getText());
+				else 
+					text3 = 0;
+				if(c4.isSelected())
+					text4 = Float.parseFloat(tField4.getText());
+				else
+					text4 = 0;
 				if(operadorLM.equals("AND"))
 					logicalOperator1 = true;
 				else
@@ -281,19 +300,15 @@ public class GUI {
 					logicalOperator2 = true;
 				else
 					logicalOperator2 = false;
-				
 				Thresholds th = new Thresholds(bofe, c1.isEnabled(),
 						c2.isEnabled(), c3.isEnabled(), c4.isEnabled(), logicalOperator1, 
-						logicalOperator2, Integer.parseInt(tField1.getText())
-						, Integer.parseInt(tField2.getText()), 
-						Integer.parseInt(tField3.getText()), 
-						Float.parseFloat(tField4.getText()));
+						logicalOperator2, text1, text2, text3, text4);
 			}
 		});
 		gbc.gridx = 0;
 		gbc.gridy = 4;
 		jPanel1.add(button2,gbc);
-		
+
 
 		//		gbc.gridwidth = 8;
 		//		gbc.fill = GridBagConstraints.HORIZONTAL;
