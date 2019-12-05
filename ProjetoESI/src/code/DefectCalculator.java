@@ -1,9 +1,9 @@
 package code;
 
-import java.util.ArrayList;
+import java.util.List;
 /**
  * 
- * DefectCalculator calculates the number of different types of defects in an arraylist of DataEntry.
+ * DefectCalculator calculates the number of different types of defects in an list of DataEntry.
  * 
  * 
  * Date: Dec 05-2019
@@ -20,7 +20,7 @@ public class DefectCalculator {
 	 * Represents the attributes of the DefectCalculator class.
 	 */
 
-	private ArrayList<DataEntry> dataEntry;
+	private List<DataEntry> dataEntry;
 	private int dci;
 	private int dii;
 	private int adci;
@@ -28,9 +28,9 @@ public class DefectCalculator {
 	
 	/**
 	 * Creates the DefectCalculator with the specific parameters.
-	 * @param dataEntry is an ArrayList of DataEntry.
+	 * @param dataEntry is an List of DataEntry.
 	 */
-	public DefectCalculator(ArrayList<DataEntry> dataEntry) {
+	public DefectCalculator(List<DataEntry> dataEntry) {
 		this.dataEntry=dataEntry;
 		dci = 0;
 		dii = 0;
@@ -39,7 +39,7 @@ public class DefectCalculator {
 	}
 	
 	/**
-	 * Calculates defects in the ArrayList of DataEntry
+	 * Calculates defects in the List of DataEntry
 	 */
 	public void CalculateDefects() {
 		for(DataEntry d : dataEntry) {
@@ -55,11 +55,11 @@ public class DefectCalculator {
 	}
 
 	/**
-	 * returns the ArrayList of DataEntry Objects
+	 * returns the List of DataEntry Objects
 	 * 
 	 * @return
 	 */
-	public ArrayList<DataEntry> getDataEntry() {
+	public List<DataEntry> getDataEntry() {
 		return dataEntry;
 	}
 	
