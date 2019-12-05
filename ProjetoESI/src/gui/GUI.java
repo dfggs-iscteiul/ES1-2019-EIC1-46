@@ -53,7 +53,7 @@ public class GUI {
 	private JPanel jPanel1;
 	private JPanel jPanel2;
 	private JLabel fileStatus;
-
+	private JScrollPane jScrollPane;
 	/**
 	 * Builds the structure of the interface and adds button listeners.
 	 */
@@ -207,8 +207,8 @@ public class GUI {
 					List<DataEntry> entries = bofe.objects();
 					TableModel model = new DataEntryTableModel(entries);		
 					JTable table = new JTable(model);
-
-					JScrollPane jScrollPane = new JScrollPane(table);
+					
+					jScrollPane = new JScrollPane(table);
 
 					gbc.gridx = 0;
 					gbc.gridy = 0;
@@ -217,7 +217,6 @@ public class GUI {
 					fileStatus.setForeground(Color.GREEN);
 					frame.pack();
 					SwingUtilities.updateComponentTreeUI(frame);
-
 				}
 			}
 		});
@@ -300,9 +299,21 @@ public class GUI {
 					logicalOperator2 = true;
 				else
 					logicalOperator2 = false;
+				
 				Thresholds th = new Thresholds(bofe, c1.isEnabled(),
 						c2.isEnabled(), c3.isEnabled(), c4.isEnabled(), logicalOperator1, 
 						logicalOperator2, text1, text2, text3, text4);
+				
+				jPanel2.remove(jScrollPane);
+				List<DataEntry> entries = th.getInputs();
+				TableModel model = new DataEntryTableModel(entries);		
+				JTable table = new JTable(model);
+				jScrollPane = new JScrollPane(table);
+				gbc.gridx = 0;
+				gbc.gridy = 0;
+				jPanel2.add(jScrollPane,gbc);
+				frame.pack();
+				SwingUtilities.updateComponentTreeUI(frame);
 			}
 		});
 		gbc.gridx = 0;

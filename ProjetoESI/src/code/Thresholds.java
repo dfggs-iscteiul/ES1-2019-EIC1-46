@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 /**
  * Sets new Thresholds for the Excel file.
+ * @author Joao Macedo
  *
  */
 public class Thresholds {
@@ -52,6 +53,13 @@ public class Thresholds {
 		this.LAAVal=LAAVal;
 		calcThresholds();
 	}
+	/**
+	 * Getter for the List of DataEntries.
+	 * @return the list of DataEntries.
+	 */
+public ArrayList<DataEntry> getInputs() {
+	return inputs;
+}
 /**
  * Cross-checks the new Thresholds with the Excel file and changes the is_long_method and is_feature_envy if needed.
  */

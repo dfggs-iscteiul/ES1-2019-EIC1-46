@@ -40,7 +40,7 @@ public class BuildObjectsFromExcel {
 	/**
 	 * Opens excel file reads it and converts all information to DataEntry objects.
 	 * 
-	 * @param file File choosen by the user in this case Excel file
+	 * @param file File chosen by the user in this case Excel file
 	 * @throws FileNotFoundException if the specified pathname does not exist or if
 	 *                               it is inaccessible.
 	 */
