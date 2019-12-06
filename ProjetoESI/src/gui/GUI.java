@@ -30,6 +30,7 @@ import javax.swing.table.TableModel;
 
 import code.BuildObjectsFromExcel;
 import code.DataEntry;
+import code.DefectCalculator;
 import code.Thresholds;
 
 //Isto ainda tem que ser otimizado
@@ -52,8 +53,18 @@ public class GUI {
 	private JTabbedPane jTabbedPane;
 	private JPanel jPanel1;
 	private JPanel jPanel2;
+	private JPanel jPanel3;
 	private JLabel fileStatus;
 	private JScrollPane jScrollPane;
+	private DefectCalculator calculator;
+	private JLabel label1p2;
+	private JLabel label2p2;
+	private JLabel label3p2;
+	private JLabel label4p2;
+	private JLabel field1;
+	private JLabel field2;
+	private JLabel field3;
+	private JLabel field4;
 	/**
 	 * Builds the structure of the interface and adds button listeners.
 	 */
@@ -68,6 +79,7 @@ public class GUI {
 		jTabbedPane = new JTabbedPane();
 		jPanel1 = new JPanel(new GridBagLayout());
 		jPanel2 = new JPanel(new GridBagLayout());
+		jPanel3 = new JPanel(new GridBagLayout());
 
 		gbc.insets = new Insets(5, 5, 5, 5);
 
@@ -213,6 +225,15 @@ public class GUI {
 					gbc.gridx = 0;
 					gbc.gridy = 0;
 					jPanel2.add(jScrollPane,gbc);
+					
+					calculator = new DefectCalculator(entries);					
+				    calculator.CalculateDefects();			    
+					field1.setText(Integer.toString(calculator.getDci()));
+					field2.setText(Integer.toString(calculator.getDii()));
+					field3.setText(Integer.toString(calculator.getAdci()));
+					field4.setText(Integer.toString(calculator.getAdii()));
+
+
 					fileStatus.setText("FICHEIRO IMPORTADO COM SUCESSO!");
 					fileStatus.setForeground(Color.GREEN);
 					frame.pack();
@@ -312,6 +333,14 @@ public class GUI {
 				gbc.gridx = 0;
 				gbc.gridy = 0;
 				jPanel2.add(jScrollPane,gbc);
+				
+				calculator = new DefectCalculator(entries);					
+			    calculator.CalculateDefects();			    
+				field1.setText(Integer.toString(calculator.getDci()));
+				field2.setText(Integer.toString(calculator.getDii()));
+				field3.setText(Integer.toString(calculator.getAdci()));
+				field4.setText(Integer.toString(calculator.getAdii()));
+				
 				frame.pack();
 				SwingUtilities.updateComponentTreeUI(frame);
 			}
@@ -323,10 +352,48 @@ public class GUI {
 
 		//		gbc.gridwidth = 8;
 		//		gbc.fill = GridBagConstraints.HORIZONTAL;
+		
+		label1p2 = new JLabel("DCI");
+		label1p2.setForeground(Color.BLUE);
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		jPanel3.add(label1p2,gbc);
+		field1 = new JLabel("0");
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		jPanel3.add(field1,gbc);
+		label2p2 = new JLabel("DII");
+		label2p2.setForeground(Color.BLUE);
+		gbc.gridx = 2;
+		gbc.gridy = 0;
+		jPanel3.add(label2p2,gbc);
+		field2 = new JLabel("0");
+		gbc.gridx = 3;
+		gbc.gridy = 0;
+		jPanel3.add(field2,gbc);
+		label3p2 = new JLabel("ADCI");
+		label3p2.setForeground(Color.BLUE);
+		gbc.gridx = 4;
+		gbc.gridy = 0;
+		jPanel3.add(label3p2,gbc);
+		field3 = new JLabel("0");
+		gbc.gridx = 5;
+		gbc.gridy = 0;
+		jPanel3.add(field3,gbc);
+		label4p2 = new JLabel("ADII");
+		label4p2.setForeground(Color.BLUE);
+		gbc.gridx = 6;
+		gbc.gridy = 0;
+		jPanel3.add(label4p2,gbc);
+		field4 = new JLabel("0");
+		gbc.gridx = 7;
+		gbc.gridy = 0;
+		jPanel3.add(field4,gbc);
 
 
 		jTabbedPane.addTab("Criar Threshold", jPanel1);
 		jTabbedPane.addTab("Visualizar dados",jPanel2);
+		jTabbedPane.addTab("Defeitos",jPanel3);
 
 
 		frame.add(jTabbedPane);
