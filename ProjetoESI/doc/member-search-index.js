@@ -1,1 +1,0 @@
-memberSearchIndex = [{"p":"code","c":"Thresholds","l":"Thresholds(BuildObjectsFromExcel, boolean, boolean, boolean, boolean, boolean, boolean, int, int, int, float)","url":"%3Cinit%3E(code.BuildObjectsFromExcel,boolean,boolean,boolean,boolean,boolean,boolean,int,int,int,float)"}]
