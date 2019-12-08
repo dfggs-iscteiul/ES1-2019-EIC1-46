@@ -3,6 +3,7 @@ package code;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -20,6 +21,31 @@ public class ExcelAccuracy {
 	public ExcelAccuracy(BuildObjectsFromExcel bofe) {
 
 		entradas = bofe.objects();
+		int iPlasmaCerto = 0;
+		int pmdCerto = 0;
+		int entradaCerta = 0;
+		for(DataEntry entrada: entradas) {
+			if(entrada.Is_Long_Method() == entrada.IPlasma())
+				iPlasmaCerto++;
+			if (entrada.Is_Long_Method() == entrada.PMD())
+				pmdCerto++;
+			if (entrada.Is_Long_Method() == entrada.IPlasma() && entrada.Is_Long_Method() == entrada.PMD())
+				entradaCerta++;
+		}
+
+
+		iPlasmaAccuracy = (iPlasmaCerto * 100 / entradas.size());
+		//System.out.printf("iPlasmaAccuracy = %.2f%%%n", iPlasmaAccuracy);
+
+		PMDAccuracy = (pmdCerto * 100 / entradas.size());
+		//System.out.printf("PMD Accuracy = %.2f%%%n", PMDAccuracy);
+
+		this.entryAccuracy = (entradaCerta * 100 / entradas.size());
+	}
+	
+	public ExcelAccuracy(ArrayList<DataEntry> entries) {
+
+		entradas = entries;
 		int iPlasmaCerto = 0;
 		int pmdCerto = 0;
 		int entradaCerta = 0;
