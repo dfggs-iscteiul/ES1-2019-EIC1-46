@@ -289,73 +289,75 @@ public class GUI {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				if(file != null) {
+					File excel = new File(file.toString()); 
 
-				File excel = new File(file.toString()); 
+					BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
 
-				BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
-
-				try {
-					bofe.buildObjects(excel);
-				} catch (FileNotFoundException ex) {
-					ex.printStackTrace();
+					try {
+						bofe.buildObjects(excel);
+					} catch (FileNotFoundException ex) {
+						ex.printStackTrace();
+					}
+					boolean logicalOperator1;
+					boolean logicalOperator2;
+					int text1;
+					int text2;
+					int text3;
+					float text4;
+					if(c1.isSelected()) 
+						text1 = Integer.parseInt(tField1.getText());
+					else 
+						text1 = 0;
+					if(c2.isSelected())
+						text2 = Integer.parseInt(tField2.getText());
+					else 
+						text2 = 0;
+					if(c3.isSelected()) 
+						text3 = Integer.parseInt(tField3.getText());
+					else 
+						text3 = 0;
+					if(c4.isSelected())
+						text4 = Float.parseFloat(tField4.getText());
+					else
+						text4 = 0;
+					if(operadorLM.equals("AND"))
+						logicalOperator1 = true;
+					else
+						logicalOperator1 = false;
+					if(operadorFE.equals("AND"))
+						logicalOperator2 = true;
+					else
+						logicalOperator2 = false;
+					
+					Thresholds th = new Thresholds(bofe, c1.isEnabled(),
+							c2.isEnabled(), c3.isEnabled(), c4.isEnabled(), logicalOperator1, 
+							logicalOperator2, text1, text2, text3, text4);
+					
+					jPanel2.remove(jScrollPane);
+					ArrayList<DataEntry> entries = th.getInputs();
+					TableModel model = new DataEntryTableModel(entries);		
+					JTable table = new JTable(model);
+					jScrollPane = new JScrollPane(table);
+					gbc.gridx = 0;
+					gbc.gridy = 0;
+					jPanel2.add(jScrollPane,gbc);
+					
+					calculator = new DefectCalculator(entries);					
+				    calculator.CalculateDefects();			    
+					field1.setText(Integer.toString(calculator.getDci()));
+					field2.setText(Integer.toString(calculator.getDii()));
+					field3.setText(Integer.toString(calculator.getAdci()));
+					field4.setText(Integer.toString(calculator.getAdii()));
+					
+					ExcelAccuracy test = new ExcelAccuracy(entries);
+					labelmedia.setText("Percentagem média da accuracy do iPlasma e PMD: " + test.getAverageAccuracy() + "%");
+					labelpercent.setText("Linhas 100% certas(iPlasma=PMD=isLongMethod): " + test.getEntryAccuracy() + "%");
+					
+					frame.pack();
+					SwingUtilities.updateComponentTreeUI(frame);
 				}
-				boolean logicalOperator1;
-				boolean logicalOperator2;
-				int text1;
-				int text2;
-				int text3;
-				float text4;
-				if(c1.isSelected()) 
-					text1 = Integer.parseInt(tField1.getText());
-				else 
-					text1 = 0;
-				if(c2.isSelected())
-					text2 = Integer.parseInt(tField2.getText());
-				else 
-					text2 = 0;
-				if(c3.isSelected()) 
-					text3 = Integer.parseInt(tField3.getText());
-				else 
-					text3 = 0;
-				if(c4.isSelected())
-					text4 = Float.parseFloat(tField4.getText());
-				else
-					text4 = 0;
-				if(operadorLM.equals("AND"))
-					logicalOperator1 = true;
-				else
-					logicalOperator1 = false;
-				if(operadorFE.equals("AND"))
-					logicalOperator2 = true;
-				else
-					logicalOperator2 = false;
-				
-				Thresholds th = new Thresholds(bofe, c1.isEnabled(),
-						c2.isEnabled(), c3.isEnabled(), c4.isEnabled(), logicalOperator1, 
-						logicalOperator2, text1, text2, text3, text4);
-				
-				jPanel2.remove(jScrollPane);
-				ArrayList<DataEntry> entries = th.getInputs();
-				TableModel model = new DataEntryTableModel(entries);		
-				JTable table = new JTable(model);
-				jScrollPane = new JScrollPane(table);
-				gbc.gridx = 0;
-				gbc.gridy = 0;
-				jPanel2.add(jScrollPane,gbc);
-				
-				calculator = new DefectCalculator(entries);					
-			    calculator.CalculateDefects();			    
-				field1.setText(Integer.toString(calculator.getDci()));
-				field2.setText(Integer.toString(calculator.getDii()));
-				field3.setText(Integer.toString(calculator.getAdci()));
-				field4.setText(Integer.toString(calculator.getAdii()));
-				
-				ExcelAccuracy test = new ExcelAccuracy(entries);
-				labelmedia.setText("Percentagem média da accuracy do iPlasma e PMD: " + test.getAverageAccuracy() + "%");
-				labelpercent.setText("Linhas 100% certas(iPlasma=PMD=isLongMethod): " + test.getEntryAccuracy() + "%");
-				
-				frame.pack();
-				SwingUtilities.updateComponentTreeUI(frame);
 			}
 		});
 		gbc.gridx = 0;
