@@ -39,6 +39,11 @@ public class CustomRule {
 		this.LAA_Max=LAA_Max;
 		System.out.println("New custom rule '" + this.name + "'  was succefully created!");
 	}
+	/**
+	 * Method that applies the new rule created, generating a set of CustomDataEntry and printing them to a File.
+	 * @param ExcelData - List with all the DataEntries that are build from the Excel file.
+	 * @throws FileNotFoundException if the CustomRuleDataFile is not found. 
+	 * */
 	
 	public void applyCustomRule(ArrayList<DataEntry> ExcelData ) throws FileNotFoundException{
 		customRuleData = new ArrayList<CustomDataEntry>();
@@ -150,12 +155,14 @@ public class CustomRule {
 		System.out.println("New custom rule '"+this.name+"' was sucessfully evaluated and its data was exported!");
 	}
 	
-	
+	/**
+	 * Getter of list that stores the data that comes from the application of the new rule.
+	 * @return ArrayList with all of the newly created CustomDataEntry associated with this new rule.
+	 */
 	public ArrayList<CustomDataEntry> getCustomRuleData() {
 		return customRuleData;
 	}
 	
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		File f = new File("Long-Method.xlsx");
