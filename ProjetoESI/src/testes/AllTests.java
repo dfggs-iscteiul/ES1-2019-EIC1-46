@@ -4,8 +4,10 @@ import org.junit.platform.runner.JUnitPlatform;
 import org.junit.platform.suite.api.SelectClasses;
 import org.junit.runner.RunWith;
 
+import code.CustomDataEntry;
+
 @RunWith(JUnitPlatform.class)
-@SelectClasses({ BuildObjectsFromExcelTest.class, RuleAccuracyTest.class})
+@SelectClasses({ BuildObjectsFromExcelTest.class, RuleAccuracyTest.class, CustomDataEntryTest.class, CustomRuleTest.class})
 public class AllTests {
 
 }
