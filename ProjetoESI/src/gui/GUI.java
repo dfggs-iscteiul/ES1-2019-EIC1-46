@@ -266,10 +266,12 @@ public class GUI {
 
 					calculator = new DefectCalculator(entries);
 					calculator.CalculateDefects();
-					field1.setText(Integer.toString(calculator.getDci()));
-					field2.setText(Integer.toString(calculator.getDii()));
-					field3.setText(Integer.toString(calculator.getAdci()));
-					field4.setText(Integer.toString(calculator.getAdii()));
+					
+					//TODO
+//					field1.setText(Integer.toString(calculator.getDci()));
+//					field2.setText(Integer.toString(calculator.getDii()));
+//					field3.setText(Integer.toString(calculator.getAdci()));
+//					field4.setText(Integer.toString(calculator.getAdii()));
 
 					fileStatus.setText("FICHEIRO IMPORTADO COM SUCESSO!");
 					fileStatus.setForeground(Color.GREEN);
@@ -372,10 +374,11 @@ public class GUI {
 
 					calculator = new DefectCalculator(entries);
 					calculator.CalculateDefects();
-					field1.setText(Integer.toString(calculator.getDci()));
-					field2.setText(Integer.toString(calculator.getDii()));
-					field3.setText(Integer.toString(calculator.getAdci()));
-					field4.setText(Integer.toString(calculator.getAdii()));
+					//TODO
+//					field1.setText(Integer.toString(calculator.getDci()));
+//					field2.setText(Integer.toString(calculator.getDii()));
+//					field3.setText(Integer.toString(calculator.getAdci()));
+//					field4.setText(Integer.toString(calculator.getAdii()));
 
 					ExcelAccuracy test = new ExcelAccuracy(entries);
 					labelmedia.setText(
