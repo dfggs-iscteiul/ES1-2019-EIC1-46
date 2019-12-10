@@ -278,9 +278,7 @@ public class GUI {
 					calculator = new DefectCalculator(entries);
 					calculator.CalculateDefects();
 					jPanel2.add(jScrollPane, gbc);
-					
-					//TESTE
-					
+
 					TableModel modelDefect = new DetectedDefectTableModel(calculator.getDefects());
 					JTable tableDefect = new JTable(modelDefect);
 					
@@ -293,7 +291,6 @@ public class GUI {
 					jPanel3.add(jScrollPaneDefect, gbc);
 					
 					
-					//TODO
 					label0p2 = new JLabel("IPlasma");
 					label0p2.setForeground(Color.RED);
 					gbc.gridx = 1;
@@ -388,25 +385,12 @@ public class GUI {
 					fieldpmd3.setText(Integer.toString(calculator.getAdciPMD()));
 					fieldpmd4.setText(Integer.toString(calculator.getAdiiPMD()));
 					
-					
-					//ATE AQUI
-
 					ExcelAccuracy test = new ExcelAccuracy(bofe);
 					labelmedia.setText(
 							"Percentagem média da accuracy do iPlasma e PMD: " + test.getAverageAccuracy() + "%");
 					labelpercent
 							.setText("Linhas 100% certas(iPlasma=PMD=isLongMethod): " + test.getEntryAccuracy() + "%");
 
-					calculator = new DefectCalculator(entries);
-					calculator.CalculateDefects();
-					
-					
-					
-					//TODO
-//					field1.setText(Integer.toString(calculator.getDci()));
-//					field2.setText(Integer.toString(calculator.getDii()));
-//					field3.setText(Integer.toString(calculator.getAdci()));
-//					field4.setText(Integer.toString(calculator.getAdii()));
 
 					fileStatus.setText("FICHEIRO IMPORTADO COM SUCESSO!");
 					fileStatus.setForeground(Color.GREEN);
@@ -509,11 +493,17 @@ public class GUI {
 
 					calculator = new DefectCalculator(entries);
 					calculator.CalculateDefects();
-					//TODO
-//					field1.setText(Integer.toString(calculator.getDci()));
-//					field2.setText(Integer.toString(calculator.getDii()));
-//					field3.setText(Integer.toString(calculator.getAdci()));
-//					field4.setText(Integer.toString(calculator.getAdii()));
+
+					
+					field1.setText(Integer.toString(calculator.getDciIPlasma()));
+					field2.setText(Integer.toString(calculator.getDiiIPlasma()));
+					field3.setText(Integer.toString(calculator.getAdciIPlasma()));
+					field4.setText(Integer.toString(calculator.getAdiiIPlasma()));
+					
+					fieldpmd1.setText(Integer.toString(calculator.getDciPMD()));
+					fieldpmd2.setText(Integer.toString(calculator.getDiiPMD()));
+					fieldpmd3.setText(Integer.toString(calculator.getAdciPMD()));
+					fieldpmd4.setText(Integer.toString(calculator.getAdiiPMD()));
 
 					ExcelAccuracy test = new ExcelAccuracy(entries);
 					labelmedia.setText(
