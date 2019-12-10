@@ -13,7 +13,7 @@ class RuleAccuracyTest {
 
 	protected void setUp() {
 		String folderPath = System.getProperty("user.dir");
-		String filePath = folderPath + "/1_215916_21102019.txt";
+		String filePath = folderPath + "/1_234614_26102019.txt";
 
 		File f = new File(filePath);
 
