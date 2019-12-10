@@ -1,6 +1,8 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -14,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -24,6 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -82,6 +86,7 @@ public class GUI {
 	private CustomRule cr;
 	private JLabel labelmedia;
 	private JLabel labelpercent;
+	private ArrayList<DataEntry> entries;
 
 	/**
 	 * Builds the structure of the interface and adds button listeners.
@@ -243,7 +248,7 @@ public class GUI {
 						ex.printStackTrace();
 					}
 
-					ArrayList<DataEntry> entries = bofe.objects();
+					entries = bofe.objects();
 					TableModel model = new DataEntryTableModel(entries);
 					JTable table = new JTable(model);
 
@@ -574,11 +579,11 @@ public class GUI {
 		gbc.gridy = 11;
 		jPanel4.add(new JScrollPane(rulesList), gbc);
 
-		JLabel jl10 = new JLabel("Todas as Regras Criadas");
-		jl10.setFont(new Font("Arial", Font.BOLD, 20));
-		gbc.gridx = 3;
-		gbc.gridy = 10;
-		jPanel4.add(jl10, gbc);
+//		JLabel jl10 = new JLabel("Todas as Regras Criadas");
+//		jl10.setFont(new Font("Arial", Font.BOLD, 20));
+//		gbc.gridx = 3;
+//		gbc.gridy = 10;
+//		jPanel4.add(jl10, gbc);
 
 		createRule.addActionListener(new ActionListener() {
 
@@ -592,7 +597,61 @@ public class GUI {
 
 			}
 		});
+		
+		//////////////////////////////////////////////////////////////
+		
+        JPanel leftPanel = new JPanel();
+        JPanel centerPanel = new JPanel();
+        JPanel rightPanel = new JPanel();
+        JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, centerPanel);
+        JSplitPane sp2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, sp, rightPanel);
+        
+        ArrayList<CustomDataEntry> results = new ArrayList<CustomDataEntry>();
+        
+        TableModel model1 = new CustomDataEntryTableModel(results);
+		JTable table1 = new JTable(model1);
+		System.out.println(table1.getRowCount());
+		
+		JLabel RegrasDisponiveis = new JLabel("Regras Disponíveis:");
+		regra.setFont(new Font("Arial", Font.BOLD, 20));
+		
+		JButton applyRule = new JButton("Aplicar Regra");
+		applyRule.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CustomRule rule = rulesList.getSelectedValue();
+				try {
+					rule.applyCustomRule(entries);
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				results.addAll(rule.getCustomRuleData());
+			}
+		});
+		
+		
+		jPanel5.add(RegrasDisponiveis);
+		jPanel5.add(sp2, gbc);
+		
+		rulesList.setCellRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                Component renderer = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                if (renderer instanceof JLabel && value instanceof CustomRule) {
+                    // Here value will be of the Type 'CD'
+                    ((JLabel) renderer).setText(((CustomRule) value).getName());
+                }
+                return renderer;
+            }
+        });
+		
+		leftPanel.add(new JScrollPane(rulesList));
+		centerPanel.add(applyRule);
+		rightPanel.add(new JScrollPane(table1));
+		
+		/////////////////////////////////////////////////////////////
 		jTabbedPane.addTab("Criar Threshold", jPanel1);
 		jTabbedPane.addTab("Visualizar dados", jPanel2);
 		jTabbedPane.addTab("Defeitos", jPanel3);
