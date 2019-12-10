@@ -1,5 +1,6 @@
 package code;
 
+import java.util.List;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -40,7 +41,7 @@ public class CustomRule {
 		System.out.println("New custom rule '" + this.name + "'  was succefully created!");
 	}
 	
-	public void applyCustomRule(ArrayList<DataEntry> ExcelData ) throws FileNotFoundException{
+	public void applyCustomRule(List<DataEntry> ExcelData ) throws FileNotFoundException{
 		customRuleData = new ArrayList<CustomDataEntry>();
 		File CustomRuleDataFile = new File(this.name + ".txt");
 		PrintWriter printWriter = new PrintWriter(CustomRuleDataFile);
