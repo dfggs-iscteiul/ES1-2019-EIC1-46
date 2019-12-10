@@ -15,8 +15,6 @@ import java.util.List;
  * 
  *
  */
-
-
 public class DefectCalculator {
 	
 	/**
@@ -59,6 +57,11 @@ public class DefectCalculator {
 		adiiCR = 0;
 		defects = new ArrayList<DetectedDefect>();
 	}
+	/**
+	 * Creates the DefectCalculator with the specific parameters.
+	 * @param dataEntry is a List of DataEntry.
+	 * @param customRule is a CustomRule.
+	 */
 	public DefectCalculator(List<DataEntry> dataEntry,CustomRule customRule) {
 		this.dataEntry=dataEntry;
 		this.customRule=customRule;
@@ -78,7 +81,7 @@ public class DefectCalculator {
 	}
 	
 	/**
-	 * Calculates defects in the List of DataEntry
+	 * Calculates defects in the List of DataEntry(IPlasma and PMD)
 	 */
 	public void CalculateDefects() {
 		for(DataEntry d : dataEntry) {
@@ -113,6 +116,9 @@ public class DefectCalculator {
 	}
 	
 	//Não tenho a certeza se isto de ir buscar por methodid-1 está certo
+	/**
+	 * Calculates defects in the List of DataEntry for the customRule
+	 */
 	public void CalculateDefectsCustomRule() {
 		if(customRule != null && defects !=null) {
 			int i = 0;
@@ -143,7 +149,7 @@ public class DefectCalculator {
 	}
 	
 	/**
-	 * returns the number of dci defects
+	 * returns the number of dci defects for IPlasma
 	 * 
 	 * @return
 	 */
@@ -152,7 +158,7 @@ public class DefectCalculator {
 	}
 
 	/**
-	 * returns the number of dii defects
+	 * returns the number of dii defects for IPlasma
 	 * 
 	 * @return
 	 */
@@ -162,7 +168,7 @@ public class DefectCalculator {
 	}
 
 	/**
-	 * returns the number of adci defects
+	 * returns the number of adci defects for IPlasma
 	 * 
 	 * @return
 	 */
@@ -172,7 +178,7 @@ public class DefectCalculator {
 	}
 
 	/**
-	 * returns the number of adii defects
+	 * returns the number of adii defects for IPlasma
 	 * 
 	 * @return
 	 */
@@ -180,30 +186,77 @@ public class DefectCalculator {
 	public int getAdiiIPlasma() {
 		return adiiIPlasma;
 	}
+	/**
+	 * returns the number of dci defects for PMD
+	 * 
+	 * @return
+	 */
+	
 	public int getDciPMD() {
 		return dciPMD;
 	}
+	
+	/**
+	 * returns the number of dii defects for PMD
+	 * 
+	 * @return
+	 */
 	public int getDiiPMD() {
 		return diiPMD;
 	}
+	/**
+	 * returns the number of adci defects for PMD
+	 * 
+	 * @return
+	 */
 	public int getAdciPMD() {
 		return adciPMD;
 	}
+	/**
+	 * returns the number of adii defects for PMD
+	 * 
+	 * @return
+	 */
 	public int getAdiiPMD() {
 		return adiiPMD;
 	}
+	/**
+	 * returns the number of dci defects for the CustomRule
+	 * 
+	 * @return
+	 */
 	public int getDciCR() {
 		return dciCR;
 	}
+	/**
+	 * returns the number of dii defects for the CustomRule
+	 * 
+	 * @return
+	 */
 	public int getDiiCR() {
 		return diiCR;
 	}
+	/**
+	 * returns the number of adci defects for the CustomRule
+	 * 
+	 * @return
+	 */
 	public int getAdciCR() {
 		return adciCR;
 	}
+	/**
+	 * returns the number of adii defects for the CustomRule
+	 * 
+	 * @return
+	 */
 	public int getAdiiCR() {
 		return adiiCR;
 	}
+	/**
+	 * returns the List of DetectedDefect Objects
+	 * 
+	 * @return
+	 */
 	public List<DetectedDefect> getDefects() {
 		return defects;
 	}
