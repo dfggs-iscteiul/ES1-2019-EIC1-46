@@ -1,6 +1,6 @@
 package code;
 /** 
- *  Represents the Data from the Excel file.
+ *  Represents a new rule created by a merge of different criteria and thresholds. Holds the results of the use of the new rule with de Excel data.
  */
 public class CustomDataEntry {
 
@@ -29,32 +29,32 @@ public class CustomDataEntry {
 		
 	}
 	/**
-	 * Getter of the ID of the method of Java Project.
-	 * @return Identification of the method of Java Project.
+	 * Getter of the ID of the method that is being analyzed.
+	 * @return Identification of the method that is being analyzed.
 	 */
 	public int getEntryMethodId() {
 		return MethodId;
 	}
 
 	/**
-	 * Getter of the  ID of the method of Java Project.
-	 * @return Identification of the package where the method is.
+	 * Getter of the package that contains the method that is being analyzed.
+	 * @return Name of the package that contains the method that is being analyzed.
 	 */
 	public String getEntryPackage() {
 		return Package;
 	}
 
 	/**
-	 * Getter of the ID of the class where the method is.
-	 * @return Identification of the class where the method is.
+	 * Getter of the class that contains the method that is being analyzed.
+	 * @return Name of the class that contains the method that is being analyzed.
 	 */
 	public String getEntryClass() {
 		return Class;
 	}
 
 	/**
-	 * Getter of the name of the method.
-	 * @return The name of the method.
+	 * Getter of the method that contains the method that is being analyzed.
+	 * @return Name of the method that contains the method that is being analyzed.
 	 */
 	public String getEntryMethod() {
 		return Method;
@@ -93,15 +93,15 @@ public class CustomDataEntry {
 	}
 
 	/**
-	 * Checks CustomRule.
-	 * @return Checks if a certain CustomRule is present.
+	 * Getter for the result of the new rule application to that specific method of the Excel data.
+	 * @return Result of the application of the new rule.
 	 */
 	public boolean Is_CustomRule() {
 		return CustomRule;
 	}
 
 	/**
-	 * Converts the object DataEntry to String.
+	 * Represents the CustomDataEntry as a String able to be printed on the console.
 	 */
 	@Override
 	public String toString() {

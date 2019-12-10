@@ -1,16 +1,17 @@
 package gui;
 
-import java.util.List;
+import java.util.ArrayList;
+//import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
 import code.DataEntry;
 
 public class DataEntryTableModel extends AbstractTableModel  {
-	private List<DataEntry> entries ;
+	private ArrayList<DataEntry> entries ;
 	private String[] columns ; 
 
-	public DataEntryTableModel(List<DataEntry> dataEntryList){
+	public DataEntryTableModel(ArrayList<DataEntry> dataEntryList){
 		super();
 		entries = dataEntryList ;
 		columns = new String[]{"ID","Package","Class", "Method", "LOC", "CYCLO", "ATFD", "LAA", "Long-Method", "IPlasma","PMD","Feature-Envy"};
