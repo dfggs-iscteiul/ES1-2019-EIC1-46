@@ -551,7 +551,7 @@ public class GUI {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+//
 				cr = new CustomRule(jtf1.getText(), jtf2.getText(), jtf3.getText(), jtf4.getText(), jtf5.getText(),
 						jtf6.getText(), jtf7.getText(), jtf8.getText(), jtf9.getText());
 
