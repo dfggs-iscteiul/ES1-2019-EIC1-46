@@ -17,6 +17,7 @@ public class ExcelAccuracy {
 	private double iPlasmaAccuracy;
 	private double PMDAccuracy;
 	private double entryAccuracy;
+	private double customAccuracy;
 
 	public ExcelAccuracy(BuildObjectsFromExcel bofe) {
 
@@ -43,29 +44,14 @@ public class ExcelAccuracy {
 		this.entryAccuracy = (entradaCerta * 100 / entradas.size());
 	}
 	
-	public ExcelAccuracy(ArrayList<DataEntry> entries) {
-
-		entradas = entries;
-		int iPlasmaCerto = 0;
-		int pmdCerto = 0;
-		int entradaCerta = 0;
-		for(DataEntry entrada: entradas) {
-			if(entrada.Is_Long_Method() == entrada.IPlasma())
-				iPlasmaCerto++;
-			if (entrada.Is_Long_Method() == entrada.PMD())
-				pmdCerto++;
-			if (entrada.Is_Long_Method() == entrada.IPlasma() && entrada.Is_Long_Method() == entrada.PMD())
-				entradaCerta++;
-		}
-
-
-		iPlasmaAccuracy = (iPlasmaCerto * 100 / entradas.size());
-		//System.out.printf("iPlasmaAccuracy = %.2f%%%n", iPlasmaAccuracy);
-
-		PMDAccuracy = (pmdCerto * 100 / entradas.size());
-		//System.out.printf("PMD Accuracy = %.2f%%%n", PMDAccuracy);
-
-		this.entryAccuracy = (entradaCerta * 100 / entradas.size());
+		public ExcelAccuracy(ArrayList<DataEntry> entries, ArrayList<CustomDataEntry> customEntries) {
+			entradas = entries;
+			int customCerto = 0;
+			for(int a = 0; a<entradas.size();a++) {
+				if(entradas.get(a).Is_Long_Method() == customEntries.get(a).Is_CustomRule())
+					customCerto++;
+			}
+		customAccuracy = (customCerto * 100 / entradas.size());
 	}
 
 	
@@ -83,6 +69,12 @@ public class ExcelAccuracy {
 	 */
 	public double getEntryAccuracy() {
 		return entryAccuracy;
+	}
+	
+	
+
+	public double getCustomAccuracy() {
+		return customAccuracy;
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {

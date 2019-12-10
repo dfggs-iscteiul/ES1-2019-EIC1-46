@@ -87,9 +87,11 @@ public class GUI {
 	private CustomRule cr;
 	private JLabel labelmedia;
 	private JLabel labelpercent;
-<<<<<<< HEAD
 	private ArrayList<DataEntry> entries;
-=======
+	private JLabel labelmedia1;
+	private JLabel labelpercent1;
+	private ArrayList<CustomRule> customRules;
+	private double customAccuracy = 0.0;
 	
 	private JLabel pmd0;
 	private JLabel pmd1;
@@ -103,7 +105,6 @@ public class GUI {
 	
 	
 	private JScrollPane jScrollPaneDefect;
->>>>>>> branch 'master' of https://github.com/dfggs-iscteiul/ES1-2019-EIC1-46.git
 
 	/**
 	 * Builds the structure of the interface and adds button listeners.
@@ -505,7 +506,7 @@ public class GUI {
 					fieldpmd3.setText(Integer.toString(calculator.getAdciPMD()));
 					fieldpmd4.setText(Integer.toString(calculator.getAdiiPMD()));
 
-					ExcelAccuracy test = new ExcelAccuracy(entries);
+					ExcelAccuracy test = new ExcelAccuracy(bofe);
 					labelmedia.setText(
 							"Percentagem média da accuracy do iPlasma e PMD: " + test.getAverageAccuracy() + "%");
 					labelpercent
@@ -671,6 +672,7 @@ public class GUI {
 //		gbc.gridy = 10;
 //		jPanel4.add(jl10, gbc);
 
+		customRules = new ArrayList<CustomRule>();
 		createRule.addActionListener(new ActionListener() {
 
 			@Override
@@ -680,26 +682,23 @@ public class GUI {
 						jtf6.getText(), jtf7.getText(), jtf8.getText(), jtf9.getText());
 
 				listModel.addElement(cr);
+				customRules.add(cr);
 
 			}
 		});
 		
 		//////////////////////////////////////////////////////////////
-		
-        JPanel leftPanel = new JPanel();
-        JPanel centerPanel = new JPanel();
-        JPanel rightPanel = new JPanel();
-        JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, centerPanel);
-        JSplitPane sp2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, sp, rightPanel);
         
         ArrayList<CustomDataEntry> results = new ArrayList<CustomDataEntry>();
         
         TableModel model1 = new CustomDataEntryTableModel(results);
 		JTable table1 = new JTable(model1);
-		System.out.println(table1.getRowCount());
 		
 		JLabel RegrasDisponiveis = new JLabel("Regras Disponíveis:");
-		regra.setFont(new Font("Arial", Font.BOLD, 20));
+		RegrasDisponiveis.setFont(new Font("Arial", Font.BOLD, 20));
+		
+		JLabel Resultados = new JLabel("Resultados:");
+		Resultados.setFont(new Font("Arial", Font.BOLD, 20));
 		
 		JButton applyRule = new JButton("Aplicar Regra");
 		applyRule.addActionListener(new ActionListener() {
@@ -709,17 +708,26 @@ public class GUI {
 				CustomRule rule = rulesList.getSelectedValue();
 				try {
 					rule.applyCustomRule(entries);
+					ExcelAccuracy test1 = new ExcelAccuracy(entries,rulesList.getSelectedValue().getCustomRuleData());
+					customAccuracy = test1.getCustomAccuracy();
+					labelmedia1.setText("Percentagem média da accuracy da regra selecionada: " + customAccuracy + "%");
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				results.addAll(rule.getCustomRuleData());
+				table1.revalidate();
+				frame.pack();
 			}
 		});
 		
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		jPanel5.add(RegrasDisponiveis,gbc);
 		
-		jPanel5.add(RegrasDisponiveis);
-		jPanel5.add(sp2, gbc);
+		gbc.gridx = 2;
+		gbc.gridy = 0;
+		jPanel5.add(Resultados,gbc);
 		
 		rulesList.setCellRenderer(new DefaultListCellRenderer() {
             @Override
@@ -732,11 +740,19 @@ public class GUI {
                 return renderer;
             }
         });
-		
-		leftPanel.add(new JScrollPane(rulesList));
-		centerPanel.add(applyRule);
-		rightPanel.add(new JScrollPane(table1));
-		
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		jPanel5.add(new JScrollPane(rulesList),gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		jPanel5.add(applyRule,gbc);
+		gbc.gridx = 2;
+		gbc.gridy = 1;
+		jPanel5.add(new JScrollPane(table1),gbc);
+		labelmedia1 = new JLabel();
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		jPanel5.add(labelmedia1, gbc);
 		/////////////////////////////////////////////////////////////
 		jTabbedPane.addTab("Criar Threshold", jPanel1);
 		jTabbedPane.addTab("Visualizar dados", jPanel2);
