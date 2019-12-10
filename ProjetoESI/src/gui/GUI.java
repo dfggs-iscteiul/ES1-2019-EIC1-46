@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -10,14 +11,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -25,10 +29,14 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableModel;
 
 import code.BuildObjectsFromExcel;
+import code.CustomDataEntry;
+import code.CustomRule;
 import code.DataEntry;
 import code.DefectCalculator;
 import code.Thresholds;
@@ -54,8 +62,11 @@ public class GUI {
 	private JPanel jPanel1;
 	private JPanel jPanel2;
 	private JPanel jPanel3;
+	private JPanel jPanel4;
+	private JPanel jPanel5;
 	private JLabel fileStatus;
 	private JScrollPane jScrollPane;
+	private JScrollPane jScrollPane2;
 	private DefectCalculator calculator;
 	private JLabel label1p2;
 	private JLabel label2p2;
@@ -65,6 +76,10 @@ public class GUI {
 	private JLabel field2;
 	private JLabel field3;
 	private JLabel field4;
+	private DefaultListModel<CustomRule> listModel = new DefaultListModel<>();
+	private JList<CustomRule> rulesList = new JList<>(listModel);
+	private CustomRule cr;
+
 	/**
 	 * Builds the structure of the interface and adds button listeners.
 	 */
@@ -80,21 +95,26 @@ public class GUI {
 		jPanel1 = new JPanel(new GridBagLayout());
 		jPanel2 = new JPanel(new GridBagLayout());
 		jPanel3 = new JPanel(new GridBagLayout());
+		jPanel4 = new JPanel(new GridBagLayout());
+		jPanel5 = new JPanel(new GridBagLayout());
 
 		gbc.insets = new Insets(5, 5, 5, 5);
 
 		JLabel label00 = new JLabel("Regra ativa");
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		jPanel1.add(label00,gbc);
+		jPanel1.add(label00, gbc);
+
 		JLabel label01 = new JLabel("Threshold");
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		jPanel1.add(label01, gbc);
+
 		JLabel label02 = new JLabel("Operador");
 		gbc.gridx = 2;
 		gbc.gridy = 0;
 		jPanel1.add(label02, gbc);
+
 		JLabel label03 = new JLabel("Valor");
 		gbc.gridx = 3;
 		gbc.gridy = 0;
@@ -103,28 +123,32 @@ public class GUI {
 		JLabel label10 = new JLabel("Regra ativa");
 		gbc.gridx = 4;
 		gbc.gridy = 0;
-		jPanel1.add(label10,gbc);
+		jPanel1.add(label10, gbc);
+
 		JLabel label11 = new JLabel("Threshold");
 		gbc.gridx = 5;
 		gbc.gridy = 0;
 		jPanel1.add(label11, gbc);
+
 		JLabel label12 = new JLabel("Operador");
 		gbc.gridx = 6;
 		gbc.gridy = 0;
 		jPanel1.add(label12, gbc);
+
 		JLabel label13 = new JLabel("Valor");
 		gbc.gridx = 7;
 		gbc.gridy = 0;
 		jPanel1.add(label13, gbc);
 
-		JCheckBox c1 = new JCheckBox();
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		jPanel1.add(c1,gbc);
 		JLabel label1 = new JLabel("LOC");
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		jPanel1.add(label1, gbc);
+
+		JCheckBox c1 = new JCheckBox();
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		jPanel1.add(c1, gbc);
 		JComboBox<String> listaOperadores = new JComboBox<>(operadores);
 		gbc.gridx = 2;
 		gbc.gridy = 1;
@@ -139,7 +163,7 @@ public class GUI {
 		JCheckBox c2 = new JCheckBox();
 		gbc.gridx = 0;
 		gbc.gridy = 2;
-		jPanel1.add(c2,gbc);
+		jPanel1.add(c2, gbc);
 		JLabel label2 = new JLabel("CYCLO");
 		gbc.gridx = 1;
 		gbc.gridy = 2;
@@ -158,7 +182,7 @@ public class GUI {
 		JCheckBox c3 = new JCheckBox();
 		gbc.gridx = 4;
 		gbc.gridy = 1;
-		jPanel1.add(c3,gbc);
+		jPanel1.add(c3, gbc);
 		JLabel label3 = new JLabel("AFTD");
 		gbc.gridx = 5;
 		gbc.gridy = 1;
@@ -177,7 +201,7 @@ public class GUI {
 		JCheckBox c4 = new JCheckBox();
 		gbc.gridx = 4;
 		gbc.gridy = 2;
-		jPanel1.add(c4,gbc);
+		jPanel1.add(c4, gbc);
 		JLabel label4 = new JLabel("LAA");
 		gbc.gridx = 5;
 		gbc.gridy = 2;
@@ -201,12 +225,12 @@ public class GUI {
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel file", "xls", "xlsx");
 				filechooser.setFileFilter(filter);
 				int returnVal = filechooser.showOpenDialog(null);
-				if(returnVal == JFileChooser.APPROVE_OPTION) {
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
 
 					file = filechooser.getSelectedFile();
 					System.out.println("Escolheu abrir o ficheiro: " + file.getName());
 
-					File excel = new File(file.toString()); 
+					File excel = new File(file.toString());
 
 					BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
 
@@ -217,22 +241,21 @@ public class GUI {
 					}
 
 					List<DataEntry> entries = bofe.objects();
-					TableModel model = new DataEntryTableModel(entries);		
+					TableModel model = new DataEntryTableModel(entries);
 					JTable table = new JTable(model);
-					
+
 					jScrollPane = new JScrollPane(table);
 
 					gbc.gridx = 0;
 					gbc.gridy = 0;
-					jPanel2.add(jScrollPane,gbc);
-					
-					calculator = new DefectCalculator(entries);					
-				    calculator.CalculateDefects();			    
+					jPanel2.add(jScrollPane, gbc);
+
+					calculator = new DefectCalculator(entries);
+					calculator.CalculateDefects();
 					field1.setText(Integer.toString(calculator.getDci()));
 					field2.setText(Integer.toString(calculator.getDii()));
 					field3.setText(Integer.toString(calculator.getAdci()));
 					field4.setText(Integer.toString(calculator.getAdii()));
-
 
 					fileStatus.setText("FICHEIRO IMPORTADO COM SUCESSO!");
 					fileStatus.setForeground(Color.GREEN);
@@ -242,10 +265,9 @@ public class GUI {
 			}
 		});
 
-
 		gbc.gridx = 1;
 		gbc.gridy = 4;
-		jPanel1.add(button,gbc);
+		jPanel1.add(button, gbc);
 
 		JLabel labelOp1 = new JLabel("Operador Long Method");
 		gbc.gridx = 0;
@@ -281,7 +303,7 @@ public class GUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				File excel = new File(file.toString()); 
+				File excel = new File(file.toString());
 
 				BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
 
@@ -296,112 +318,258 @@ public class GUI {
 				int text2;
 				int text3;
 				float text4;
-				if(c1.isSelected()) 
+				if (c1.isSelected())
 					text1 = Integer.parseInt(tField1.getText());
-				else 
+				else
 					text1 = 0;
-				if(c2.isSelected())
+				if (c2.isSelected())
 					text2 = Integer.parseInt(tField2.getText());
-				else 
+				else
 					text2 = 0;
-				if(c3.isSelected()) 
+				if (c3.isSelected())
 					text3 = Integer.parseInt(tField3.getText());
-				else 
+				else
 					text3 = 0;
-				if(c4.isSelected())
+				if (c4.isSelected())
 					text4 = Float.parseFloat(tField4.getText());
 				else
 					text4 = 0;
-				if(operadorLM.equals("AND"))
+				if (operadorLM.equals("AND"))
 					logicalOperator1 = true;
 				else
 					logicalOperator1 = false;
-				if(operadorFE.equals("AND"))
+				if (operadorFE.equals("AND"))
 					logicalOperator2 = true;
 				else
 					logicalOperator2 = false;
-				
-				Thresholds th = new Thresholds(bofe, c1.isEnabled(),
-						c2.isEnabled(), c3.isEnabled(), c4.isEnabled(), logicalOperator1, 
-						logicalOperator2, text1, text2, text3, text4);
-				
+
+				Thresholds th = new Thresholds(bofe, c1.isEnabled(), c2.isEnabled(), c3.isEnabled(), c4.isEnabled(),
+						logicalOperator1, logicalOperator2, text1, text2, text3, text4);
+
 				jPanel2.remove(jScrollPane);
 				List<DataEntry> entries = th.getInputs();
-				TableModel model = new DataEntryTableModel(entries);		
+				TableModel model = new DataEntryTableModel(entries);
 				JTable table = new JTable(model);
 				jScrollPane = new JScrollPane(table);
 				gbc.gridx = 0;
 				gbc.gridy = 0;
-				jPanel2.add(jScrollPane,gbc);
-				
-				calculator = new DefectCalculator(entries);					
-			    calculator.CalculateDefects();			    
+				jPanel2.add(jScrollPane, gbc);
+
+				calculator = new DefectCalculator(entries);
+				calculator.CalculateDefects();
 				field1.setText(Integer.toString(calculator.getDci()));
 				field2.setText(Integer.toString(calculator.getDii()));
 				field3.setText(Integer.toString(calculator.getAdci()));
 				field4.setText(Integer.toString(calculator.getAdii()));
-				
+
 				frame.pack();
 				SwingUtilities.updateComponentTreeUI(frame);
 			}
 		});
 		gbc.gridx = 0;
 		gbc.gridy = 4;
-		jPanel1.add(button2,gbc);
+		jPanel1.add(button2, gbc);
 
+		// gbc.gridwidth = 8;
+		// gbc.fill = GridBagConstraints.HORIZONTAL;
 
-		//		gbc.gridwidth = 8;
-		//		gbc.fill = GridBagConstraints.HORIZONTAL;
-		
 		label1p2 = new JLabel("DCI");
 		label1p2.setForeground(Color.BLUE);
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		jPanel3.add(label1p2,gbc);
+		jPanel3.add(label1p2, gbc);
 		field1 = new JLabel("0");
 		gbc.gridx = 1;
 		gbc.gridy = 0;
-		jPanel3.add(field1,gbc);
+		jPanel3.add(field1, gbc);
 		label2p2 = new JLabel("DII");
 		label2p2.setForeground(Color.BLUE);
 		gbc.gridx = 2;
 		gbc.gridy = 0;
-		jPanel3.add(label2p2,gbc);
+		jPanel3.add(label2p2, gbc);
 		field2 = new JLabel("0");
 		gbc.gridx = 3;
 		gbc.gridy = 0;
-		jPanel3.add(field2,gbc);
+		jPanel3.add(field2, gbc);
 		label3p2 = new JLabel("ADCI");
 		label3p2.setForeground(Color.BLUE);
 		gbc.gridx = 4;
 		gbc.gridy = 0;
-		jPanel3.add(label3p2,gbc);
+		jPanel3.add(label3p2, gbc);
 		field3 = new JLabel("0");
 		gbc.gridx = 5;
 		gbc.gridy = 0;
-		jPanel3.add(field3,gbc);
+		jPanel3.add(field3, gbc);
 		label4p2 = new JLabel("ADII");
 		label4p2.setForeground(Color.BLUE);
 		gbc.gridx = 6;
 		gbc.gridy = 0;
-		jPanel3.add(label4p2,gbc);
+		jPanel3.add(label4p2, gbc);
 		field4 = new JLabel("0");
 		gbc.gridx = 7;
 		gbc.gridy = 0;
-		jPanel3.add(field4,gbc);
+		jPanel3.add(field4, gbc);
 
+		//////////////////////////////////////////////////////////
+		JLabel regra = new JLabel("Regra");
+		regra.setFont(new Font("Arial", Font.BOLD, 20));
+
+		JLabel valor = new JLabel("Valores");
+		valor.setFont(new Font("Arial", Font.BOLD, 20));
+
+		JLabel jl1 = new JLabel("Nome da regra");
+		JLabel jl2 = new JLabel("LOC_Max");
+		JLabel jl3 = new JLabel("LOC_Min");
+		JLabel jl4 = new JLabel("CYCLO_Max");
+		JLabel jl5 = new JLabel("CYCLO_Min");
+		JLabel jl6 = new JLabel("ATFD_Max");
+		JLabel jl7 = new JLabel("ATFD_Min");
+		JLabel jl8 = new JLabel("LAA_Max");
+		JLabel jl9 = new JLabel("LAA_Min");
+
+		JTextField jtf1 = new JTextField();
+		JTextField jtf2 = new JTextField();
+		JTextField jtf3 = new JTextField();
+		JTextField jtf4 = new JTextField();
+		JTextField jtf5 = new JTextField();
+		JTextField jtf6 = new JTextField();
+		JTextField jtf7 = new JTextField();
+		JTextField jtf8 = new JTextField();
+		JTextField jtf9 = new JTextField();
+
+		JButton createRule = new JButton("Cria Regra");
+
+		jtf1.setPreferredSize(new Dimension(80, 20));
+		jtf2.setPreferredSize(new Dimension(80, 20));
+		jtf3.setPreferredSize(new Dimension(80, 20));
+		jtf4.setPreferredSize(new Dimension(80, 20));
+		jtf5.setPreferredSize(new Dimension(80, 20));
+		jtf6.setPreferredSize(new Dimension(80, 20));
+		jtf7.setPreferredSize(new Dimension(80, 20));
+		jtf8.setPreferredSize(new Dimension(80, 20));
+		jtf9.setPreferredSize(new Dimension(80, 20));
+
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		jPanel4.add(regra, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		jPanel4.add(jl1, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		jPanel4.add(jl2, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		jPanel4.add(jl3, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		jPanel4.add(jl4, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 5;
+		jPanel4.add(jl5, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 6;
+		jPanel4.add(jl6, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 7;
+		jPanel4.add(jl7, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 8;
+		jPanel4.add(jl8, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 9;
+		jPanel4.add(jl9, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 9;
+		jPanel4.add(jl9, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		jPanel4.add(valor, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		jPanel4.add(jtf1, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		jPanel4.add(jtf2, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 3;
+		jPanel4.add(jtf3, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 4;
+		jPanel4.add(jtf4, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 5;
+		jPanel4.add(jtf5, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 6;
+		jPanel4.add(jtf6, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 7;
+		jPanel4.add(jtf7, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 8;
+		jPanel4.add(jtf8, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 9;
+		jPanel4.add(jtf9, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 10;
+		jPanel4.add(createRule, gbc);
+
+		gbc.gridx = 3;
+		gbc.gridy = 11;
+		jPanel4.add(new JScrollPane(rulesList), gbc);
+
+		JLabel jl10 = new JLabel("Todas as Regras Criadas");
+		jl10.setFont(new Font("Arial", Font.BOLD, 20));
+		gbc.gridx = 3;
+		gbc.gridy = 10;
+		jPanel4.add(jl10, gbc);
+
+		createRule.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				cr = new CustomRule(jtf1.getText(), jtf2.getText(), jtf3.getText(), jtf4.getText(), jtf5.getText(),
+						jtf6.getText(), jtf7.getText(), jtf8.getText(), jtf9.getText());
+
+				listModel.addElement(cr);
+
+			}
+		});
 
 		jTabbedPane.addTab("Criar Threshold", jPanel1);
-		jTabbedPane.addTab("Visualizar dados",jPanel2);
-		jTabbedPane.addTab("Defeitos",jPanel3);
-
+		jTabbedPane.addTab("Visualizar dados", jPanel2);
+		jTabbedPane.addTab("Defeitos", jPanel3);
+		jTabbedPane.addTab("Criar Regra", jPanel4);
+		jTabbedPane.addTab("Ver Regra", jPanel5);
 
 		frame.add(jTabbedPane);
-
 		frame.pack();
 		frame.setVisible(true);
 	}
-
 
 	public static void main(String[] args) {
 		GUI gui = new GUI();
