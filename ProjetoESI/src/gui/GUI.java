@@ -69,6 +69,7 @@ public class GUI {
 	private JScrollPane jScrollPane;
 	private JScrollPane jScrollPane2;
 	private DefectCalculator calculator;
+	private JLabel label0p2;
 	private JLabel label1p2;
 	private JLabel label2p2;
 	private JLabel label3p2;
@@ -82,6 +83,19 @@ public class GUI {
 	private CustomRule cr;
 	private JLabel labelmedia;
 	private JLabel labelpercent;
+	
+	private JLabel pmd0;
+	private JLabel pmd1;
+	private JLabel pmd2;
+	private JLabel pmd3;
+	private JLabel pmd4;
+	private JLabel fieldpmd1;
+	private JLabel fieldpmd2;
+	private JLabel fieldpmd3;
+	private JLabel fieldpmd4;
+	
+	
+	private JScrollPane jScrollPaneDefect;
 
 	/**
 	 * Builds the structure of the interface and adds button listeners.
@@ -256,8 +270,119 @@ public class GUI {
 					calculator = new DefectCalculator(entries);
 					calculator.CalculateDefects();
 					jPanel2.add(jScrollPane, gbc);
+					
+					//TESTE
+					
+					TableModel modelDefect = new DetectedDefectTableModel(calculator.getDefects());
+					JTable tableDefect = new JTable(modelDefect);
+					
+					
 
-					// TODO
+					jScrollPaneDefect = new JScrollPane(tableDefect);
+
+					gbc.gridx = 0;
+					gbc.gridy = 0;
+					jPanel3.add(jScrollPaneDefect, gbc);
+					
+					
+					//TODO
+					label0p2 = new JLabel("IPlasma");
+					label0p2.setForeground(Color.RED);
+					gbc.gridx = 1;
+					gbc.gridy = 1;
+					jPanel3.add(label0p2, gbc);
+					label1p2 = new JLabel("DCI");
+					label1p2.setForeground(Color.BLUE);
+					gbc.gridx = 2;
+					gbc.gridy = 1;
+					jPanel3.add(label1p2, gbc);
+					field1 = new JLabel("0");
+					gbc.gridx = 3;
+					gbc.gridy = 1;
+					jPanel3.add(field1, gbc);
+					label2p2 = new JLabel("DII");
+					label2p2.setForeground(Color.BLUE);
+					gbc.gridx = 4;
+					gbc.gridy = 1;
+					jPanel3.add(label2p2, gbc);
+					field2 = new JLabel("0");
+					gbc.gridx = 5;
+					gbc.gridy = 1;
+					jPanel3.add(field2, gbc);
+					label3p2 = new JLabel("ADCI");
+					label3p2.setForeground(Color.BLUE);
+					gbc.gridx = 6;
+					gbc.gridy = 1;
+					jPanel3.add(label3p2, gbc);
+					field3 = new JLabel("0");
+					gbc.gridx = 7;
+					gbc.gridy = 1;
+					jPanel3.add(field3, gbc);
+					label4p2 = new JLabel("ADII");
+					label4p2.setForeground(Color.BLUE);
+					gbc.gridx = 8;
+					gbc.gridy = 1;
+					jPanel3.add(label4p2, gbc);
+					field4 = new JLabel("0");
+					gbc.gridx = 9;
+					gbc.gridy = 1;
+					jPanel3.add(field4, gbc);
+					
+					pmd0 = new JLabel("PMD");
+					pmd0.setForeground(Color.RED);
+					gbc.gridx = 1;
+					gbc.gridy = 2;
+					jPanel3.add(pmd0, gbc);
+					pmd1 = new JLabel("DCI");
+					pmd1.setForeground(Color.BLUE);
+					gbc.gridx = 2;
+					gbc.gridy = 2;
+					jPanel3.add(pmd1, gbc);
+					fieldpmd1 = new JLabel("0");
+					gbc.gridx = 3;
+					gbc.gridy = 2;
+					jPanel3.add(fieldpmd1, gbc);
+					pmd2 = new JLabel("DII");
+					pmd2.setForeground(Color.BLUE);
+					gbc.gridx = 4;
+					gbc.gridy = 2;
+					jPanel3.add(pmd2, gbc);
+					fieldpmd2 = new JLabel("0");
+					gbc.gridx = 5;
+					gbc.gridy = 2;
+					jPanel3.add(fieldpmd2, gbc);
+					pmd3 = new JLabel("ADCI");
+					pmd3.setForeground(Color.BLUE);
+					gbc.gridx = 6;
+					gbc.gridy = 2;
+					jPanel3.add(pmd3, gbc);
+					fieldpmd3 = new JLabel("0");
+					gbc.gridx = 7;
+					gbc.gridy = 2;
+					jPanel3.add(fieldpmd3, gbc);
+					pmd4 = new JLabel("ADII");
+					pmd4.setForeground(Color.BLUE);
+					gbc.gridx = 8;
+					gbc.gridy = 2;
+					jPanel3.add(pmd4, gbc);
+					fieldpmd4 = new JLabel("0");
+					gbc.gridx = 9;
+					gbc.gridy = 2;
+					jPanel3.add(fieldpmd4, gbc);
+					
+					field1.setText(Integer.toString(calculator.getDciIPlasma()));
+					field2.setText(Integer.toString(calculator.getDiiIPlasma()));
+					field3.setText(Integer.toString(calculator.getAdciIPlasma()));
+					field4.setText(Integer.toString(calculator.getAdiiIPlasma()));
+					
+					fieldpmd1.setText(Integer.toString(calculator.getDciPMD()));
+					fieldpmd2.setText(Integer.toString(calculator.getDiiPMD()));
+					fieldpmd3.setText(Integer.toString(calculator.getAdciPMD()));
+					fieldpmd4.setText(Integer.toString(calculator.getAdiiPMD()));
+					
+					
+					//ATE AQUI
+
 					ExcelAccuracy test = new ExcelAccuracy(bofe);
 					labelmedia.setText(
 							"Percentagem média da accuracy do iPlasma e PMD: " + test.getAverageAccuracy() + "%");
@@ -266,6 +391,8 @@ public class GUI {
 
 					calculator = new DefectCalculator(entries);
 					calculator.CalculateDefects();
+					
+					
 					
 					//TODO
 //					field1.setText(Integer.toString(calculator.getDci()));
@@ -399,43 +526,6 @@ public class GUI {
 		// gbc.gridwidth = 8;
 		// gbc.fill = GridBagConstraints.HORIZONTAL;
 
-		label1p2 = new JLabel("DCI");
-		label1p2.setForeground(Color.BLUE);
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		jPanel3.add(label1p2, gbc);
-		field1 = new JLabel("0");
-		gbc.gridx = 1;
-		gbc.gridy = 0;
-		jPanel3.add(field1, gbc);
-		label2p2 = new JLabel("DII");
-		label2p2.setForeground(Color.BLUE);
-		gbc.gridx = 2;
-		gbc.gridy = 0;
-		jPanel3.add(label2p2, gbc);
-		field2 = new JLabel("0");
-		gbc.gridx = 3;
-		gbc.gridy = 0;
-		jPanel3.add(field2, gbc);
-		label3p2 = new JLabel("ADCI");
-		label3p2.setForeground(Color.BLUE);
-		gbc.gridx = 4;
-		gbc.gridy = 0;
-		jPanel3.add(label3p2, gbc);
-		field3 = new JLabel("0");
-		gbc.gridx = 5;
-		gbc.gridy = 0;
-		jPanel3.add(field3, gbc);
-		label4p2 = new JLabel("ADII");
-		label4p2.setForeground(Color.BLUE);
-		gbc.gridx = 6;
-		gbc.gridy = 0;
-		jPanel3.add(label4p2, gbc);
-		field4 = new JLabel("0");
-		gbc.gridx = 7;
-		gbc.gridy = 0;
-		jPanel3.add(field4, gbc);
-		jPanel3.add(field4, gbc);
 
 		labelmedia = new JLabel();
 		gbc.gridx = 0;
