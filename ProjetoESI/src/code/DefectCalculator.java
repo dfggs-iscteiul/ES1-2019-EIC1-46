@@ -125,11 +125,11 @@ public class DefectCalculator {
 			for(DataEntry d : dataEntry) {
 				if(customRule.getCustomRuleData().get(i).Is_CustomRule()==true && d.Is_Long_Method()==true) {
 					dciCR+=1;
-					defects.get(d.getEntryMethodId()-1).setIplasma(true);
+					defects.get(d.getEntryMethodId()-1).setCustomrule(true);
 				}
 				if(customRule.getCustomRuleData().get(i).Is_CustomRule()==true && d.Is_Long_Method()==false) {
 					diiCR+=1;
-					defects.get(d.getEntryMethodId()-1).setIplasma(true);
+					defects.get(d.getEntryMethodId()-1).setCustomrule(true);
 				}
 				if(customRule.getCustomRuleData().get(i).Is_CustomRule()==false && d.Is_Long_Method()==false)
 					adciCR+=1;
