@@ -102,7 +102,7 @@ public ArrayList<DataEntry> getInputs() {
 					input.setIs_Long_Method(false);
 			}
 			if(rule3 && rule4) {
-				if(logicalOperator1) {
+				if(logicalOperator2) {
 					if(input.getEntryATFD() > AFTDVal && input.getEntryLAA() < LAAVal)
 						input.setIs_Feature_Envy(true);
 					else
