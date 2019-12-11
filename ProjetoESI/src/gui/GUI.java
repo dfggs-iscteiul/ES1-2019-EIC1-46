@@ -371,7 +371,7 @@ public class GUI {
 					gbc.gridx = 0;
 					gbc.gridy = 0;
 					jPanel2.add(jScrollPane, gbc);
-
+//
 					calculator = new DefectCalculator(entries);
 					calculator.CalculateDefects();
 					//TODO
