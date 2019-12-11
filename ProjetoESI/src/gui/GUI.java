@@ -58,6 +58,7 @@ import code.Thresholds;
  */
 public class GUI {
 
+	private Thresholds thinputs;
 	private JFrame frame;
 	private File file;
 	private GridBagConstraints gbc = new GridBagConstraints();
@@ -102,6 +103,16 @@ public class GUI {
 	private JLabel fieldpmd2;
 	private JLabel fieldpmd3;
 	private JLabel fieldpmd4;
+	
+	private JLabel cr0;
+	private JLabel cr1;
+	private JLabel cr2;
+	private JLabel cr3;
+	private JLabel cr4;
+	private JLabel fieldcr1;
+	private JLabel fieldcr2;
+	private JLabel fieldcr3;
+	private JLabel fieldcr4;
 
 
 	private JScrollPane jScrollPaneDefect;
@@ -392,6 +403,48 @@ public class GUI {
 			gbc.gridx = 9;
 			gbc.gridy = 2;
 			jPanel3.add(fieldpmd4, gbc);
+			
+			cr0 = new JLabel("CustomRule");
+			cr0.setForeground(Color.RED);
+			gbc.gridx = 1;
+			gbc.gridy = 3;
+			jPanel3.add(cr0, gbc);
+			cr1 = new JLabel("DCI");
+			cr1.setForeground(Color.BLUE);
+			gbc.gridx = 2;
+			gbc.gridy = 3;
+			jPanel3.add(cr1, gbc);
+			fieldcr1 = new JLabel("0");
+			gbc.gridx = 3;
+			gbc.gridy = 3;
+			jPanel3.add(fieldcr1, gbc);
+			cr2 = new JLabel("DII");
+			cr2.setForeground(Color.BLUE);
+			gbc.gridx = 4;
+			gbc.gridy = 3;
+			jPanel3.add(cr2, gbc);
+			fieldcr2 = new JLabel("0");
+			gbc.gridx = 5;
+			gbc.gridy = 3;
+			jPanel3.add(fieldcr2, gbc);
+			cr3 = new JLabel("ADCI");
+			cr3.setForeground(Color.BLUE);
+			gbc.gridx = 6;
+			gbc.gridy = 3;
+			jPanel3.add(cr3, gbc);
+			fieldcr3 = new JLabel("0");
+			gbc.gridx = 7;
+			gbc.gridy = 3;
+			jPanel3.add(fieldcr3, gbc);
+			cr4 = new JLabel("ADII");
+			cr4.setForeground(Color.BLUE);
+			gbc.gridx = 8;
+			gbc.gridy = 3;
+			jPanel3.add(cr4, gbc);
+			fieldcr4 = new JLabel("0");
+			gbc.gridx = 9;
+			gbc.gridy = 3;
+			jPanel3.add(fieldcr4, gbc);
 		}
 
 		///////////
@@ -723,6 +776,8 @@ public class GUI {
 							logicalOperator1, logicalOperator2, text1, text2, text3, text4);
 					th.calcThresholds();
 					
+					thinputs = th;
+					
 					jPanel2.remove(jScrollPane);
 					ArrayList<DataEntry> entries = th.getInputs();
 					TableModel model = new DataEntryTableModel(entries);
@@ -789,6 +844,69 @@ public class GUI {
 					ExcelAccuracy test1 = new ExcelAccuracy(entries,rulesList.getSelectedValue().getCustomRuleData());
 					customAccuracy = test1.getCustomAccuracy();
 					labelmedia1.setText("Percentagem média da accuracy da regra selecionada: " + customAccuracy + "%");
+					
+					
+					//TESTE
+					if(thinputs != null) {
+						calculator = new DefectCalculator(thinputs.getInputs(), cr);
+						calculator.CalculateDefects();
+						calculator.CalculateDefectsCustomRule();
+						
+						TableModel modelDefect = new DetectedDefectTableModel(calculator.getDefects());
+						JTable tableDefect = new JTable(modelDefect);
+
+						jPanel3.remove(jScrollPaneDefect);
+
+						jScrollPaneDefect = new JScrollPane(tableDefect);
+
+						gbc.gridx = 0;
+						gbc.gridy = 0;
+						gbc.gridwidth = 11;
+						gbc.fill = GridBagConstraints.HORIZONTAL;
+						jPanel3.add(jScrollPaneDefect, gbc);
+						
+						fieldcr1.setText(Integer.toString(calculator.getDciCR()));
+						fieldcr2.setText(Integer.toString(calculator.getDiiCR()));
+						fieldcr3.setText(Integer.toString(calculator.getAdciCR()));
+						fieldcr4.setText(Integer.toString(calculator.getAdiiCR()));
+						
+					} else if(file !=null) {
+						File excel = new File(file.toString());
+
+						BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
+
+						try {
+							bofe.buildObjects(excel);
+						} catch (FileNotFoundException ex) {
+							ex.printStackTrace();
+						}
+						calculator = new DefectCalculator(bofe.objects(), cr);
+						calculator.CalculateDefects();
+						calculator.CalculateDefectsCustomRule();
+						
+						TableModel modelDefect = new DetectedDefectTableModel(calculator.getDefects());
+						JTable tableDefect = new JTable(modelDefect);
+
+						jPanel3.remove(jScrollPaneDefect);
+
+						jScrollPaneDefect = new JScrollPane(tableDefect);
+
+						gbc.gridx = 0;
+						gbc.gridy = 0;
+						gbc.gridwidth = 11;
+						gbc.fill = GridBagConstraints.HORIZONTAL;
+						jPanel3.add(jScrollPaneDefect, gbc);
+						
+						fieldcr1.setText(Integer.toString(calculator.getDciCR()));
+						fieldcr2.setText(Integer.toString(calculator.getDiiCR()));
+						fieldcr3.setText(Integer.toString(calculator.getAdciCR()));
+						fieldcr4.setText(Integer.toString(calculator.getAdiiCR()));
+						
+					}
+					
+					//TESTE
+					
+					
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -818,6 +936,7 @@ public class GUI {
 				listModel.addElement(cr);
 				customRules.add(cr);
 				applyRule.setEnabled(true);
+				
 
 			}
 		});
