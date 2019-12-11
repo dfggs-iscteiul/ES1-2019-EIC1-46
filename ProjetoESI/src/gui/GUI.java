@@ -247,6 +247,7 @@ public class GUI {
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				JFileChooser filechooser = new JFileChooser("Importar ficheiro");
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel file", "xls", "xlsx");
 				filechooser.setFileFilter(filter);
@@ -287,94 +288,18 @@ public class GUI {
 
 					jScrollPaneDefect = new JScrollPane(tableDefect);
 
+//					gbc.gridx = 0;
+//					gbc.gridy = 0;
+//					gbc.gridwidth = 9;
+//					gbc.fill = GridBagConstraints.VERTICAL;
+//					jPanel3.add(jScrollPaneDefect, gbc);
+					
+					
 					gbc.gridx = 0;
 					gbc.gridy = 0;
+					gbc.gridwidth = 11;
+					gbc.fill = GridBagConstraints.HORIZONTAL;
 					jPanel3.add(jScrollPaneDefect, gbc);
-					
-					
-					label0p2 = new JLabel("IPlasma");
-					label0p2.setForeground(Color.RED);
-					gbc.gridx = 1;
-					gbc.gridy = 1;
-					jPanel3.add(label0p2, gbc);
-					label1p2 = new JLabel("DCI");
-					label1p2.setForeground(Color.BLUE);
-					gbc.gridx = 2;
-					gbc.gridy = 1;
-					jPanel3.add(label1p2, gbc);
-					field1 = new JLabel("0");
-					gbc.gridx = 3;
-					gbc.gridy = 1;
-					jPanel3.add(field1, gbc);
-					label2p2 = new JLabel("DII");
-					label2p2.setForeground(Color.BLUE);
-					gbc.gridx = 4;
-					gbc.gridy = 1;
-					jPanel3.add(label2p2, gbc);
-					field2 = new JLabel("0");
-					gbc.gridx = 5;
-					gbc.gridy = 1;
-					jPanel3.add(field2, gbc);
-					label3p2 = new JLabel("ADCI");
-					label3p2.setForeground(Color.BLUE);
-					gbc.gridx = 6;
-					gbc.gridy = 1;
-					jPanel3.add(label3p2, gbc);
-					field3 = new JLabel("0");
-					gbc.gridx = 7;
-					gbc.gridy = 1;
-					jPanel3.add(field3, gbc);
-					label4p2 = new JLabel("ADII");
-					label4p2.setForeground(Color.BLUE);
-					gbc.gridx = 8;
-					gbc.gridy = 1;
-					jPanel3.add(label4p2, gbc);
-					field4 = new JLabel("0");
-					gbc.gridx = 9;
-					gbc.gridy = 1;
-					jPanel3.add(field4, gbc);
-					
-					pmd0 = new JLabel("PMD");
-					pmd0.setForeground(Color.RED);
-					gbc.gridx = 1;
-					gbc.gridy = 2;
-					jPanel3.add(pmd0, gbc);
-					pmd1 = new JLabel("DCI");
-					pmd1.setForeground(Color.BLUE);
-					gbc.gridx = 2;
-					gbc.gridy = 2;
-					jPanel3.add(pmd1, gbc);
-					fieldpmd1 = new JLabel("0");
-					gbc.gridx = 3;
-					gbc.gridy = 2;
-					jPanel3.add(fieldpmd1, gbc);
-					pmd2 = new JLabel("DII");
-					pmd2.setForeground(Color.BLUE);
-					gbc.gridx = 4;
-					gbc.gridy = 2;
-					jPanel3.add(pmd2, gbc);
-					fieldpmd2 = new JLabel("0");
-					gbc.gridx = 5;
-					gbc.gridy = 2;
-					jPanel3.add(fieldpmd2, gbc);
-					pmd3 = new JLabel("ADCI");
-					pmd3.setForeground(Color.BLUE);
-					gbc.gridx = 6;
-					gbc.gridy = 2;
-					jPanel3.add(pmd3, gbc);
-					fieldpmd3 = new JLabel("0");
-					gbc.gridx = 7;
-					gbc.gridy = 2;
-					jPanel3.add(fieldpmd3, gbc);
-					pmd4 = new JLabel("ADII");
-					pmd4.setForeground(Color.BLUE);
-					gbc.gridx = 8;
-					gbc.gridy = 2;
-					jPanel3.add(pmd4, gbc);
-					fieldpmd4 = new JLabel("0");
-					gbc.gridx = 9;
-					gbc.gridy = 2;
-					jPanel3.add(fieldpmd4, gbc);
 					
 					field1.setText(Integer.toString(calculator.getDciIPlasma()));
 					field2.setText(Integer.toString(calculator.getDiiIPlasma()));
@@ -494,6 +419,20 @@ public class GUI {
 
 					calculator = new DefectCalculator(entries);
 					calculator.CalculateDefects();
+
+					
+					TableModel modelDefect = new DetectedDefectTableModel(calculator.getDefects());
+					JTable tableDefect = new JTable(modelDefect);
+					
+					jPanel3.remove(jScrollPaneDefect);
+
+					jScrollPaneDefect = new JScrollPane(tableDefect);
+					
+					gbc.gridx = 0;
+					gbc.gridy = 0;
+					gbc.gridwidth = 11;
+					gbc.fill = GridBagConstraints.HORIZONTAL;
+					jPanel3.add(jScrollPaneDefect, gbc);
 
 					
 					field1.setText(Integer.toString(calculator.getDciIPlasma()));
@@ -754,6 +693,93 @@ public class GUI {
 		gbc.gridy = 2;
 		jPanel5.add(labelmedia1, gbc);
 		/////////////////////////////////////////////////////////////
+		
+		if(file==null) {
+		label0p2 = new JLabel("IPlasma");
+		label0p2.setForeground(Color.RED);
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		jPanel3.add(label0p2, gbc);
+		label1p2 = new JLabel("DCI");
+		label1p2.setForeground(Color.BLUE);
+		gbc.gridx = 2;
+		gbc.gridy = 1;
+		jPanel3.add(label1p2, gbc);
+		field1 = new JLabel("0");
+		gbc.gridx = 3;
+		gbc.gridy = 1;
+		jPanel3.add(field1, gbc);
+		label2p2 = new JLabel("DII");
+		label2p2.setForeground(Color.BLUE);
+		gbc.gridx = 4;
+		gbc.gridy = 1;
+		jPanel3.add(label2p2, gbc);
+		field2 = new JLabel("0");
+		gbc.gridx = 5;
+		gbc.gridy = 1;
+		jPanel3.add(field2, gbc);
+		label3p2 = new JLabel("ADCI");
+		label3p2.setForeground(Color.BLUE);
+		gbc.gridx = 6;
+		gbc.gridy = 1;
+		jPanel3.add(label3p2, gbc);
+		field3 = new JLabel("0");
+		gbc.gridx = 7;
+		gbc.gridy = 1;
+		jPanel3.add(field3, gbc);
+		label4p2 = new JLabel("ADII");
+		label4p2.setForeground(Color.BLUE);
+		gbc.gridx = 8;
+		gbc.gridy = 1;
+		jPanel3.add(label4p2, gbc);
+		field4 = new JLabel("0");
+		gbc.gridx = 9;
+		gbc.gridy = 1;
+		jPanel3.add(field4, gbc);
+		
+		pmd0 = new JLabel("PMD");
+		pmd0.setForeground(Color.RED);
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		jPanel3.add(pmd0, gbc);
+		pmd1 = new JLabel("DCI");
+		pmd1.setForeground(Color.BLUE);
+		gbc.gridx = 2;
+		gbc.gridy = 2;
+		jPanel3.add(pmd1, gbc);
+		fieldpmd1 = new JLabel("0");
+		gbc.gridx = 3;
+		gbc.gridy = 2;
+		jPanel3.add(fieldpmd1, gbc);
+		pmd2 = new JLabel("DII");
+		pmd2.setForeground(Color.BLUE);
+		gbc.gridx = 4;
+		gbc.gridy = 2;
+		jPanel3.add(pmd2, gbc);
+		fieldpmd2 = new JLabel("0");
+		gbc.gridx = 5;
+		gbc.gridy = 2;
+		jPanel3.add(fieldpmd2, gbc);
+		pmd3 = new JLabel("ADCI");
+		pmd3.setForeground(Color.BLUE);
+		gbc.gridx = 6;
+		gbc.gridy = 2;
+		jPanel3.add(pmd3, gbc);
+		fieldpmd3 = new JLabel("0");
+		gbc.gridx = 7;
+		gbc.gridy = 2;
+		jPanel3.add(fieldpmd3, gbc);
+		pmd4 = new JLabel("ADII");
+		pmd4.setForeground(Color.BLUE);
+		gbc.gridx = 8;
+		gbc.gridy = 2;
+		jPanel3.add(pmd4, gbc);
+		fieldpmd4 = new JLabel("0");
+		gbc.gridx = 9;
+		gbc.gridy = 2;
+		jPanel3.add(fieldpmd4, gbc);
+		}
+		
 		jTabbedPane.addTab("Criar Threshold", jPanel1);
 		jTabbedPane.addTab("Visualizar dados", jPanel2);
 		jTabbedPane.addTab("Defeitos", jPanel3);
