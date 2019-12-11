@@ -721,7 +721,8 @@ public class GUI {
 
 					Thresholds th = new Thresholds(bofe, c1.isEnabled(), c2.isEnabled(), c3.isEnabled(), c4.isEnabled(),
 							logicalOperator1, logicalOperator2, text1, text2, text3, text4);
-
+					th.calcThresholds();
+					
 					jPanel2.remove(jScrollPane);
 					ArrayList<DataEntry> entries = th.getInputs();
 					TableModel model = new DataEntryTableModel(entries);

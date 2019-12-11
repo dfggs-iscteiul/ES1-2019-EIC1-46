@@ -1,8 +1,5 @@
 package code;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -51,7 +48,6 @@ public class Thresholds {
 		this.CYCLOVal=CYCLOVal;
 		this.AFTDVal=AFTDVal;
 		this.LAAVal=LAAVal;
-		calcThresholds();
 	}
 	/**
 	 * Getter for the List of DataEntries.
@@ -63,17 +59,7 @@ public ArrayList<DataEntry> getInputs() {
 /**
  * Cross-checks the new Thresholds with the Excel file and changes the is_long_method and is_feature_envy if needed.
  */
-	private void calcThresholds() {
-		String folderPath = System.getProperty("user.dir");
-		String filePath = folderPath + "/thresholds.txt";
-		File abc = new File(filePath);
-		PrintWriter printWriter = null;
-		try {
-			printWriter = new PrintWriter(abc);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void calcThresholds() {
 		for(DataEntry input:inputs) {
 			if(rule1 && rule2) {
 				if(logicalOperator1) {
@@ -127,21 +113,6 @@ public ArrayList<DataEntry> getInputs() {
 				else
 					input.setIs_Feature_Envy(false);
 			}
-			System.out.println(input.Is_Long_Method());
-			printWriter.println(input.toString());
 		}
 	}
-
-//	public static void main(String[] args) {
-//		File f = new File("Long-Method.xlsx");
-//		BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
-//		try {
-//			bofe.buildObjects(f);
-//		} catch (FileNotFoundException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//		Thresholds ct= null;
-//		ct= new Thresholds(bofe, true,true,false,false,true,false,4,2,0,0);
-//	}
 }
