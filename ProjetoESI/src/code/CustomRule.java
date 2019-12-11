@@ -24,7 +24,7 @@ public class CustomRule {
 	private ArrayList<CustomDataEntry> customRuleData;
 	
 	public CustomRule(String name, String LOC_Max, String LOC_Min, String CYCLO_Max, 
-		String CYCLO_Min, String ATFD_Min, String ATFD_Max, String LAA_Min, String LAA_Max) {
+		String CYCLO_Min, String ATFD_Max, String ATFD_Min, String LAA_Max, String LAA_Min) {
 		Calendar calendar = Calendar.getInstance();
 		SimpleDateFormat formatter = new SimpleDateFormat(" HH:mm:ss dd-MM-yyyy");
 		this.name=name+"_"+calendar.get(calendar.HOUR_OF_DAY)+calendar.get(calendar.MINUTE)
@@ -46,7 +46,7 @@ public class CustomRule {
 	 * @throws FileNotFoundException if the CustomRuleDataFile is not found. 
 	 * */
 	
-	public void applyCustomRule(List<DataEntry> ExcelData ) throws FileNotFoundException{
+	public void applyCustomRule(ArrayList<DataEntry> ExcelData ) throws FileNotFoundException{
 		customRuleData = new ArrayList<CustomDataEntry>();
 		File CustomRuleDataFile = new File(this.name + ".txt");
 		PrintWriter printWriter = new PrintWriter(CustomRuleDataFile);
@@ -63,7 +63,7 @@ public class CustomRule {
 					i++;
 				}		
 				if(this.LOC_Min!=null) {
-					if(d.getEntryLOC()>Integer.parseInt(this.LOC_Min)) {
+					if(d.getEntryLOC()>=Integer.parseInt(this.LOC_Min)) {
 						checklist[i]="true";
 					}
 					else {
@@ -72,7 +72,7 @@ public class CustomRule {
 					i++;
 				}		
 				if(this.CYCLO_Max!=null) {
-					if(d.getEntryCYCLO()<Integer.parseInt(this.CYCLO_Max)) {
+					if(d.getEntryCYCLO()<=Integer.parseInt(this.CYCLO_Max)) {
 						checklist[i]="true";
 					}
 					else {
@@ -81,7 +81,7 @@ public class CustomRule {
 					i++;
 				}		
 				if(this.CYCLO_Min!=null) {
-					if(d.getEntryCYCLO()>Integer.parseInt(this.CYCLO_Min)) {
+					if(d.getEntryCYCLO()>=Integer.parseInt(this.CYCLO_Min)) {
 						checklist[i]="true";
 					}
 					else {
@@ -90,7 +90,7 @@ public class CustomRule {
 					i++;
 				}		
 				if(this.ATFD_Max!=null) {
-					if(d.getEntryATFD()<Integer.parseInt(this.ATFD_Max)) {
+					if(d.getEntryATFD()<=Integer.parseInt(this.ATFD_Max)) {
 						checklist[i]="true";
 					}
 					else {
@@ -99,7 +99,7 @@ public class CustomRule {
 					i++;
 				}		
 				if(this.ATFD_Min!=null) {
-					if(d.getEntryATFD()>Integer.parseInt(this.ATFD_Min)) {
+					if(d.getEntryATFD()>=Integer.parseInt(this.ATFD_Min)) {
 						checklist[i]="true";
 					}
 					else {
@@ -108,7 +108,7 @@ public class CustomRule {
 					i++;
 				}		
 				if(this.LAA_Max!=null) {
-					if(d.getEntryLAA()<Integer.parseInt(this.LAA_Max)) {
+					if(d.getEntryLAA()<=Integer.parseInt(this.LAA_Max)) {
 						checklist[i]="true";
 					}
 					else {
@@ -117,7 +117,7 @@ public class CustomRule {
 					i++;
 				}		
 				if(this.LAA_Min!=null) {
-					if(d.getEntryLAA()>Integer.parseInt(this.LAA_Min)) {
+					if(d.getEntryLAA()>=Integer.parseInt(this.LAA_Min)) {
 						checklist[i]="true";
 					}
 					else {
@@ -186,6 +186,11 @@ public class CustomRule {
 		
 		
 	}
+	
+	public String getName() {
+		return name;
+	}
+
 	
 
 }

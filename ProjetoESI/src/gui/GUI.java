@@ -1,6 +1,8 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -14,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -24,6 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -69,6 +73,7 @@ public class GUI {
 	private JScrollPane jScrollPane;
 	private JScrollPane jScrollPane2;
 	private DefectCalculator calculator;
+	private JLabel label0p2;
 	private JLabel label1p2;
 	private JLabel label2p2;
 	private JLabel label3p2;
@@ -82,6 +87,24 @@ public class GUI {
 	private CustomRule cr;
 	private JLabel labelmedia;
 	private JLabel labelpercent;
+	private ArrayList<DataEntry> entries;
+	private JLabel labelmedia1;
+	private JLabel labelpercent1;
+	private ArrayList<CustomRule> customRules;
+	private double customAccuracy = 0.0;
+	
+	private JLabel pmd0;
+	private JLabel pmd1;
+	private JLabel pmd2;
+	private JLabel pmd3;
+	private JLabel pmd4;
+	private JLabel fieldpmd1;
+	private JLabel fieldpmd2;
+	private JLabel fieldpmd3;
+	private JLabel fieldpmd4;
+	
+	
+	private JScrollPane jScrollPaneDefect;
 
 	/**
 	 * Builds the structure of the interface and adds button listeners.
@@ -224,6 +247,7 @@ public class GUI {
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				JFileChooser filechooser = new JFileChooser("Importar ficheiro");
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel file", "xls", "xlsx");
 				filechooser.setFileFilter(filter);
@@ -243,7 +267,7 @@ public class GUI {
 						ex.printStackTrace();
 					}
 
-					ArrayList<DataEntry> entries = bofe.objects();
+					entries = bofe.objects();
 					TableModel model = new DataEntryTableModel(entries);
 					JTable table = new JTable(model);
 
@@ -257,21 +281,42 @@ public class GUI {
 					calculator.CalculateDefects();
 					jPanel2.add(jScrollPane, gbc);
 
-					// TODO
+					TableModel modelDefect = new DetectedDefectTableModel(calculator.getDefects());
+					JTable tableDefect = new JTable(modelDefect);
+					
+					
+
+					jScrollPaneDefect = new JScrollPane(tableDefect);
+
+//					gbc.gridx = 0;
+//					gbc.gridy = 0;
+//					gbc.gridwidth = 9;
+//					gbc.fill = GridBagConstraints.VERTICAL;
+//					jPanel3.add(jScrollPaneDefect, gbc);
+					
+					
+					gbc.gridx = 0;
+					gbc.gridy = 0;
+					gbc.gridwidth = 11;
+					gbc.fill = GridBagConstraints.HORIZONTAL;
+					jPanel3.add(jScrollPaneDefect, gbc);
+					
+					field1.setText(Integer.toString(calculator.getDciIPlasma()));
+					field2.setText(Integer.toString(calculator.getDiiIPlasma()));
+					field3.setText(Integer.toString(calculator.getAdciIPlasma()));
+					field4.setText(Integer.toString(calculator.getAdiiIPlasma()));
+					
+					fieldpmd1.setText(Integer.toString(calculator.getDciPMD()));
+					fieldpmd2.setText(Integer.toString(calculator.getDiiPMD()));
+					fieldpmd3.setText(Integer.toString(calculator.getAdciPMD()));
+					fieldpmd4.setText(Integer.toString(calculator.getAdiiPMD()));
+					
 					ExcelAccuracy test = new ExcelAccuracy(bofe);
 					labelmedia.setText(
 							"Percentagem média da accuracy do iPlasma e PMD: " + test.getAverageAccuracy() + "%");
 					labelpercent
 							.setText("Linhas 100% certas(iPlasma=PMD=isLongMethod): " + test.getEntryAccuracy() + "%");
 
-					calculator = new DefectCalculator(entries);
-					calculator.CalculateDefects();
-					
-					//TODO
-//					field1.setText(Integer.toString(calculator.getDci()));
-//					field2.setText(Integer.toString(calculator.getDii()));
-//					field3.setText(Integer.toString(calculator.getAdci()));
-//					field4.setText(Integer.toString(calculator.getAdii()));
 
 					fileStatus.setText("FICHEIRO IMPORTADO COM SUCESSO!");
 					fileStatus.setForeground(Color.GREEN);
@@ -381,7 +426,32 @@ public class GUI {
 //					field3.setText(Integer.toString(calculator.getAdci()));
 //					field4.setText(Integer.toString(calculator.getAdii()));
 
-					ExcelAccuracy test = new ExcelAccuracy(entries);
+					
+					TableModel modelDefect = new DetectedDefectTableModel(calculator.getDefects());
+					JTable tableDefect = new JTable(modelDefect);
+					
+					jPanel3.remove(jScrollPaneDefect);
+
+					jScrollPaneDefect = new JScrollPane(tableDefect);
+					
+					gbc.gridx = 0;
+					gbc.gridy = 0;
+					gbc.gridwidth = 11;
+					gbc.fill = GridBagConstraints.HORIZONTAL;
+					jPanel3.add(jScrollPaneDefect, gbc);
+
+					
+					field1.setText(Integer.toString(calculator.getDciIPlasma()));
+					field2.setText(Integer.toString(calculator.getDiiIPlasma()));
+					field3.setText(Integer.toString(calculator.getAdciIPlasma()));
+					field4.setText(Integer.toString(calculator.getAdiiIPlasma()));
+					
+					fieldpmd1.setText(Integer.toString(calculator.getDciPMD()));
+					fieldpmd2.setText(Integer.toString(calculator.getDiiPMD()));
+					fieldpmd3.setText(Integer.toString(calculator.getAdciPMD()));
+					fieldpmd4.setText(Integer.toString(calculator.getAdiiPMD()));
+
+					ExcelAccuracy test = new ExcelAccuracy(bofe);
 					labelmedia.setText(
 							"Percentagem média da accuracy do iPlasma e PMD: " + test.getAverageAccuracy() + "%");
 					labelpercent
@@ -400,43 +470,6 @@ public class GUI {
 		// gbc.gridwidth = 8;
 		// gbc.fill = GridBagConstraints.HORIZONTAL;
 
-		label1p2 = new JLabel("DCI");
-		label1p2.setForeground(Color.BLUE);
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		jPanel3.add(label1p2, gbc);
-		field1 = new JLabel("0");
-		gbc.gridx = 1;
-		gbc.gridy = 0;
-		jPanel3.add(field1, gbc);
-		label2p2 = new JLabel("DII");
-		label2p2.setForeground(Color.BLUE);
-		gbc.gridx = 2;
-		gbc.gridy = 0;
-		jPanel3.add(label2p2, gbc);
-		field2 = new JLabel("0");
-		gbc.gridx = 3;
-		gbc.gridy = 0;
-		jPanel3.add(field2, gbc);
-		label3p2 = new JLabel("ADCI");
-		label3p2.setForeground(Color.BLUE);
-		gbc.gridx = 4;
-		gbc.gridy = 0;
-		jPanel3.add(label3p2, gbc);
-		field3 = new JLabel("0");
-		gbc.gridx = 5;
-		gbc.gridy = 0;
-		jPanel3.add(field3, gbc);
-		label4p2 = new JLabel("ADII");
-		label4p2.setForeground(Color.BLUE);
-		gbc.gridx = 6;
-		gbc.gridy = 0;
-		jPanel3.add(label4p2, gbc);
-		field4 = new JLabel("0");
-		gbc.gridx = 7;
-		gbc.gridy = 0;
-		jPanel3.add(field4, gbc);
-		jPanel3.add(field4, gbc);
 
 		labelmedia = new JLabel();
 		gbc.gridx = 0;
@@ -579,12 +612,13 @@ public class GUI {
 		jPanel4.add(new JScrollPane(rulesList), gbc);
 		//
 
-		JLabel jl10 = new JLabel("Todas as Regras Criadas");
-		jl10.setFont(new Font("Arial", Font.BOLD, 20));
-		gbc.gridx = 3;
-		gbc.gridy = 10;
-		jPanel4.add(jl10, gbc);
+//		JLabel jl10 = new JLabel("Todas as Regras Criadas");
+//		jl10.setFont(new Font("Arial", Font.BOLD, 20));
+//		gbc.gridx = 3;
+//		gbc.gridy = 10;
+//		jPanel4.add(jl10, gbc);
 
+		customRules = new ArrayList<CustomRule>();
 		createRule.addActionListener(new ActionListener() {
 
 			@Override
@@ -594,10 +628,165 @@ public class GUI {
 						jtf6.getText(), jtf7.getText(), jtf8.getText(), jtf9.getText());
 
 				listModel.addElement(cr);
+				customRules.add(cr);
 
 			}
 		});
+		
+		//////////////////////////////////////////////////////////////
+        
+        ArrayList<CustomDataEntry> results = new ArrayList<CustomDataEntry>();
+        
+        TableModel model1 = new CustomDataEntryTableModel(results);
+		JTable table1 = new JTable(model1);
+		
+		JLabel RegrasDisponiveis = new JLabel("Regras Disponíveis:");
+		RegrasDisponiveis.setFont(new Font("Arial", Font.BOLD, 20));
+		
+		JLabel Resultados = new JLabel("Resultados:");
+		Resultados.setFont(new Font("Arial", Font.BOLD, 20));
+		
+		JButton applyRule = new JButton("Aplicar Regra");
+		applyRule.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CustomRule rule = rulesList.getSelectedValue();
+				try {
+					rule.applyCustomRule(entries);
+					ExcelAccuracy test1 = new ExcelAccuracy(entries,rulesList.getSelectedValue().getCustomRuleData());
+					customAccuracy = test1.getCustomAccuracy();
+					labelmedia1.setText("Percentagem média da accuracy da regra selecionada: " + customAccuracy + "%");
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				results.addAll(rule.getCustomRuleData());
+				table1.revalidate();
+				frame.pack();
+			}
+		});
+		
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		jPanel5.add(RegrasDisponiveis,gbc);
+		
+		gbc.gridx = 2;
+		gbc.gridy = 0;
+		jPanel5.add(Resultados,gbc);
+		
+		rulesList.setCellRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                Component renderer = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                if (renderer instanceof JLabel && value instanceof CustomRule) {
+                    // Here value will be of the Type 'CD'
+                    ((JLabel) renderer).setText(((CustomRule) value).getName());
+                }
+                return renderer;
+            }
+        });
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		jPanel5.add(new JScrollPane(rulesList),gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		jPanel5.add(applyRule,gbc);
+		gbc.gridx = 2;
+		gbc.gridy = 1;
+		jPanel5.add(new JScrollPane(table1),gbc);
+		labelmedia1 = new JLabel();
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		jPanel5.add(labelmedia1, gbc);
+		/////////////////////////////////////////////////////////////
+		
+		if(file==null) {
+		label0p2 = new JLabel("IPlasma");
+		label0p2.setForeground(Color.RED);
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		jPanel3.add(label0p2, gbc);
+		label1p2 = new JLabel("DCI");
+		label1p2.setForeground(Color.BLUE);
+		gbc.gridx = 2;
+		gbc.gridy = 1;
+		jPanel3.add(label1p2, gbc);
+		field1 = new JLabel("0");
+		gbc.gridx = 3;
+		gbc.gridy = 1;
+		jPanel3.add(field1, gbc);
+		label2p2 = new JLabel("DII");
+		label2p2.setForeground(Color.BLUE);
+		gbc.gridx = 4;
+		gbc.gridy = 1;
+		jPanel3.add(label2p2, gbc);
+		field2 = new JLabel("0");
+		gbc.gridx = 5;
+		gbc.gridy = 1;
+		jPanel3.add(field2, gbc);
+		label3p2 = new JLabel("ADCI");
+		label3p2.setForeground(Color.BLUE);
+		gbc.gridx = 6;
+		gbc.gridy = 1;
+		jPanel3.add(label3p2, gbc);
+		field3 = new JLabel("0");
+		gbc.gridx = 7;
+		gbc.gridy = 1;
+		jPanel3.add(field3, gbc);
+		label4p2 = new JLabel("ADII");
+		label4p2.setForeground(Color.BLUE);
+		gbc.gridx = 8;
+		gbc.gridy = 1;
+		jPanel3.add(label4p2, gbc);
+		field4 = new JLabel("0");
+		gbc.gridx = 9;
+		gbc.gridy = 1;
+		jPanel3.add(field4, gbc);
+		
+		pmd0 = new JLabel("PMD");
+		pmd0.setForeground(Color.RED);
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		jPanel3.add(pmd0, gbc);
+		pmd1 = new JLabel("DCI");
+		pmd1.setForeground(Color.BLUE);
+		gbc.gridx = 2;
+		gbc.gridy = 2;
+		jPanel3.add(pmd1, gbc);
+		fieldpmd1 = new JLabel("0");
+		gbc.gridx = 3;
+		gbc.gridy = 2;
+		jPanel3.add(fieldpmd1, gbc);
+		pmd2 = new JLabel("DII");
+		pmd2.setForeground(Color.BLUE);
+		gbc.gridx = 4;
+		gbc.gridy = 2;
+		jPanel3.add(pmd2, gbc);
+		fieldpmd2 = new JLabel("0");
+		gbc.gridx = 5;
+		gbc.gridy = 2;
+		jPanel3.add(fieldpmd2, gbc);
+		pmd3 = new JLabel("ADCI");
+		pmd3.setForeground(Color.BLUE);
+		gbc.gridx = 6;
+		gbc.gridy = 2;
+		jPanel3.add(pmd3, gbc);
+		fieldpmd3 = new JLabel("0");
+		gbc.gridx = 7;
+		gbc.gridy = 2;
+		jPanel3.add(fieldpmd3, gbc);
+		pmd4 = new JLabel("ADII");
+		pmd4.setForeground(Color.BLUE);
+		gbc.gridx = 8;
+		gbc.gridy = 2;
+		jPanel3.add(pmd4, gbc);
+		fieldpmd4 = new JLabel("0");
+		gbc.gridx = 9;
+		gbc.gridy = 2;
+		jPanel3.add(fieldpmd4, gbc);
+		}
+		
 		jTabbedPane.addTab("Criar Threshold", jPanel1);
 		jTabbedPane.addTab("Visualizar dados", jPanel2);
 		jTabbedPane.addTab("Defeitos", jPanel3);

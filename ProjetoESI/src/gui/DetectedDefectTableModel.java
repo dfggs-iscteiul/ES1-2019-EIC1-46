@@ -2,16 +2,17 @@ package gui;
 
 import java.util.ArrayList;
 //import java.util.List;
+import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
 import code.DetectedDefect;
 
 public class DetectedDefectTableModel extends AbstractTableModel  {
-	private ArrayList<DetectedDefect> entries ;
+	private List<DetectedDefect> entries ;
 	private String[] columns ; 
 
-	public DetectedDefectTableModel(ArrayList<DetectedDefect> detectedDefects){
+	public DetectedDefectTableModel(List<DetectedDefect> detectedDefects){
 		super();
 		entries = detectedDefects ;
 		columns = new String[]{"MethodID","IPlasma","PMD", "CustomRule"};
