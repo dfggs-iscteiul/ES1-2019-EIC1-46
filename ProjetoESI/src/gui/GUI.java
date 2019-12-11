@@ -576,6 +576,7 @@ public class GUI {
 		gbc.gridx = 3;
 		gbc.gridy = 11;
 		jPanel4.add(new JScrollPane(rulesList), gbc);
+		//
 
 		JLabel jl10 = new JLabel("Todas as Regras Criadas");
 		jl10.setFont(new Font("Arial", Font.BOLD, 20));
