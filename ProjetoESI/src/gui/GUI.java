@@ -375,6 +375,7 @@ public class GUI {
 					calculator = new DefectCalculator(entries);
 					calculator.CalculateDefects();
 					//TODO
+					//
 //					field1.setText(Integer.toString(calculator.getDci()));
 //					field2.setText(Integer.toString(calculator.getDii()));
 //					field3.setText(Integer.toString(calculator.getAdci()));
