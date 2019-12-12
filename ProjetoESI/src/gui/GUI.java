@@ -116,7 +116,7 @@ public class GUI {
 	private JLabel fieldpmd2;
 	private JLabel fieldpmd3;
 	private JLabel fieldpmd4;
-	
+
 	private TableModel modelDefect;
 
 
@@ -195,37 +195,37 @@ public class GUI {
 		tField1.setPreferredSize(new Dimension(80, 20));
 		gbc.gridx = 2;
 		gbc.gridy = 1;
-//		tField1.setEnabled(false);
+		//		tField1.setEnabled(false);
 		jPanel1.add(tField1, gbc);
 		list.add(tField1);
-		
+
 		JCheckBox c1 = new JCheckBox();
 		gbc.gridx = 0;
 		gbc.gridy = 1;
-//		if(c1.isSelected())
-//			tField1.setEnabled(true);
+		//		if(c1.isSelected())
+		//			tField1.setEnabled(true);
 		jPanel1.add(c1, gbc);
 		//		JComboBox<String> listaOperadores = new JComboBox<>(operadores);
 		//		gbc.gridx = 2;
 		//		gbc.gridy = 1;
 		//		jPanel1.add(listaOperadores, gbc);
 		//		String operadorSelecionado = (String) listaOperadores.getSelectedItem();
-		
+
 		JTextField tField2 = new JTextField();
 		tField2.setPreferredSize(new Dimension(80, 20));
 		gbc.gridx = 2;
 		gbc.gridy = 2;
-//		tField2.setEnabled(false);
+		//		tField2.setEnabled(false);
 		jPanel1.add(tField2, gbc);
 		list.add(tField2);
-		
+
 		JCheckBox c2 = new JCheckBox();
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		jPanel1.add(c2, gbc);
-//		if(c2.isSelected())
-//			tField2.setEnabled(true);
-		
+		//		if(c2.isSelected())
+		//			tField2.setEnabled(true);
+
 		JLabel label2 = new JLabel("CYCLO");
 		gbc.gridx = 1;
 		gbc.gridy = 2;
@@ -240,50 +240,50 @@ public class GUI {
 		tField3.setPreferredSize(new Dimension(80, 20));
 		gbc.gridx = 7;
 		gbc.gridy = 1;
-//		tField3.setEnabled(false);
+		//		tField3.setEnabled(false);
 		jPanel1.add(tField3, gbc);
 		list.add(tField3);
 
-		
+
 		JCheckBox c3 = new JCheckBox();
 		gbc.gridx = 4;
 		gbc.gridy = 1;
 		jPanel1.add(c3, gbc);
-//		if(c3.isSelected())
-//			tField3.setEnabled(true);
-		
+		//		if(c3.isSelected())
+		//			tField3.setEnabled(true);
+
 		JLabel label3 = new JLabel("AFTD");
 		gbc.gridx = 5;
 		gbc.gridy = 1;
 		jPanel1.add(label3, gbc);
-		
+
 		//		JComboBox<String> listaOperadores3 = new JComboBox<>(operadores);
 		//		gbc.gridx = 6;
 		//		gbc.gridy = 1;
 		//		jPanel1.add(listaOperadores3, gbc);
 		//		String operadorSelecionado3 = (String) listaOperadores3.getSelectedItem();
-		
+
 		JTextField tField4 = new JTextField();
 		tField4.setPreferredSize(new Dimension(80, 20));
 		gbc.gridx = 7;
 		gbc.gridy = 2;
-//		tField4.setEnabled(false);
+		//		tField4.setEnabled(false);
 		jPanel1.add(tField4, gbc);
 		list.add(tField4);
 
-		
+
 		JCheckBox c4 = new JCheckBox();
 		gbc.gridx = 4;
 		gbc.gridy = 2;
 		jPanel1.add(c4, gbc);
-//		if(c4.isSelected())
-//			tField4.setEnabled(true);
-		
+		//		if(c4.isSelected())
+		//			tField4.setEnabled(true);
+
 		JLabel label4 = new JLabel("LAA");
 		gbc.gridx = 5;
 		gbc.gridy = 2;
 		jPanel1.add(label4, gbc);
-		
+
 		//		JComboBox<String> listaOperadores4 = new JComboBox<>(operadores);
 		//		gbc.gridx = 6;
 		//		gbc.gridy = 2;
@@ -350,7 +350,7 @@ public class GUI {
 		///////////////
 		/////////////////////////////////TAB3 -- DEFEITOS
 		///////////////
-		
+
 		if(file==null) {
 			label0p2 = new JLabel("IPlasma");
 			label0p2.setForeground(Color.RED);
@@ -435,7 +435,7 @@ public class GUI {
 			gbc.gridx = 9;
 			gbc.gridy = 2;
 			jPanel3.add(fieldpmd4, gbc);
-			
+
 			cr1 = new JLabel("---");
 			cr1.setForeground(Color.RED);
 			gbc.gridx = 1;
@@ -508,8 +508,8 @@ public class GUI {
 		JTextField jtf7 = new JTextField();
 		JTextField jtf8 = new JTextField();
 		JTextField jtf9 = new JTextField();
-		
-//		list.add(jtf1);
+
+		//		list.add(jtf1);
 		list.add(jtf2);
 		list.add(jtf3);
 		list.add(jtf4);
@@ -524,7 +524,7 @@ public class GUI {
 
 		JButton createRule = new JButton("Cria Regra");
 		createRule.setEnabled(false);
-		
+
 		jtf1.setPreferredSize(new Dimension(80, 20));
 		jtf2.setPreferredSize(new Dimension(80, 20));
 		jtf3.setPreferredSize(new Dimension(80, 20));
@@ -651,7 +651,7 @@ public class GUI {
 
 		JButton applyRule = new JButton("Aplicar Regra");
 		applyRule.setEnabled(false);
-		
+
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		jPanel5.add(RegrasDisponiveis,gbc);
@@ -794,85 +794,88 @@ public class GUI {
 					int text2;
 					int text3;
 					float text4;
-					if (c1.isSelected())
-						text1 = Integer.parseInt(tField1.getText());
-					else
-						text1 = 0;
-					if (c2.isSelected())
-						text2 = Integer.parseInt(tField2.getText());
-					else
-						text2 = 0;
-					if (c3.isSelected())
-						text3 = Integer.parseInt(tField3.getText());
-					else
-						text3 = 0;
-					if (c4.isSelected())
-						text4 = Float.parseFloat(tField4.getText());
-					else
-						text4 = 0;
-					if (operadorLM.equals("AND"))
-						logicalOperator1 = true;
-					else
-						logicalOperator1 = false;
-					if (operadorFE.equals("AND"))
-						logicalOperator2 = true;
-					else
-						logicalOperator2 = false;
-					Thresholds th = new Thresholds(bofe, c1.isSelected(), c2.isSelected(), c3.isSelected(), c4.isSelected(),
-							logicalOperator1, logicalOperator2, text1, text2, text3, text4);
-					th.calcThresholds();
-					
-					jPanel2.remove(jScrollPane);
-					ArrayList<DataEntry> entries = th.getInputs();
-					TableModel model = new DataEntryTableModel(entries);
-					JTable table = new JTable(model);
-					jScrollPane = new JScrollPane(table);
-					gbc.gridx = 0;
-					gbc.gridy = 0;
-					jPanel2.add(jScrollPane, gbc);
-					
-					calculator = new DefectCalculator(entries);
-					calculator.CalculateDefects();
-					//TODO
-					//
-					//					field1.setText(Integer.toString(calculator.getDci()));
-					//					field2.setText(Integer.toString(calculator.getDii()));
-					//					field3.setText(Integer.toString(calculator.getAdci()));
-					//					field4.setText(Integer.toString(calculator.getAdii()));
+					try {
+						if (c1.isSelected())
+							text1 = Integer.parseInt(tField1.getText());
+						else
+							text1 = 0;
+						if (c2.isSelected())
+							text2 = Integer.parseInt(tField2.getText());
+						else
+							text2 = 0;
+						if (c3.isSelected())
+							text3 = Integer.parseInt(tField3.getText());
+						else
+							text3 = 0;
+						if (c4.isSelected())
+							text4 = Float.parseFloat(tField4.getText());
+						else
+							text4 = 0;
+						if (operadorLM.equals("AND"))
+							logicalOperator1 = true;
+						else
+							logicalOperator1 = false;
+						if (operadorFE.equals("AND"))
+							logicalOperator2 = true;
+						else
+							logicalOperator2 = false;
+						Thresholds th = new Thresholds(bofe, c1.isSelected(), c2.isSelected(), c3.isSelected(), c4.isSelected(),
+								logicalOperator1, logicalOperator2, text1, text2, text3, text4);
+						th.calcThresholds();
+						jPanel2.remove(jScrollPane);
+						ArrayList<DataEntry> entries = th.getInputs();
+						TableModel model = new DataEntryTableModel(entries);
+						JTable table = new JTable(model);
+						jScrollPane = new JScrollPane(table);
+						gbc.gridx = 0;
+						gbc.gridy = 0;
+						jPanel2.add(jScrollPane, gbc);
+						calculator = new DefectCalculator(entries);
+						calculator.CalculateDefects();
+						//TODO
+						//
+						//					field1.setText(Integer.toString(calculator.getDci()));
+						//					field2.setText(Integer.toString(calculator.getDii()));
+						//					field3.setText(Integer.toString(calculator.getAdci()));
+						//					field4.setText(Integer.toString(calculator.getAdii()));
 
 
-					TableModel modelDefect = new DetectedDefectTableModel(calculator.getDefects());
-					JTable tableDefect = new JTable(modelDefect);
+						TableModel modelDefect = new DetectedDefectTableModel(calculator.getDefects());
+						JTable tableDefect = new JTable(modelDefect);
 
-					jPanel3.remove(jScrollPaneDefect);
+						jPanel3.remove(jScrollPaneDefect);
 
-					jScrollPaneDefect = new JScrollPane(tableDefect);
+						jScrollPaneDefect = new JScrollPane(tableDefect);
 
-					gbc.gridx = 0;
-					gbc.gridy = 0;
-					gbc.gridwidth = 11;
-					gbc.fill = GridBagConstraints.HORIZONTAL;
-					jPanel3.add(jScrollPaneDefect, gbc);
+						gbc.gridx = 0;
+						gbc.gridy = 0;
+						gbc.gridwidth = 11;
+						gbc.fill = GridBagConstraints.HORIZONTAL;
+						jPanel3.add(jScrollPaneDefect, gbc);
 
 
-					field1.setText(Integer.toString(calculator.getDciIPlasma()));
-					field2.setText(Integer.toString(calculator.getDiiIPlasma()));
-					field3.setText(Integer.toString(calculator.getAdciIPlasma()));
-					field4.setText(Integer.toString(calculator.getAdiiIPlasma()));
+						field1.setText(Integer.toString(calculator.getDciIPlasma()));
+						field2.setText(Integer.toString(calculator.getDiiIPlasma()));
+						field3.setText(Integer.toString(calculator.getAdciIPlasma()));
+						field4.setText(Integer.toString(calculator.getAdiiIPlasma()));
 
-					fieldpmd1.setText(Integer.toString(calculator.getDciPMD()));
-					fieldpmd2.setText(Integer.toString(calculator.getDiiPMD()));
-					fieldpmd3.setText(Integer.toString(calculator.getAdciPMD()));
-					fieldpmd4.setText(Integer.toString(calculator.getAdiiPMD()));
+						fieldpmd1.setText(Integer.toString(calculator.getDciPMD()));
+						fieldpmd2.setText(Integer.toString(calculator.getDiiPMD()));
+						fieldpmd3.setText(Integer.toString(calculator.getAdciPMD()));
+						fieldpmd4.setText(Integer.toString(calculator.getAdiiPMD()));
 
-					ExcelAccuracy test = new ExcelAccuracy(bofe);
-					labelmedia.setText(
-							"Percentagem média da accuracy do iPlasma e PMD: " + test.getAverageAccuracy() + "%");
-					labelpercent
-					.setText("Linhas 100% certas(iPlasma=PMD=isLongMethod): " + test.getEntryAccuracy() + "%");
+						ExcelAccuracy test = new ExcelAccuracy(bofe);
+						labelmedia.setText(
+								"Percentagem média da accuracy do iPlasma e PMD: " + test.getAverageAccuracy() + "%");
+						labelpercent
+						.setText("Linhas 100% certas(iPlasma=PMD=isLongMethod): " + test.getEntryAccuracy() + "%");
 
-					frame.pack();
-					SwingUtilities.updateComponentTreeUI(frame);
+						frame.pack();
+						SwingUtilities.updateComponentTreeUI(frame);
+					}
+					catch(NumberFormatException ez) {
+						JOptionPane.showMessageDialog(frame, "Please type a number or uncheck the checkbox!", "ERROR", JOptionPane.ERROR_MESSAGE);
+					}
 				}
 
 			}
@@ -944,140 +947,140 @@ public class GUI {
 				return renderer;
 			}
 		});
-		
-		
+
+
 		for(JTextField x:list) {
 			x.addKeyListener(new KeyAdapter(){
-			public void keyTyped(KeyEvent e) {
-				char input = e.getKeyChar();
-				if((input < '0' || input > '9') && input != '\b' && input!= '.') {
-					e.consume();
-					System.out.println("Invalid character!");
+				public void keyTyped(KeyEvent e) {
+					char input = e.getKeyChar();
+					if((input < '0' || input > '9') && input != '\b' && input!= '.') {
+						e.consume();
+						System.out.println("Invalid character!");
+					}
 				}
-			}
-		});
+			});
 		}
-		
-//		
-//		tField1.addKeyListener(new KeyAdapter(){
-//			public void keyTyped(KeyEvent e) {
-//				char input = e.getKeyChar();
-//				if((input < '0' || input > '9') && input != '\b') {
-//					e.consume();
-//					System.out.println("Invalid character!");
-//				}
-//			}
-//		});
-//		
-//		tField2.addKeyListener(new KeyAdapter(){
-//			public void keyTyped(KeyEvent e) {
-//				char input = e.getKeyChar();
-//				if((input < '0' || input > '9') && input != '\b') {
-//					e.consume();
-//					System.out.println("Invalid character!");
-//				}
-//			}
-//		});
-//		
-//		tField3.addKeyListener(new KeyAdapter(){
-//			public void keyTyped(KeyEvent e) {
-//				char input = e.getKeyChar();
-//				if((input < '0' || input > '9') && input != '\b') {
-//					e.consume();
-//					System.out.println("Invalid character!");
-//				}
-//			}
-//		});
-//		
-//		tField4.addKeyListener(new KeyAdapter(){
-//			public void keyTyped(KeyEvent e) {
-//				char input = e.getKeyChar();
-//				if((input < '0' || input > '9') && input != '\b' && input!= '.') {
-//					e.consume();
-//					System.out.println("Invalid character!");
-//				}
-//			}
-//		});
-//		
-//		jtf2.addKeyListener(new KeyAdapter(){
-//			public void keyTyped(KeyEvent e) {
-//				char input = e.getKeyChar();
-//				if((input < '0' || input > '9') && input != '\b') {
-//					e.consume();
-//					System.out.println("Invalid character!");
-//				}
-//			}
-//		});
-//		
-//		jtf3.addKeyListener(new KeyAdapter(){
-//			public void keyTyped(KeyEvent e) {
-//				char input = e.getKeyChar();
-//				if((input < '0' || input > '9') && input != '\b') {
-//					e.consume();
-//					System.out.println("Invalid character!");
-//				}
-//			}
-//		});
-//		
-//		jtf4.addKeyListener(new KeyAdapter(){
-//			public void keyTyped(KeyEvent e) {
-//				char input = e.getKeyChar();
-//				if((input < '0' || input > '9') && input != '\b') {
-//					e.consume();
-//					System.out.println("Invalid character!");
-//				}
-//			}
-//		});
-//		
-//		jtf5.addKeyListener(new KeyAdapter(){
-//			public void keyTyped(KeyEvent e) {
-//				char input = e.getKeyChar();
-//				if((input < '0' || input > '9') && input != '\b') {
-//					e.consume();
-//					System.out.println("Invalid character!");
-//				}
-//			}
-//		});
-//		
-//		jtf6.addKeyListener(new KeyAdapter(){
-//			public void keyTyped(KeyEvent e) {
-//				char input = e.getKeyChar();
-//				if((input < '0' || input > '9') && input != '\b') {
-//					e.consume();
-//					System.out.println("Invalid character!");
-//				}
-//			}
-//		});
-//		
-//		jtf7.addKeyListener(new KeyAdapter(){
-//			public void keyTyped(KeyEvent e) {
-//				char input = e.getKeyChar();
-//				if((input < '0' || input > '9') && input != '\b') {
-//					e.consume();
-//					System.out.println("Invalid character!");
-//				}
-//			}
-//		});
-//		
-//		jtf8.addKeyListener(new KeyAdapter(){
-//			public void keyTyped(KeyEvent e) {
-//				char input = e.getKeyChar();
-//				if((input < '0' || input > '9') && input != '\b' && input!= '.') {
-//					e.consume();
-//					System.out.println("Invalid character!");
-//				}
-//			}
-//		});
-//		
-//		jtf9.addKeyListener(new KeyAdapter(){
-//			public void keyTyped(KeyEvent e) {
-//				char input = e.getKeyChar();
-//				if((input < '0' || input > '9') && input != '\b' && input!= '.') {
-//					e.consume();
-//					System.out.println("Invalid character!");
-//				}
-//			}
-//		});
+
+		//		
+		//		tField1.addKeyListener(new KeyAdapter(){
+		//			public void keyTyped(KeyEvent e) {
+		//				char input = e.getKeyChar();
+		//				if((input < '0' || input > '9') && input != '\b') {
+		//					e.consume();
+		//					System.out.println("Invalid character!");
+		//				}
+		//			}
+		//		});
+		//		
+		//		tField2.addKeyListener(new KeyAdapter(){
+		//			public void keyTyped(KeyEvent e) {
+		//				char input = e.getKeyChar();
+		//				if((input < '0' || input > '9') && input != '\b') {
+		//					e.consume();
+		//					System.out.println("Invalid character!");
+		//				}
+		//			}
+		//		});
+		//		
+		//		tField3.addKeyListener(new KeyAdapter(){
+		//			public void keyTyped(KeyEvent e) {
+		//				char input = e.getKeyChar();
+		//				if((input < '0' || input > '9') && input != '\b') {
+		//					e.consume();
+		//					System.out.println("Invalid character!");
+		//				}
+		//			}
+		//		});
+		//		
+		//		tField4.addKeyListener(new KeyAdapter(){
+		//			public void keyTyped(KeyEvent e) {
+		//				char input = e.getKeyChar();
+		//				if((input < '0' || input > '9') && input != '\b' && input!= '.') {
+		//					e.consume();
+		//					System.out.println("Invalid character!");
+		//				}
+		//			}
+		//		});
+		//		
+		//		jtf2.addKeyListener(new KeyAdapter(){
+		//			public void keyTyped(KeyEvent e) {
+		//				char input = e.getKeyChar();
+		//				if((input < '0' || input > '9') && input != '\b') {
+		//					e.consume();
+		//					System.out.println("Invalid character!");
+		//				}
+		//			}
+		//		});
+		//		
+		//		jtf3.addKeyListener(new KeyAdapter(){
+		//			public void keyTyped(KeyEvent e) {
+		//				char input = e.getKeyChar();
+		//				if((input < '0' || input > '9') && input != '\b') {
+		//					e.consume();
+		//					System.out.println("Invalid character!");
+		//				}
+		//			}
+		//		});
+		//		
+		//		jtf4.addKeyListener(new KeyAdapter(){
+		//			public void keyTyped(KeyEvent e) {
+		//				char input = e.getKeyChar();
+		//				if((input < '0' || input > '9') && input != '\b') {
+		//					e.consume();
+		//					System.out.println("Invalid character!");
+		//				}
+		//			}
+		//		});
+		//		
+		//		jtf5.addKeyListener(new KeyAdapter(){
+		//			public void keyTyped(KeyEvent e) {
+		//				char input = e.getKeyChar();
+		//				if((input < '0' || input > '9') && input != '\b') {
+		//					e.consume();
+		//					System.out.println("Invalid character!");
+		//				}
+		//			}
+		//		});
+		//		
+		//		jtf6.addKeyListener(new KeyAdapter(){
+		//			public void keyTyped(KeyEvent e) {
+		//				char input = e.getKeyChar();
+		//				if((input < '0' || input > '9') && input != '\b') {
+		//					e.consume();
+		//					System.out.println("Invalid character!");
+		//				}
+		//			}
+		//		});
+		//		
+		//		jtf7.addKeyListener(new KeyAdapter(){
+		//			public void keyTyped(KeyEvent e) {
+		//				char input = e.getKeyChar();
+		//				if((input < '0' || input > '9') && input != '\b') {
+		//					e.consume();
+		//					System.out.println("Invalid character!");
+		//				}
+		//			}
+		//		});
+		//		
+		//		jtf8.addKeyListener(new KeyAdapter(){
+		//			public void keyTyped(KeyEvent e) {
+		//				char input = e.getKeyChar();
+		//				if((input < '0' || input > '9') && input != '\b' && input!= '.') {
+		//					e.consume();
+		//					System.out.println("Invalid character!");
+		//				}
+		//			}
+		//		});
+		//		
+		//		jtf9.addKeyListener(new KeyAdapter(){
+		//			public void keyTyped(KeyEvent e) {
+		//				char input = e.getKeyChar();
+		//				if((input < '0' || input > '9') && input != '\b' && input!= '.') {
+		//					e.consume();
+		//					System.out.println("Invalid character!");
+		//				}
+		//			}
+		//		});
 	}
 
 	public static void main(String[] args) {
