@@ -82,6 +82,14 @@ public class GUI {
 	private JLabel field2;
 	private JLabel field3;
 	private JLabel field4;
+	private JLabel fieldcr1;
+	private JLabel fieldcr2;
+	private JLabel fieldcr3;
+	private JLabel fieldcr4;
+	private JLabel cr1;
+	private JLabel cr2;
+	private JLabel cr3;
+	private JLabel cr4;
 	private DefaultListModel<CustomRule> listModel = new DefaultListModel<>();
 	private JList<CustomRule> rulesList = new JList<>(listModel);
 	private CustomRule cr;
@@ -102,6 +110,8 @@ public class GUI {
 	private JLabel fieldpmd2;
 	private JLabel fieldpmd3;
 	private JLabel fieldpmd4;
+	
+	private TableModel modelDefect;
 
 
 	private JScrollPane jScrollPaneDefect;
@@ -392,6 +402,48 @@ public class GUI {
 			gbc.gridx = 9;
 			gbc.gridy = 2;
 			jPanel3.add(fieldpmd4, gbc);
+			
+			cr1 = new JLabel("---");
+			cr1.setForeground(Color.RED);
+			gbc.gridx = 1;
+			gbc.gridy =3;
+			jPanel3.add(cr1, gbc);
+			cr2 = new JLabel("DCI");
+			cr2.setForeground(Color.BLUE);
+			gbc.gridx = 2;
+			gbc.gridy = 3;
+			jPanel3.add(cr2, gbc);
+			fieldcr1 = new JLabel("0");
+			gbc.gridx = 3;
+			gbc.gridy = 3;
+			jPanel3.add(fieldcr1, gbc);
+			cr2 = new JLabel("DII");
+			cr2.setForeground(Color.BLUE);
+			gbc.gridx = 4;
+			gbc.gridy = 3;
+			jPanel3.add(cr2, gbc);
+			fieldcr2 = new JLabel("0");
+			gbc.gridx = 5;
+			gbc.gridy = 3;
+			jPanel3.add(fieldcr2, gbc);
+			cr3 = new JLabel("ADCI");
+			cr3.setForeground(Color.BLUE);
+			gbc.gridx = 6;
+			gbc.gridy = 3;
+			jPanel3.add(cr3, gbc);
+			fieldcr3 = new JLabel("0");
+			gbc.gridx = 7;
+			gbc.gridy = 3;
+			jPanel3.add(fieldcr3, gbc);
+			cr4 = new JLabel("ADII");
+			cr4.setForeground(Color.BLUE);
+			gbc.gridx = 8;
+			gbc.gridy = 3;
+			jPanel3.add(cr4, gbc);
+			fieldcr4 = new JLabel("0");
+			gbc.gridx = 9;
+			gbc.gridy = 3;
+			jPanel3.add(fieldcr4, gbc);
 		}
 
 		///////////
@@ -627,7 +679,7 @@ public class GUI {
 					calculator.CalculateDefects();
 					jPanel2.add(jScrollPane, gbc);
 
-					TableModel modelDefect = new DetectedDefectTableModel(calculator.getDefects());
+					modelDefect = new DetectedDefectTableModel(calculator.getDefects());
 					JTable tableDefect = new JTable(modelDefect);
 
 
@@ -786,6 +838,18 @@ public class GUI {
 				CustomRule rule = rulesList.getSelectedValue();
 				try {
 					rule.applyCustomRule(entries);
+					DefectCalculator c = new DefectCalculator(entries,rule);
+					c.CalculateDefectsCustomRule();
+					cr1.setText(rule.getName());
+					fieldcr1.setText(Integer.toString(c.getDciCR()));
+					fieldcr2.setText(Integer.toString(c.getDiiCR()));
+					fieldcr3.setText(Integer.toString(c.getAdciCR()));
+					fieldcr4.setText(Integer.toString(c.getAdiiCR()));
+					int a = 0;
+					for(CustomDataEntry cde:rule.getCustomRuleData()) {
+						((DetectedDefectTableModel) modelDefect).setDefectAt(cde.Is_CustomRule(),a,3);
+						a++;
+					}
 					ExcelAccuracy test1 = new ExcelAccuracy(entries,rulesList.getSelectedValue().getCustomRuleData());
 					customAccuracy = test1.getCustomAccuracy();
 					labelmedia1.setText("Percentagem média da accuracy da regra selecionada: " + customAccuracy + "%");

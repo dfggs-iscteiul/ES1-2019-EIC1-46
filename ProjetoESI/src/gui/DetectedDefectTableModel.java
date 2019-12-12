@@ -40,5 +40,14 @@ public class DetectedDefectTableModel extends AbstractTableModel  {
 	public String getColumnName(int col) {
 		return columns[col] ;
 	}
+	
+	public void setDefectAt(boolean Value, int row, int col) {
+		DetectedDefect dd = entries.get(row);
+		switch(col) {
+		case 1: dd.setIplasma(Value);
+		case 2: dd.setPmd(Value);
+		case 3: dd.setCustomrule(Value);
+		}
+	}
 
 }

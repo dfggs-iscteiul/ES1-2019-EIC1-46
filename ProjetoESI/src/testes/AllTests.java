@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import code.CustomDataEntry;
 
 @RunWith(JUnitPlatform.class)
-@SelectClasses({ BuildObjectsFromExcelTest.class, ExcelAccuracyTest.class, RuleAccuracyTest.class, CustomDataEntryTest.class, CustomRuleTest.class, DefectCalculatorTest.class, DetectedDefectTest.class})
+@SelectClasses({ BuildObjectsFromExcelTest.class, ExcelAccuracyTest.class, RuleAccuracyTest.class, CustomDataEntryTest.class, CustomRuleTest.class, DetectedDefectTest.class})
 public class AllTests {
 
 }
