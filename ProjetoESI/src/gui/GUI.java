@@ -11,6 +11,10 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -25,6 +29,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -185,25 +190,39 @@ public class GUI {
 		gbc.gridy = 1;
 		jPanel1.add(label1, gbc);
 
+		JTextField tField1 = new JTextField();
+		tField1.setPreferredSize(new Dimension(80, 20));
+		gbc.gridx = 2;
+		gbc.gridy = 1;
+//		tField1.setEnabled(false);
+		jPanel1.add(tField1, gbc);
+		
 		JCheckBox c1 = new JCheckBox();
 		gbc.gridx = 0;
 		gbc.gridy = 1;
+//		if(c1.isSelected())
+//			tField1.setEnabled(true);
 		jPanel1.add(c1, gbc);
 		//		JComboBox<String> listaOperadores = new JComboBox<>(operadores);
 		//		gbc.gridx = 2;
 		//		gbc.gridy = 1;
 		//		jPanel1.add(listaOperadores, gbc);
 		//		String operadorSelecionado = (String) listaOperadores.getSelectedItem();
-		JTextField tField1 = new JTextField();
-		tField1.setPreferredSize(new Dimension(80, 20));
+		
+		JTextField tField2 = new JTextField();
+		tField2.setPreferredSize(new Dimension(80, 20));
 		gbc.gridx = 2;
-		gbc.gridy = 1;
-		jPanel1.add(tField1, gbc);
-
+		gbc.gridy = 2;
+//		tField2.setEnabled(false);
+		jPanel1.add(tField2, gbc);
+		
 		JCheckBox c2 = new JCheckBox();
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		jPanel1.add(c2, gbc);
+//		if(c2.isSelected())
+//			tField2.setEnabled(true);
+		
 		JLabel label2 = new JLabel("CYCLO");
 		gbc.gridx = 1;
 		gbc.gridy = 2;
@@ -213,49 +232,56 @@ public class GUI {
 		//		gbc.gridy = 2;
 		//		jPanel1.add(listaOperadores2, gbc);
 		//		String operadorSelecionado2 = (String) listaOperadores2.getSelectedItem();
-		JTextField tField2 = new JTextField();
-		tField2.setPreferredSize(new Dimension(80, 20));
-		gbc.gridx = 2;
-		gbc.gridy = 2;
-		jPanel1.add(tField2, gbc);
 
+		JTextField tField3 = new JTextField();
+		tField3.setPreferredSize(new Dimension(80, 20));
+		gbc.gridx = 7;
+		gbc.gridy = 1;
+//		tField3.setEnabled(false);
+		jPanel1.add(tField3, gbc);
+		
 		JCheckBox c3 = new JCheckBox();
 		gbc.gridx = 4;
 		gbc.gridy = 1;
 		jPanel1.add(c3, gbc);
+//		if(c3.isSelected())
+//			tField3.setEnabled(true);
+		
 		JLabel label3 = new JLabel("AFTD");
 		gbc.gridx = 5;
 		gbc.gridy = 1;
 		jPanel1.add(label3, gbc);
+		
 		//		JComboBox<String> listaOperadores3 = new JComboBox<>(operadores);
 		//		gbc.gridx = 6;
 		//		gbc.gridy = 1;
 		//		jPanel1.add(listaOperadores3, gbc);
 		//		String operadorSelecionado3 = (String) listaOperadores3.getSelectedItem();
-		JTextField tField3 = new JTextField();
-		tField3.setPreferredSize(new Dimension(80, 20));
+		
+		JTextField tField4 = new JTextField();
+		tField4.setPreferredSize(new Dimension(80, 20));
 		gbc.gridx = 7;
-		gbc.gridy = 1;
-		jPanel1.add(tField3, gbc);
-
+		gbc.gridy = 2;
+//		tField4.setEnabled(false);
+		jPanel1.add(tField4, gbc);
+		
 		JCheckBox c4 = new JCheckBox();
 		gbc.gridx = 4;
 		gbc.gridy = 2;
 		jPanel1.add(c4, gbc);
+//		if(c4.isSelected())
+//			tField4.setEnabled(true);
+		
 		JLabel label4 = new JLabel("LAA");
 		gbc.gridx = 5;
 		gbc.gridy = 2;
 		jPanel1.add(label4, gbc);
+		
 		//		JComboBox<String> listaOperadores4 = new JComboBox<>(operadores);
 		//		gbc.gridx = 6;
 		//		gbc.gridy = 2;
 		//		jPanel1.add(listaOperadores4, gbc);
 		//		String operadorSelecionado4 = (String) listaOperadores4.getSelectedItem();
-		JTextField tField4 = new JTextField();
-		tField4.setPreferredSize(new Dimension(80, 20));
-		gbc.gridx = 7;
-		gbc.gridy = 2;
-		jPanel1.add(tField4, gbc);
 
 		JButton button = new JButton("Importar ficheiro");
 		JButton button2 = new JButton("Criar threshold");
@@ -477,7 +503,8 @@ public class GUI {
 		JTextField jtf9 = new JTextField();
 
 		JButton createRule = new JButton("Cria Regra");
-
+		createRule.setEnabled(false);
+		
 		jtf1.setPreferredSize(new Dimension(80, 20));
 		jtf2.setPreferredSize(new Dimension(80, 20));
 		jtf3.setPreferredSize(new Dimension(80, 20));
@@ -719,6 +746,7 @@ public class GUI {
 					fileStatus.setText("FICHEIRO IMPORTADO COM SUCESSO!");
 					fileStatus.setForeground(Color.GREEN);
 					button2.setEnabled(true);
+					createRule.setEnabled(true);
 					frame.pack();
 					SwingUtilities.updateComponentTreeUI(frame);
 				}
@@ -746,6 +774,8 @@ public class GUI {
 					int text2;
 					int text3;
 					float text4;
+					if(tField1.getText().isEmpty() && c1.isSelected())
+						JOptionPane.showMessageDialog(frame, "Introduza números válidos", "Error", JOptionPane.ERROR_MESSAGE);
 					if (c1.isSelected())
 						text1 = Integer.parseInt(tField1.getText());
 					else
@@ -770,7 +800,6 @@ public class GUI {
 						logicalOperator2 = true;
 					else
 						logicalOperator2 = false;
-
 					Thresholds th = new Thresholds(bofe, c1.isEnabled(), c2.isEnabled(), c3.isEnabled(), c4.isEnabled(),
 							logicalOperator1, logicalOperator2, text1, text2, text3, text4);
 					th.calcThresholds();
@@ -783,7 +812,7 @@ public class GUI {
 					gbc.gridx = 0;
 					gbc.gridy = 0;
 					jPanel2.add(jScrollPane, gbc);
-					//
+					
 					calculator = new DefectCalculator(entries);
 					calculator.CalculateDefects();
 					//TODO
@@ -895,6 +924,126 @@ public class GUI {
 					((JLabel) renderer).setText(((CustomRule) value).getName());
 				}
 				return renderer;
+			}
+		});
+		
+		tField1.addKeyListener(new KeyAdapter(){
+			public void keyTyped(KeyEvent e) {
+				char input = e.getKeyChar();
+				if((input < '0' || input > '9') && input != '\b') {
+					e.consume();
+					System.out.println("Invalid character!");
+				}
+			}
+		});
+		
+		tField2.addKeyListener(new KeyAdapter(){
+			public void keyTyped(KeyEvent e) {
+				char input = e.getKeyChar();
+				if((input < '0' || input > '9') && input != '\b') {
+					e.consume();
+					System.out.println("Invalid character!");
+				}
+			}
+		});
+		
+		tField3.addKeyListener(new KeyAdapter(){
+			public void keyTyped(KeyEvent e) {
+				char input = e.getKeyChar();
+				if((input < '0' || input > '9') && input != '\b') {
+					e.consume();
+					System.out.println("Invalid character!");
+				}
+			}
+		});
+		
+		tField4.addKeyListener(new KeyAdapter(){
+			public void keyTyped(KeyEvent e) {
+				char input = e.getKeyChar();
+				if((input < '0' || input > '9') && input != '\b' && input!= '.') {
+					e.consume();
+					System.out.println("Invalid character!");
+				}
+			}
+		});
+		
+		jtf2.addKeyListener(new KeyAdapter(){
+			public void keyTyped(KeyEvent e) {
+				char input = e.getKeyChar();
+				if((input < '0' || input > '9') && input != '\b') {
+					e.consume();
+					System.out.println("Invalid character!");
+				}
+			}
+		});
+		
+		jtf3.addKeyListener(new KeyAdapter(){
+			public void keyTyped(KeyEvent e) {
+				char input = e.getKeyChar();
+				if((input < '0' || input > '9') && input != '\b') {
+					e.consume();
+					System.out.println("Invalid character!");
+				}
+			}
+		});
+		
+		jtf4.addKeyListener(new KeyAdapter(){
+			public void keyTyped(KeyEvent e) {
+				char input = e.getKeyChar();
+				if((input < '0' || input > '9') && input != '\b') {
+					e.consume();
+					System.out.println("Invalid character!");
+				}
+			}
+		});
+		
+		jtf5.addKeyListener(new KeyAdapter(){
+			public void keyTyped(KeyEvent e) {
+				char input = e.getKeyChar();
+				if((input < '0' || input > '9') && input != '\b') {
+					e.consume();
+					System.out.println("Invalid character!");
+				}
+			}
+		});
+		
+		jtf6.addKeyListener(new KeyAdapter(){
+			public void keyTyped(KeyEvent e) {
+				char input = e.getKeyChar();
+				if((input < '0' || input > '9') && input != '\b') {
+					e.consume();
+					System.out.println("Invalid character!");
+				}
+			}
+		});
+		
+		jtf7.addKeyListener(new KeyAdapter(){
+			public void keyTyped(KeyEvent e) {
+				char input = e.getKeyChar();
+				if((input < '0' || input > '9') && input != '\b') {
+					e.consume();
+					System.out.println("Invalid character!");
+				}
+			}
+		});
+		
+		jtf8.addKeyListener(new KeyAdapter(){
+			public void keyTyped(KeyEvent e) {
+				char input = e.getKeyChar();
+				if((input < '0' || input > '9') && input != '\b' && input!= '.') {
+					e.consume();
+					System.out.println("Invalid character!");
+				}
+			}
+		});
+		
+		jtf9.addKeyListener(new KeyAdapter(){
+			public void keyTyped(KeyEvent e) {
+				char input = e.getKeyChar();
+				if((input < '0' || input > '9') && input != '\b' && input!= '.') {
+					e.consume();
+					System.out.println("Invalid character!");
+				}
 			}
 		});
 	}

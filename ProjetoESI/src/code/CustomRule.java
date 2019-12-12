@@ -108,7 +108,7 @@ public class CustomRule {
 					i++;
 				}		
 				if(this.LAA_Max!=null) {
-					if(d.getEntryLAA()<=Integer.parseInt(this.LAA_Max)) {
+					if(d.getEntryLAA()<=Float.parseFloat(this.LAA_Max)) {
 						checklist[i]="true";
 					}
 					else {
@@ -117,7 +117,7 @@ public class CustomRule {
 					i++;
 				}		
 				if(this.LAA_Min!=null) {
-					if(d.getEntryLAA()>=Integer.parseInt(this.LAA_Min)) {
+					if(d.getEntryLAA()>=Float.parseFloat((this.LAA_Min))) {
 						checklist[i]="true";
 					}
 					else {
