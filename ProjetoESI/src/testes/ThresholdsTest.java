@@ -1,13 +1,8 @@
 package testes;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.io.File;
-
 import org.junit.jupiter.api.Test;
 
 import code.BuildObjectsFromExcel;
-import code.RuleAccuracy;
 import code.Thresholds;
 
 class ThresholdsTest {
