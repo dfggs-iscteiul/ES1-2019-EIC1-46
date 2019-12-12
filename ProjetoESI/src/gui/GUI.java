@@ -774,8 +774,6 @@ public class GUI {
 					int text2;
 					int text3;
 					float text4;
-					if(tField1.getText().isEmpty() && c1.isSelected())
-						JOptionPane.showMessageDialog(frame, "Introduza números válidos", "Error", JOptionPane.ERROR_MESSAGE);
 					if (c1.isSelected())
 						text1 = Integer.parseInt(tField1.getText());
 					else
@@ -800,7 +798,7 @@ public class GUI {
 						logicalOperator2 = true;
 					else
 						logicalOperator2 = false;
-					Thresholds th = new Thresholds(bofe, c1.isEnabled(), c2.isEnabled(), c3.isEnabled(), c4.isEnabled(),
+					Thresholds th = new Thresholds(bofe, c1.isSelected(), c2.isSelected(), c3.isSelected(), c4.isSelected(),
 							logicalOperator1, logicalOperator2, text1, text2, text3, text4);
 					th.calcThresholds();
 					
