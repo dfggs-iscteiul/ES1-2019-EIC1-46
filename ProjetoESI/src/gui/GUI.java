@@ -627,11 +627,6 @@ public class GUI {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				if(jtf1.getText()!=null && jtf2.getText()!=null &&  jtf3.getText()!=null &&
-				   jtf4.getText()!=null && jtf5.getText()!= null && jtf5.getText()!=null &&
-				   jtf6.getText()!=null && jtf7.getText()!= null && jtf7.getText()!=null &&
-				   jtf8.getText()!=null && jtf9.getText()!=null) {
 				  
 				cr = new CustomRule(jtf1.getText(),jtf2.getText(),jtf3.getText(),
 						            jtf4.getText(),jtf5.getText(),jtf6.getText(),
@@ -650,9 +645,6 @@ public class GUI {
 				applyRule.setEnabled(true);
 				}
 				
-			
-
-			}
 		});
 
 		rulesList.setCellRenderer(new DefaultListCellRenderer() {

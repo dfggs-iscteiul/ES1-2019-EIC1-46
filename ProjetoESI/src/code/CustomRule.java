@@ -25,6 +25,10 @@ public class CustomRule {
 	
 	public CustomRule(String name, String LOC_Max, String LOC_Min, String CYCLO_Max, 
 		String CYCLO_Min, String ATFD_Max, String ATFD_Min, String LAA_Max, String LAA_Min) {
+		
+		if(!name.isEmpty() && !LOC_Max.isEmpty() && !LOC_Min.isEmpty() && !CYCLO_Max.isEmpty()
+				&& !CYCLO_Min.isEmpty() && !ATFD_Max.isEmpty()&& 
+				!ATFD_Min.isEmpty()&& !LAA_Max.isEmpty() && !LAA_Min.isEmpty()){
 		Calendar calendar = Calendar.getInstance();
 		SimpleDateFormat formatter = new SimpleDateFormat(" HH:mm:ss dd-MM-yyyy");
 		this.name=name+"_"+calendar.get(calendar.HOUR_OF_DAY)+calendar.get(calendar.MINUTE)
@@ -39,6 +43,11 @@ public class CustomRule {
 		this.LAA_Min=LAA_Min;
 		this.LAA_Max=LAA_Max;
 		System.out.println("New custom rule '" + this.name + "'  was succefully created!");
+		}
+		
+		else {
+			
+		}
 	}
 	/**
 	 * Method that applies the new rule created, generating a set of CustomDataEntry and printing them to a File.
