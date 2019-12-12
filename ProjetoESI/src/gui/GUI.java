@@ -269,7 +269,7 @@ public class GUI {
 		gbc.gridy = 2;
 //		tField4.setEnabled(false);
 		jPanel1.add(tField4, gbc);
-		list.add(tField1);
+		list.add(tField4);
 
 		
 		JCheckBox c4 = new JCheckBox();
