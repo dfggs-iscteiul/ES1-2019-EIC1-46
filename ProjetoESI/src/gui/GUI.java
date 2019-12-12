@@ -954,7 +954,7 @@ public class GUI {
 			x.addKeyListener(new KeyAdapter(){
 				public void keyTyped(KeyEvent e) {
 					char input = e.getKeyChar();
-					if((input < '0' || input > '9') && input != '\b' && input!= '.') {
+					if((input < '0' || input > '9') && input != '\b') {
 						e.consume();
 						System.out.println("Invalid character!");
 					}
