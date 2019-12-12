@@ -164,29 +164,6 @@ public class CustomRule {
 		return customRuleData;
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		File f = new File("Long-Method.xlsx");
-		BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
-		try {
-			bofe.buildObjects(f);
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		ArrayList<DataEntry> l = bofe.objects();
-		CustomRule cr = null;
-		try {
-		cr = new CustomRule("1", "5", "2", "2", "0", "-1", "1", "0", "2");
-		cr.applyCustomRule(l);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-	}
-	
 	public String getName() {
 		return name;
 	}
