@@ -509,7 +509,7 @@ public class GUI {
 		JTextField jtf8 = new JTextField();
 		JTextField jtf9 = new JTextField();
 		
-		list.add(jtf1);
+//		list.add(jtf1);
 		list.add(jtf2);
 		list.add(jtf3);
 		list.add(jtf4);
