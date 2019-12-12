@@ -9,7 +9,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+/** 
+ *  Represents a new rule created by a merge of different criteria and thresholds.
+ *  Date: Nov 20-2019
+ * 
+ * @author Daniel Gonçalves
+ * @version 1.0
+ */
 public class CustomRule {
 	
 	private String name;
@@ -164,6 +170,10 @@ public class CustomRule {
 		return customRuleData;
 	}
 	
+	/**
+	 * Getter of the name of the new rule.
+	 * @return String that represents the name of the new rule.
+	 */
 	public String getName() {
 		return name;
 	}
