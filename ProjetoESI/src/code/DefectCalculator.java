@@ -115,25 +115,23 @@ public class DefectCalculator {
 		}
 	}
 	
-	//Não tenho a certeza se isto de ir buscar por methodid-1 está certo
 	/**
 	 * Calculates defects in the List of DataEntry for the customRule
 	 */
 	public void CalculateDefectsCustomRule() {
 		if(customRule != null && defects !=null) {
-			int i = 0;
 			for(DataEntry d : dataEntry) {
-				if(customRule.getCustomRuleData().get(i).Is_CustomRule()==true && d.Is_Long_Method()==true) {
+				if(customRule.getCustomRuleData().get(d.getEntryMethodId()-1).Is_CustomRule()==true && d.Is_Long_Method()==true) {
 					dciCR+=1;
-					defects.add(new DetectedDefect(d.getEntryMethodId(), false, false,true));
+					defects.get(d.getEntryMethodId()-1).setCustomrule(true);
 				}
-				if(customRule.getCustomRuleData().get(i).Is_CustomRule()==true && d.Is_Long_Method()==false) {
+				if(customRule.getCustomRuleData().get(d.getEntryMethodId()-1).Is_CustomRule()==true && d.Is_Long_Method()==false) {
 					diiCR+=1;
-					defects.add(new DetectedDefect(d.getEntryMethodId(), false, false,true));
+					defects.get(d.getEntryMethodId()-1).setCustomrule(true);
 				}
-				if(customRule.getCustomRuleData().get(i).Is_CustomRule()==false && d.Is_Long_Method()==false)
+				if(customRule.getCustomRuleData().get(d.getEntryMethodId()-1).Is_CustomRule()==false && d.Is_Long_Method()==false)
 					adciCR+=1;
-				if(customRule.getCustomRuleData().get(i).Is_CustomRule()==false && d.Is_Long_Method()==true)
+				if(customRule.getCustomRuleData().get(d.getEntryMethodId()-1).Is_CustomRule()==false && d.Is_Long_Method()==true)
 					adiiCR+=1;
 			}
 		}

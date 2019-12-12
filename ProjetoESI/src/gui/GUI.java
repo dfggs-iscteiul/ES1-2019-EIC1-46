@@ -823,7 +823,7 @@ public class GUI {
 								logicalOperator1, logicalOperator2, text1, text2, text3, text4);
 						th.calcThresholds();
 						jPanel2.remove(jScrollPane);
-						ArrayList<DataEntry> entries = th.getInputs();
+						entries = th.getInputs();
 						TableModel model = new DataEntryTableModel(entries);
 						JTable table = new JTable(model);
 						jScrollPane = new JScrollPane(table);
@@ -889,6 +889,7 @@ public class GUI {
 				try {
 					rule.applyCustomRule(entries);
 					DefectCalculator c = new DefectCalculator(entries,rule);
+					c.CalculateDefects();
 					c.CalculateDefectsCustomRule();
 					cr1.setText(rule.getName());
 					fieldcr1.setText(Integer.toString(c.getDciCR()));
