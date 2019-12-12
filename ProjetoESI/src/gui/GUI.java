@@ -105,6 +105,7 @@ public class GUI {
 	private JLabel labelpercent1;
 	private ArrayList<CustomRule> customRules;
 	private double customAccuracy = 0.0;
+	private ArrayList<JTextField> list = new ArrayList<>();
 
 	private JLabel pmd0;
 	private JLabel pmd1;
@@ -196,6 +197,7 @@ public class GUI {
 		gbc.gridy = 1;
 //		tField1.setEnabled(false);
 		jPanel1.add(tField1, gbc);
+		list.add(tField1);
 		
 		JCheckBox c1 = new JCheckBox();
 		gbc.gridx = 0;
@@ -215,6 +217,7 @@ public class GUI {
 		gbc.gridy = 2;
 //		tField2.setEnabled(false);
 		jPanel1.add(tField2, gbc);
+		list.add(tField2);
 		
 		JCheckBox c2 = new JCheckBox();
 		gbc.gridx = 0;
@@ -239,6 +242,8 @@ public class GUI {
 		gbc.gridy = 1;
 //		tField3.setEnabled(false);
 		jPanel1.add(tField3, gbc);
+		list.add(tField3);
+
 		
 		JCheckBox c3 = new JCheckBox();
 		gbc.gridx = 4;
@@ -264,6 +269,8 @@ public class GUI {
 		gbc.gridy = 2;
 //		tField4.setEnabled(false);
 		jPanel1.add(tField4, gbc);
+		list.add(tField1);
+
 		
 		JCheckBox c4 = new JCheckBox();
 		gbc.gridx = 4;
@@ -501,6 +508,19 @@ public class GUI {
 		JTextField jtf7 = new JTextField();
 		JTextField jtf8 = new JTextField();
 		JTextField jtf9 = new JTextField();
+		
+		list.add(jtf1);
+		list.add(jtf2);
+		list.add(jtf3);
+		list.add(jtf4);
+		list.add(jtf5);
+		list.add(jtf6);
+		list.add(jtf7);
+		list.add(jtf8);
+		list.add(jtf9);
+
+
+
 
 		JButton createRule = new JButton("Cria Regra");
 		createRule.setEnabled(false);
@@ -925,7 +945,9 @@ public class GUI {
 			}
 		});
 		
-		tField1.addKeyListener(new KeyAdapter(){
+		
+		for(JTextField x:list) {
+			x.addKeyListener(new KeyAdapter(){
 			public void keyTyped(KeyEvent e) {
 				char input = e.getKeyChar();
 				if((input < '0' || input > '9') && input != '\b') {
@@ -934,116 +956,128 @@ public class GUI {
 				}
 			}
 		});
+		}
 		
-		tField2.addKeyListener(new KeyAdapter(){
-			public void keyTyped(KeyEvent e) {
-				char input = e.getKeyChar();
-				if((input < '0' || input > '9') && input != '\b') {
-					e.consume();
-					System.out.println("Invalid character!");
-				}
-			}
-		});
-		
-		tField3.addKeyListener(new KeyAdapter(){
-			public void keyTyped(KeyEvent e) {
-				char input = e.getKeyChar();
-				if((input < '0' || input > '9') && input != '\b') {
-					e.consume();
-					System.out.println("Invalid character!");
-				}
-			}
-		});
-		
-		tField4.addKeyListener(new KeyAdapter(){
-			public void keyTyped(KeyEvent e) {
-				char input = e.getKeyChar();
-				if((input < '0' || input > '9') && input != '\b' && input!= '.') {
-					e.consume();
-					System.out.println("Invalid character!");
-				}
-			}
-		});
-		
-		jtf2.addKeyListener(new KeyAdapter(){
-			public void keyTyped(KeyEvent e) {
-				char input = e.getKeyChar();
-				if((input < '0' || input > '9') && input != '\b') {
-					e.consume();
-					System.out.println("Invalid character!");
-				}
-			}
-		});
-		
-		jtf3.addKeyListener(new KeyAdapter(){
-			public void keyTyped(KeyEvent e) {
-				char input = e.getKeyChar();
-				if((input < '0' || input > '9') && input != '\b') {
-					e.consume();
-					System.out.println("Invalid character!");
-				}
-			}
-		});
-		
-		jtf4.addKeyListener(new KeyAdapter(){
-			public void keyTyped(KeyEvent e) {
-				char input = e.getKeyChar();
-				if((input < '0' || input > '9') && input != '\b') {
-					e.consume();
-					System.out.println("Invalid character!");
-				}
-			}
-		});
-		
-		jtf5.addKeyListener(new KeyAdapter(){
-			public void keyTyped(KeyEvent e) {
-				char input = e.getKeyChar();
-				if((input < '0' || input > '9') && input != '\b') {
-					e.consume();
-					System.out.println("Invalid character!");
-				}
-			}
-		});
-		
-		jtf6.addKeyListener(new KeyAdapter(){
-			public void keyTyped(KeyEvent e) {
-				char input = e.getKeyChar();
-				if((input < '0' || input > '9') && input != '\b') {
-					e.consume();
-					System.out.println("Invalid character!");
-				}
-			}
-		});
-		
-		jtf7.addKeyListener(new KeyAdapter(){
-			public void keyTyped(KeyEvent e) {
-				char input = e.getKeyChar();
-				if((input < '0' || input > '9') && input != '\b') {
-					e.consume();
-					System.out.println("Invalid character!");
-				}
-			}
-		});
-		
-		jtf8.addKeyListener(new KeyAdapter(){
-			public void keyTyped(KeyEvent e) {
-				char input = e.getKeyChar();
-				if((input < '0' || input > '9') && input != '\b' && input!= '.') {
-					e.consume();
-					System.out.println("Invalid character!");
-				}
-			}
-		});
-		
-		jtf9.addKeyListener(new KeyAdapter(){
-			public void keyTyped(KeyEvent e) {
-				char input = e.getKeyChar();
-				if((input < '0' || input > '9') && input != '\b' && input!= '.') {
-					e.consume();
-					System.out.println("Invalid character!");
-				}
-			}
-		});
+//		
+//		tField1.addKeyListener(new KeyAdapter(){
+//			public void keyTyped(KeyEvent e) {
+//				char input = e.getKeyChar();
+//				if((input < '0' || input > '9') && input != '\b') {
+//					e.consume();
+//					System.out.println("Invalid character!");
+//				}
+//			}
+//		});
+//		
+//		tField2.addKeyListener(new KeyAdapter(){
+//			public void keyTyped(KeyEvent e) {
+//				char input = e.getKeyChar();
+//				if((input < '0' || input > '9') && input != '\b') {
+//					e.consume();
+//					System.out.println("Invalid character!");
+//				}
+//			}
+//		});
+//		
+//		tField3.addKeyListener(new KeyAdapter(){
+//			public void keyTyped(KeyEvent e) {
+//				char input = e.getKeyChar();
+//				if((input < '0' || input > '9') && input != '\b') {
+//					e.consume();
+//					System.out.println("Invalid character!");
+//				}
+//			}
+//		});
+//		
+//		tField4.addKeyListener(new KeyAdapter(){
+//			public void keyTyped(KeyEvent e) {
+//				char input = e.getKeyChar();
+//				if((input < '0' || input > '9') && input != '\b' && input!= '.') {
+//					e.consume();
+//					System.out.println("Invalid character!");
+//				}
+//			}
+//		});
+//		
+//		jtf2.addKeyListener(new KeyAdapter(){
+//			public void keyTyped(KeyEvent e) {
+//				char input = e.getKeyChar();
+//				if((input < '0' || input > '9') && input != '\b') {
+//					e.consume();
+//					System.out.println("Invalid character!");
+//				}
+//			}
+//		});
+//		
+//		jtf3.addKeyListener(new KeyAdapter(){
+//			public void keyTyped(KeyEvent e) {
+//				char input = e.getKeyChar();
+//				if((input < '0' || input > '9') && input != '\b') {
+//					e.consume();
+//					System.out.println("Invalid character!");
+//				}
+//			}
+//		});
+//		
+//		jtf4.addKeyListener(new KeyAdapter(){
+//			public void keyTyped(KeyEvent e) {
+//				char input = e.getKeyChar();
+//				if((input < '0' || input > '9') && input != '\b') {
+//					e.consume();
+//					System.out.println("Invalid character!");
+//				}
+//			}
+//		});
+//		
+//		jtf5.addKeyListener(new KeyAdapter(){
+//			public void keyTyped(KeyEvent e) {
+//				char input = e.getKeyChar();
+//				if((input < '0' || input > '9') && input != '\b') {
+//					e.consume();
+//					System.out.println("Invalid character!");
+//				}
+//			}
+//		});
+//		
+//		jtf6.addKeyListener(new KeyAdapter(){
+//			public void keyTyped(KeyEvent e) {
+//				char input = e.getKeyChar();
+//				if((input < '0' || input > '9') && input != '\b') {
+//					e.consume();
+//					System.out.println("Invalid character!");
+//				}
+//			}
+//		});
+//		
+//		jtf7.addKeyListener(new KeyAdapter(){
+//			public void keyTyped(KeyEvent e) {
+//				char input = e.getKeyChar();
+//				if((input < '0' || input > '9') && input != '\b') {
+//					e.consume();
+//					System.out.println("Invalid character!");
+//				}
+//			}
+//		});
+//		
+//		jtf8.addKeyListener(new KeyAdapter(){
+//			public void keyTyped(KeyEvent e) {
+//				char input = e.getKeyChar();
+//				if((input < '0' || input > '9') && input != '\b' && input!= '.') {
+//					e.consume();
+//					System.out.println("Invalid character!");
+//				}
+//			}
+//		});
+//		
+//		jtf9.addKeyListener(new KeyAdapter(){
+//			public void keyTyped(KeyEvent e) {
+//				char input = e.getKeyChar();
+//				if((input < '0' || input > '9') && input != '\b' && input!= '.') {
+//					e.consume();
+//					System.out.println("Invalid character!");
+//				}
+//			}
+//		});
 	}
 
 	public static void main(String[] args) {
