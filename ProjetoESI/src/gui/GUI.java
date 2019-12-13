@@ -159,7 +159,7 @@ public class GUI {
 		////////////////
 		////////////////////// TAB2 ---- CRIAR THRESHOLDS
 		////////////////
-
+		
 		JLabel label00 = new JLabel("Regra ativa");
 		JLabel label03 = new JLabel("Valor");
 		JLabel label1 = new JLabel("LOC");
@@ -386,7 +386,6 @@ public class GUI {
 		gbc.gridx = 1; gbc.gridy = 9; jPanel4.add(jtf9, gbc);
 		gbc.gridx = 0; gbc.gridy = 10; jPanel4.add(createRule, gbc);
 		gbc.gridx = 3; gbc.gridy = 11;
-		jPanel4.add(new JScrollPane(rulesList), gbc);
 		customRules = new ArrayList<CustomRule>();
 
 		////////////////////// TAB5 -- VER REGRA
