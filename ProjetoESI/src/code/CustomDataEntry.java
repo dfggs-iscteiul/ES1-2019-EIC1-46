@@ -8,7 +8,7 @@ package code;
  */
 public class CustomDataEntry {
 	/**
-	 * Represents the attributes of the DefectCalculator class.
+	 * Represents the attributes of the CustomDataEntry class.
 	 */
 	private int MethodId;
 	private String Package;
