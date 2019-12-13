@@ -57,6 +57,7 @@ public class RuleAccuracy {
 	 * 
 	 */
 
+	
 	public void calcAccuracy() {
 		// Builds a excel File
 		File excelFile = new File("Long-Method.xlsx");

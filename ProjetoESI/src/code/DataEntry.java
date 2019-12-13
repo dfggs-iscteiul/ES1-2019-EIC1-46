@@ -3,7 +3,9 @@ package code;
  *  Represents the Data from the Excel file.
  */
 public class DataEntry {
-
+	/**
+	 * Represents the attributes of the DataEntry class.
+	 */
 	private int MethodId;
 	private String Package;
 	private String Class;
@@ -17,7 +19,21 @@ public class DataEntry {
 	private boolean IPlasma;
 	private boolean PMD;
 	private boolean Is_Feature_Envy;
-	
+	/**
+	 * Creates the DataEntry with the specific parameters.
+	 * @param MethodId is a Integer.
+	 * @param Package is the name of the package.
+	 * @param Class is the name of the class.
+	 * @param Method is the name of the method.
+	 * @param LOC is a Integer.
+	 * @param CYCLO is a Integer.
+	 * @param ATFD is a Integer.
+	 * @param LAA is a Float.
+	 * @param Is_Long_Method indicates if the method have the defect Long_Method
+	 * @param IPlasma indicates if the IPlasma tool detects the defect
+	 * @param PMD indicates if the IPlasma tool detects the defect
+	 * @param Is_Feature_Envy indicates if the method have the defect Is_Feature_Envy
+	 */
 	public DataEntry(int MethodId, String Package, String Class, String Method,
 						int LOC, int CYCLO, int ATFD, float LAA, boolean Is_Long_Method,
 						boolean IPlasma, boolean PMD, boolean Is_Feature_Envy ) {

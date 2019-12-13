@@ -12,7 +12,9 @@ import java.util.List;
  *
  */
 public class ExcelAccuracy {
-
+	/**
+	 * Represents the attributes of the ExcelAccuracy class.
+	 */
 	private ArrayList<DataEntry> entradas;
 	private double iPlasmaAccuracy;
 	private double PMDAccuracy;
@@ -71,7 +73,10 @@ public class ExcelAccuracy {
 		return entryAccuracy;
 	}
 	
-	
+	/**
+	 *  
+	 * @return the accuracy of the CustomRule
+	 */
 
 	public double getCustomAccuracy() {
 		return customAccuracy;

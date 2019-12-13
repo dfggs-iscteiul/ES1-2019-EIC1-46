@@ -14,7 +14,9 @@ import java.util.Calendar;
  * @version 1.0
  */
 public class CustomRule {
-	
+	/**
+	 * Represents the attributes of the DefectCalculator class.
+	 */
 	private String name;
 	private String LOC_Max;
 	private String LOC_Min;

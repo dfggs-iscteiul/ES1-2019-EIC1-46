@@ -7,7 +7,9 @@ package code;
  * @version 1.0
  */
 public class CustomDataEntry {
-
+	/**
+	 * Represents the attributes of the DefectCalculator class.
+	 */
 	private int MethodId;
 	private String Package;
 	private String Class;
@@ -18,7 +20,18 @@ public class CustomDataEntry {
 	private int ATFD;
 	private float LAA;
 	private boolean CustomRule;
-	
+	/**
+	 * Creates the DataEntry with the specific parameters.
+	 * @param MethodId is a Integer.
+	 * @param Package is the name of the package.
+	 * @param Class is the name of the class.
+	 * @param Method is the name of the method.
+	 * @param LOC is a Integer.
+	 * @param CYCLO is a Integer.
+	 * @param ATFD is a Integer.
+	 * @param LAA is a Float.
+	 * @param CustomRule indicates if the CustomRule detects the defect in the method.
+	 */
 	public CustomDataEntry(int MethodId, String Package, String Class, String Method,
 						int LOC, int CYCLO, int ATFD, float LAA, boolean CustomRule ) {
 		this.MethodId=MethodId;
