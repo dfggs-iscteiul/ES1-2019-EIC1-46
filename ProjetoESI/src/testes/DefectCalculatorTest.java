@@ -33,8 +33,8 @@ class DefectCalculatorTest {
 		dc2 = new DefectCalculator(helper.objects(), cr);
 		BuildObjectsFromExcel helper1 = new BuildObjectsFromExcel();
 		helper1.buildObjects(new File("Long-Method.xlsx"));
-		Thresholds t1 = new Thresholds(helper1,true,true,true,true,true,true,0,0,0,0);
-		Thresholds t2 = new Thresholds(helper1,true,true,true,true,true,true,150,150,150,150);
+		Thresholds t1 = new Thresholds(helper1,"b",true,true,true,true,true,true,0,0,0,0);
+		Thresholds t2 = new Thresholds(helper1,"a",true,true,true,true,true,true,150,150,150,150);
 		t1.calcThresholds();
 		t2.calcThresholds();
 		dc3 = new DefectCalculator(t1.getInputs(),cr);

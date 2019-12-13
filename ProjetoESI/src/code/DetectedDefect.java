@@ -47,9 +47,8 @@ public class DetectedDefect {
 		this.pmd=pmd;
 	}
 	/**
-	 * returns the method id
 	 * 
-	 * @return
+	 * @return the method id
 	 */
 	public int getId() {
 		return id;

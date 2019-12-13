@@ -1,12 +1,10 @@
 package gui;
 
 import java.util.ArrayList;
-//import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
 import code.CustomDataEntry;
-import code.DataEntry;
 
 public class CustomDataEntryTableModel extends AbstractTableModel  {
 	private ArrayList<CustomDataEntry> entries ;
