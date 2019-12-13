@@ -10,7 +10,6 @@ Daniel Gonçalves, nº82074
 
 Guilherme Ferreira, nº82561
 
-João Macedo, nº
+João Macedo, nº82802
 
 Rafael Pacheco, nº69327
-
