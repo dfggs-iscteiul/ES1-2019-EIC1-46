@@ -91,5 +91,10 @@ class CustomRuleTest {
 		cr10.getCustomRuleData();
 	}
 	
+	@Test
+	void testGetName() {
+		assertEquals("teste", cr.getName());
+	}
+	
 
 }

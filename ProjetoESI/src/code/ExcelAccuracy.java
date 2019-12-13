@@ -77,14 +77,14 @@ public class ExcelAccuracy {
 		return customAccuracy;
 	}
 
-	public static void main(String[] args) throws FileNotFoundException {
-		File excelFile = new File("Long-Method.xlsx");
-		BuildObjectsFromExcel helper = new BuildObjectsFromExcel();
-		helper.buildObjects(excelFile);
-		ExcelAccuracy teste = new ExcelAccuracy(helper.objects());
-		System.out.println("Media: " + teste.getAverageAccuracy() + "%");
-		System.out.println("Linhas 100% certas: " + teste.getEntryAccuracy() + "%");
-	}
+//	public static void main(String[] args) throws FileNotFoundException {
+//		File excelFile = new File("Long-Method.xlsx");
+//		BuildObjectsFromExcel helper = new BuildObjectsFromExcel();
+//		helper.buildObjects(excelFile);
+//		ExcelAccuracy teste = new ExcelAccuracy(helper.objects());
+//		System.out.println("Media: " + teste.getAverageAccuracy() + "%");
+//		System.out.println("Linhas 100% certas: " + teste.getEntryAccuracy() + "%");
+//	}
 
 
 }
