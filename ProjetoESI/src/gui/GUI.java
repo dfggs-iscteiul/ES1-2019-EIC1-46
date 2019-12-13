@@ -580,7 +580,7 @@ public class GUI {
 						frame.pack();
 						SwingUtilities.updateComponentTreeUI(frame);
 					} catch (NumberFormatException ez) {
-						JOptionPane.showMessageDialog(frame, "Please type a number or uncheck the checkbox!", "ERROR",
+						JOptionPane.showMessageDialog(frame, "Preenche o campo com um número ou desmarque a checkbox!", "ERROR",
 								JOptionPane.ERROR_MESSAGE);
 					}
 				}
@@ -614,6 +614,10 @@ public class GUI {
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+				}
+				catch (NullPointerException ez) {
+					JOptionPane.showMessageDialog(frame, "Selecione uma CostumRule válida!", "ERROR",
+							JOptionPane.ERROR_MESSAGE);
 				}
 				results.addAll(rule.getCustomRuleData());
 				table1.revalidate();
