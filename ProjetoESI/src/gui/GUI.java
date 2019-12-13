@@ -117,6 +117,7 @@ public class GUI {
 	private JList<CustomRule> rulesList = new JList<>(listModel);
 	private DefaultListModel<Thresholds> listThresholds = new DefaultListModel<>();
 	private JList <Thresholds> thresholdsList = new JList<>(listThresholds);
+	private JScrollPane thresholds = new JScrollPane(thresholdsList);
 
 	/**
 	 * Builds the structure of the interface and adds button listeners.
@@ -149,12 +150,12 @@ public class GUI {
 		JButton button = new JButton("Importar ficheiro");
 		labelmedia = new JLabel();
 		labelpercent = new JLabel();
-
+		
 		gbc.gridx = 0; gbc.gridy = 1; jPanel1.add(labelmedia, gbc);
 		gbc.gridx = 0; gbc.gridy = 2; jPanel1.add(labelpercent, gbc);
 		gbc.gridx = 0; gbc.gridy = 3; jPanel1.add(button, gbc);
-		gbc.gridx = 0; gbc.gridy = 4; jPanel1.add(fileStatus,gbc); 
-		
+		gbc.gridx = 0; gbc.gridy = 4; jPanel1.add(fileStatus, gbc); 
+
 		////////////////
 		////////////////////// TAB2 ---- CRIAR THRESHOLDS
 		////////////////
@@ -175,8 +176,6 @@ public class GUI {
 		
 		JComboBox<String> listaOperadoresMethod1 = new JComboBox<>(operadores1);
 		JComboBox<String> listaOperadoresMethod2 = new JComboBox<>(operadores1);
-		String operadorLM = (String) listaOperadoresMethod1.getSelectedItem();
-		String operadorFE = (String) listaOperadoresMethod2.getSelectedItem();
 
 		JButton button2 = new JButton("Criar threshold");
 		button2.setEnabled(false);
@@ -218,7 +217,7 @@ public class GUI {
 		gbc.gridx = 1; gbc.gridy = 5; jPanel2.add(listaOperadoresMethod1, gbc);
 		gbc.gridx = 1; gbc.gridy = 8; jPanel2.add(listaOperadoresMethod2, gbc); 
 		gbc.gridx = 0; gbc.gridy = 9; jPanel2.add(button2, gbc);
-		gbc.gridx = 3; gbc.gridy = 5; jPanel2.add(new JScrollPane(thresholdsList),gbc);
+		gbc.gridx = 3; gbc.gridy = 5; jPanel2.add(thresholds,gbc);
 		gbc.gridx = 1; gbc.gridy = 9; jPanel2.add(button3, gbc);
 		gbc.gridx = 3; gbc.gridy = 6; jPanel2.add(button4, gbc);
 		
@@ -548,49 +547,6 @@ public class GUI {
 						button3.setEnabled(true);
 						button4.setEnabled(true);
 						
-						
-						
-						
-						th.calcThresholds();
-						jPanel1.remove(jScrollPane);
-						entries = th.getInputs();
-						TableModel model = new DataEntryTableModel(entries);
-						JTable table = new JTable(model);
-						jScrollPane = new JScrollPane(table);
-						
-						gbc.gridx = 0; gbc.gridy = 0; jPanel1.add(jScrollPane, gbc);
-						calculator = new DefectCalculator(entries);
-						calculator.CalculateDefects();
-						// TODO
-
-						TableModel modelDefect = new DetectedDefectTableModel(calculator.getDefects());
-						JTable tableDefect = new JTable(modelDefect);
-
-						jPanel3.remove(jScrollPaneDefect);
-
-						jScrollPaneDefect = new JScrollPane(tableDefect);
-
-						gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 11; gbc.fill = GridBagConstraints.HORIZONTAL;
-						jPanel3.add(jScrollPaneDefect, gbc);
-
-						field1.setText(Integer.toString(calculator.getDciIPlasma()));
-						field2.setText(Integer.toString(calculator.getDiiIPlasma()));
-						field3.setText(Integer.toString(calculator.getAdciIPlasma()));
-						field4.setText(Integer.toString(calculator.getAdiiIPlasma()));
-
-						fieldpmd1.setText(Integer.toString(calculator.getDciPMD()));
-						fieldpmd2.setText(Integer.toString(calculator.getDiiPMD()));
-						fieldpmd3.setText(Integer.toString(calculator.getAdciPMD()));
-						fieldpmd4.setText(Integer.toString(calculator.getAdiiPMD()));
-
-						ExcelAccuracy test = new ExcelAccuracy(bofe);
-						labelmedia.setText(
-								"Percentagem média da accuracy do iPlasma e PMD: " + test.getAverageAccuracy() + "%");
-						labelpercent.setText(
-								"Linhas 100% certas(iPlasma=PMD=isLongMethod): " + test.getEntryAccuracy() + "%");
-
-						frame.pack();
-						SwingUtilities.updateComponentTreeUI(frame);
 					} catch (NumberFormatException ez) {
 						JOptionPane.showMessageDialog(frame, "Preenche o campo com um número ou desmarque a checkbox!", "ERROR",
 								JOptionPane.ERROR_MESSAGE);
@@ -635,6 +591,16 @@ public class GUI {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				File excel = new File(file.toString());
+
+				BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
+
+				try {
+					bofe.buildObjects(excel);
+				} catch (FileNotFoundException ex) {
+					ex.printStackTrace();
+				}
+				try {
 				Thresholds th = thresholdsList.getSelectedValue();
 				tField5.setText(th.getName());
 				tField1.setText(Integer.toString(th.getLOCVal()));
@@ -653,6 +619,51 @@ public class GUI {
 					listaOperadoresMethod2.setSelectedItem("AND");
 				else
 					listaOperadoresMethod2.setSelectedItem("OR");
+				th.calcThresholds();
+				jPanel1.remove(jScrollPane);
+				entries = th.getInputs();
+				TableModel model = new DataEntryTableModel(entries);
+				JTable table = new JTable(model);
+				jScrollPane = new JScrollPane(table);
+				
+				gbc.gridx = 0; gbc.gridy = 0; jPanel1.add(jScrollPane, gbc);
+				calculator = new DefectCalculator(entries);
+				calculator.CalculateDefects();
+				// TODO
+
+				TableModel modelDefect = new DetectedDefectTableModel(calculator.getDefects());
+				JTable tableDefect = new JTable(modelDefect);
+
+				jPanel3.remove(jScrollPaneDefect);
+
+				jScrollPaneDefect = new JScrollPane(tableDefect);
+
+				gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 11; gbc.fill = GridBagConstraints.HORIZONTAL;
+				jPanel3.add(jScrollPaneDefect, gbc);
+
+				field1.setText(Integer.toString(calculator.getDciIPlasma()));
+				field2.setText(Integer.toString(calculator.getDiiIPlasma()));
+				field3.setText(Integer.toString(calculator.getAdciIPlasma()));
+				field4.setText(Integer.toString(calculator.getAdiiIPlasma()));
+
+				fieldpmd1.setText(Integer.toString(calculator.getDciPMD()));
+				fieldpmd2.setText(Integer.toString(calculator.getDiiPMD()));
+				fieldpmd3.setText(Integer.toString(calculator.getAdciPMD()));
+				fieldpmd4.setText(Integer.toString(calculator.getAdiiPMD()));
+
+				ExcelAccuracy test = new ExcelAccuracy(bofe);
+				labelmedia.setText(
+						"Percentagem média da accuracy do iPlasma e PMD: " + test.getAverageAccuracy() + "%");
+				labelpercent.setText(
+						"Linhas 100% certas(iPlasma=PMD=isLongMethod): " + test.getEntryAccuracy() + "%");
+
+				frame.pack();
+				SwingUtilities.updateComponentTreeUI(frame);
+			}
+			catch(NullPointerException ez) {
+				JOptionPane.showMessageDialog(frame, "Selecione um Threshold válido!", "ERROR",
+						JOptionPane.ERROR_MESSAGE);
+			}
 			}
 		});
 		
@@ -730,6 +741,18 @@ public class GUI {
 			}
 		});
 
+		thresholdsList.setCellRenderer(new DefaultListCellRenderer() {
+			@Override
+			public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
+					boolean cellHasFocus) {
+				Component renderer = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+				if (renderer instanceof JLabel && value instanceof Thresholds) {
+					// Here value will be of the Type 'CD'
+					((JLabel) renderer).setText(((Thresholds) value).getName());
+				}
+				return renderer;
+			}
+		});
 		for (JTextField x : list) {
 			x.addKeyListener(new KeyAdapter() {
 				public void keyTyped(KeyEvent e) {
