@@ -116,7 +116,7 @@ public class GUI {
 	private DefaultListModel<CustomRule> listModel = new DefaultListModel<>();
 	private JList<CustomRule> rulesList = new JList<>(listModel);
 	private DefaultListModel<Thresholds> listThresholds = new DefaultListModel<>();
-	private JList <Thresholds> threhsoldsList = new JList<>(listThresholds);
+	private JList <Thresholds> thresholdsList = new JList<>(listThresholds);
 
 	/**
 	 * Builds the structure of the interface and adds button listeners.
@@ -156,7 +156,7 @@ public class GUI {
 		gbc.gridx = 0; gbc.gridy = 4; jPanel1.add(fileStatus,gbc); 
 		
 		////////////////
-		////////////////////// TAB1 ---- CRIAR THRESHOLDS
+		////////////////////// TAB2 ---- CRIAR THRESHOLDS
 		////////////////
 
 		JLabel label00 = new JLabel("Regra ativa");
@@ -180,6 +180,10 @@ public class GUI {
 
 		JButton button2 = new JButton("Criar threshold");
 		button2.setEnabled(false);
+		JButton button3 = new JButton("Editar threshold");
+		button3.setEnabled(false);
+		JButton button4 = new JButton("Carregar threshold");
+		button4.setEnabled(false);
 
 		JTextField tField1 = new JTextField();
 		JTextField tField2 = new JTextField();
@@ -213,8 +217,10 @@ public class GUI {
 		gbc.gridx = 2; gbc.gridy = 7; jPanel2.add(c4, gbc);
 		gbc.gridx = 1; gbc.gridy = 5; jPanel2.add(listaOperadoresMethod1, gbc);
 		gbc.gridx = 1; gbc.gridy = 8; jPanel2.add(listaOperadoresMethod2, gbc); 
-		gbc.gridx = 1; gbc.gridy = 9; jPanel2.add(button2, gbc);
-		gbc.gridx = 3; gbc.gridy = 6; jPanel2.add(new JScrollPane(threhsoldsList),gbc);
+		gbc.gridx = 0; gbc.gridy = 9; jPanel2.add(button2, gbc);
+		gbc.gridx = 3; gbc.gridy = 5; jPanel2.add(new JScrollPane(thresholdsList),gbc);
+		gbc.gridx = 1; gbc.gridy = 9; jPanel2.add(button3, gbc);
+		gbc.gridx = 3; gbc.gridy = 6; jPanel2.add(button4, gbc);
 		
 		list.add(tField1);
 		list.add(tField2);
@@ -528,18 +534,24 @@ public class GUI {
 							text4 = Float.parseFloat(tField4.getText());
 						else
 							text4 = 0;
-						if (operadorLM.equals("AND"))
+						if (listaOperadoresMethod1.getSelectedItem().equals("AND"))
 							logicalOperator1 = true;
 						else
 							logicalOperator1 = false;
-						if (operadorFE.equals("AND"))
+						if (listaOperadoresMethod2.getSelectedItem().equals("AND"))
 							logicalOperator2 = true;
 						else
 							logicalOperator2 = false;
 						Thresholds th = new Thresholds(bofe,tField5.getText(), c1.isSelected(), c2.isSelected(), c3.isSelected(),
 								c4.isSelected(), logicalOperator1, logicalOperator2, text1, text2, text3, text4);
-						th.calcThresholds();
 						listThresholds.addElement(th);
+						button3.setEnabled(true);
+						button4.setEnabled(true);
+						
+						
+						
+						
+						th.calcThresholds();
 						jPanel1.remove(jScrollPane);
 						entries = th.getInputs();
 						TableModel model = new DataEntryTableModel(entries);
@@ -588,6 +600,62 @@ public class GUI {
 			}
 		});
 
+		button3.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				for(Thresholds ths: thresholdsList.getSelectedValuesList()) {
+					if(ths.getName().equals(tField5.getText())) {
+						ths.setRule1(c1.isSelected());
+						ths.setRule2(c2.isSelected());
+						ths.setRule3(c3.isSelected());
+						ths.setRule4(c4.isSelected());
+						ths.setLOCVal(Integer.parseInt(tField1.getText()));
+						ths.setCYCLOVal(Integer.parseInt(tField2.getText()));
+						ths.setAFTDVal(Integer.parseInt(tField3.getText()));
+						ths.setLAAVal(Float.parseFloat(tField4.getText()));
+						if (listaOperadoresMethod1.getSelectedItem().equals("AND"))
+							ths.setLogicalOperator1(true);
+						else
+							ths.setLogicalOperator1(false);
+						if (listaOperadoresMethod2.getSelectedItem().equals("AND"))
+							ths.setLogicalOperator2(true);
+						else
+							ths.setLogicalOperator2(false);
+					}
+					else
+						JOptionPane.showMessageDialog(frame, "Não foi encontrado nenhum Threshold com o nome " + tField5.getText(), "WARNING",
+								JOptionPane.WARNING_MESSAGE);
+						
+				}
+			}
+		});
+		
+		button4.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Thresholds th = thresholdsList.getSelectedValue();
+				tField5.setText(th.getName());
+				tField1.setText(Integer.toString(th.getLOCVal()));
+				tField2.setText(Integer.toString(th.getCYCLOVal()));
+				tField3.setText(Integer.toString(th.getAFTDVal()));
+				tField4.setText(Float.toString(th.getLAAVal()));
+				c1.setSelected(th.isRule1());
+				c2.setSelected(th.isRule2());
+				c3.setSelected(th.isRule3());
+				c4.setSelected(th.isRule4());
+				if(th.isLogicalOperator1())
+					listaOperadoresMethod1.setSelectedItem("AND");
+				else
+					listaOperadoresMethod1.setSelectedItem("OR");
+				if(th.isLogicalOperator2())
+					listaOperadoresMethod2.setSelectedItem("AND");
+				else
+					listaOperadoresMethod2.setSelectedItem("OR");
+			}
+		});
+		
 		applyRule.addActionListener(new ActionListener() {
 
 			@Override
