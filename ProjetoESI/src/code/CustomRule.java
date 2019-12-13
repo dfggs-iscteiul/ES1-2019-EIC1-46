@@ -9,7 +9,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+/** 
+ *  Represents a new rule created by a merge of different criteria and thresholds.
+ *  Date: Nov 20-2019
+ * 
+ * @author Daniel Gonçalves
+ * @version 1.0
+ */
 public class CustomRule {
 	
 	private String name;
@@ -172,24 +178,6 @@ public class CustomRule {
 	public ArrayList<CustomDataEntry> getCustomRuleData() {
 		return customRuleData;
 	}
-	
-//	public static void main(String[] args) {
-//		File f = new File("Long-Method.xlsx");
-//		BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
-//		try {
-//			bofe.buildObjects(f);
-//		} catch (FileNotFoundException e1) {
-//			e1.printStackTrace();
-//		}
-//		ArrayList<DataEntry> l = bofe.objects();
-//		CustomRule cr = null;
-//		try {
-//		cr = new CustomRule("1", "5", "2", "2", "0", "-1", "1", "0", "2");
-//		cr.applyCustomRule(l);
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//	}
 	
 	public String getName() {
 		return name;

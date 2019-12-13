@@ -1,6 +1,10 @@
 package code;
 /** 
- *  Represents a new rule created by a merge of different criteria and thresholds. Holds the results of the use of the new rule with de Excel data.
+ *  Holds the results of the use of the new rule with the Excel data.
+ *  Date: Nov 20-2019
+ * 
+ * @author Daniel Gonçalves
+ * @version 1.0
  */
 public class CustomDataEntry {
 
