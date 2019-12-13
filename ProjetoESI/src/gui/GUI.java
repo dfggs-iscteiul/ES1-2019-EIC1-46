@@ -510,6 +510,11 @@ public class GUI {
 					} catch (FileNotFoundException ex) {
 						ex.printStackTrace();
 					}
+					if(tField5.getText().isEmpty()) {
+							JOptionPane.showMessageDialog(frame, "Introduza o nome do Threshold!", "WARNING",
+									JOptionPane.WARNING_MESSAGE);
+							return;
+					}
 					boolean logicalOperator1;
 					boolean logicalOperator2;
 					int text1;
@@ -517,6 +522,13 @@ public class GUI {
 					int text3;
 					float text4;
 					try {
+						for(Thresholds ths: thresholdsList.getSelectedValuesList()) {
+							if(ths.getName().equals(tField5.getText())) {
+								JOptionPane.showMessageDialog(frame, "O nome escolhido já está a ser utilizado!", "WARNING",
+										JOptionPane.WARNING_MESSAGE);
+								return;
+							}
+						}
 						if (c1.isSelected())
 							text1 = Integer.parseInt(tField1.getText());
 						else
@@ -543,10 +555,21 @@ public class GUI {
 							logicalOperator2 = false;
 						Thresholds th = new Thresholds(bofe,tField5.getText(), c1.isSelected(), c2.isSelected(), c3.isSelected(),
 								c4.isSelected(), logicalOperator1, logicalOperator2, text1, text2, text3, text4);
+							
 						listThresholds.addElement(th);
 						button3.setEnabled(true);
 						button4.setEnabled(true);
-						
+						tField1.setText(null);
+						tField2.setText(null);
+						tField3.setText(null);
+						tField4.setText(null);
+						tField5.setText(null);
+						c1.setSelected(false);
+						c2.setSelected(false);
+						c3.setSelected(false);
+						c4.setSelected(false);
+						listaOperadoresMethod1.setSelectedItem("AND");
+						listaOperadoresMethod2.setSelectedItem("AND");
 					} catch (NumberFormatException ez) {
 						JOptionPane.showMessageDialog(frame, "Preenche o campo com um número ou desmarque a checkbox!", "ERROR",
 								JOptionPane.ERROR_MESSAGE);
@@ -708,7 +731,18 @@ public class GUI {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				  
+				if(jtf1.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(frame, "Introduza o nome da CustomRule!", "WARNING",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+			}
+				for(CustomRule crs: rulesList.getSelectedValuesList()) {
+					if(crs.getName().equals(jtf1.getText())) {
+						JOptionPane.showMessageDialog(frame, "O nome escolhido já está a ser utilizado!", "WARNING",
+								JOptionPane.WARNING_MESSAGE);
+						return;
+					}
+				}
 				cr = new CustomRule(jtf1.getText(),jtf2.getText(),jtf3.getText(),
 						            jtf4.getText(),jtf5.getText(),jtf6.getText(),
 						            jtf7.getText(),jtf8.getText(),jtf9.getText());
@@ -757,7 +791,7 @@ public class GUI {
 			x.addKeyListener(new KeyAdapter() {
 				public void keyTyped(KeyEvent e) {
 					char input = e.getKeyChar();
-					if ((input < '0' || input > '9') && input != '\b') {
+					if ((input < '0' || input > '9') && input != '\b' && input==',') {
 						e.consume();
 						System.out.println("Invalid character!");
 					}
