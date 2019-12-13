@@ -15,7 +15,7 @@ import java.util.Calendar;
  */
 public class CustomRule {
 	/**
-	 * Represents the attributes of the DefectCalculator class.
+	 * Represents the attributes of the CustomRule class.
 	 */
 	private String name;
 	private String LOC_Max;
@@ -27,7 +27,18 @@ public class CustomRule {
 	private String LAA_Min;
 	private String LAA_Max;
 	private ArrayList<CustomDataEntry> customRuleData;
-	
+	/**
+	 * Creates the CustomRule with the specific parameters.
+	 * @param name is the name of the CustomRule.
+	 * @param LOC_Max is the maximum value of LOC
+	 * @param LOC_Min is the minimum value of LOC.
+	 * @param CYCLO_Max is the maximum value of CYCLO.
+	 * @param CYCLO_Min is the minimum value of CYCLO.
+	 * @param ATFD_Max is the maximum value of ATFD
+	 * @param ATFD_Min is the minimum value of ATFD.
+	 * @param LAA_Max is the maximum value of LAA
+	 * @param LAA_Min is the minimum value of LAA.
+	 */
 	public CustomRule(String name, String LOC_Max, String LOC_Min, String CYCLO_Max, 
 		String CYCLO_Min, String ATFD_Max, String ATFD_Min, String LAA_Max, String LAA_Min) {
 		
@@ -177,7 +188,9 @@ public class CustomRule {
 	public ArrayList<CustomDataEntry> getCustomRuleData() {
 		return customRuleData;
 	}
-	
+	/**
+	 * @return the name of the CustomRule.
+	 */
 	public String getName() {
 		return name;
 	}
