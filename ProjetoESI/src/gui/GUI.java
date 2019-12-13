@@ -479,7 +479,7 @@ public class GUI {
 					fieldpmd3.setText(Integer.toString(calculator.getAdciPMD()));
 					fieldpmd4.setText(Integer.toString(calculator.getAdiiPMD()));
 
-					ExcelAccuracy test = new ExcelAccuracy(bofe);
+					ExcelAccuracy test = new ExcelAccuracy(bofe.objects());
 					labelmedia.setText(
 							"Percentagem média da accuracy do iPlasma e PMD: " + test.getAverageAccuracy() + "%");
 					labelpercent
@@ -651,7 +651,7 @@ public class GUI {
 				fieldpmd3.setText(Integer.toString(calculator.getAdciPMD()));
 				fieldpmd4.setText(Integer.toString(calculator.getAdiiPMD()));
 
-				ExcelAccuracy test = new ExcelAccuracy(bofe);
+				ExcelAccuracy test = new ExcelAccuracy(entries);
 				labelmedia.setText(
 						"Percentagem média da accuracy do iPlasma e PMD: " + test.getAverageAccuracy() + "%");
 				labelpercent.setText(

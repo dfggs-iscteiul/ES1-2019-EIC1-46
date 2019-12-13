@@ -19,9 +19,9 @@ public class ExcelAccuracy {
 	private double entryAccuracy;
 	private double customAccuracy;
 
-	public ExcelAccuracy(BuildObjectsFromExcel bofe) {
+	public ExcelAccuracy(ArrayList<DataEntry> entries) {
 
-		entradas = bofe.objects();
+		entradas = entries;
 		int iPlasmaCerto = 0;
 		int pmdCerto = 0;
 		int entradaCerta = 0;
@@ -81,7 +81,7 @@ public class ExcelAccuracy {
 		File excelFile = new File("Long-Method.xlsx");
 		BuildObjectsFromExcel helper = new BuildObjectsFromExcel();
 		helper.buildObjects(excelFile);
-		ExcelAccuracy teste = new ExcelAccuracy(helper);
+		ExcelAccuracy teste = new ExcelAccuracy(helper.objects());
 		System.out.println("Media: " + teste.getAverageAccuracy() + "%");
 		System.out.println("Linhas 100% certas: " + teste.getEntryAccuracy() + "%");
 	}

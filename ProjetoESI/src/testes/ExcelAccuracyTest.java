@@ -18,7 +18,7 @@ class ExcelAccuracyTest {
 	static void setUpBeforeClass() throws Exception {
 		BuildObjectsFromExcel helper = new BuildObjectsFromExcel();
 		helper.buildObjects(new File("Long-Method.xlsx"));
-		ea = new ExcelAccuracy(helper);
+		ea = new ExcelAccuracy(helper.objects());
 	}
 
 	@Test
