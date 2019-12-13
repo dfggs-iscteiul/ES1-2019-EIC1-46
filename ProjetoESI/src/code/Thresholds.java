@@ -59,69 +59,135 @@ public class Thresholds {
 	public ArrayList<DataEntry> getInputs() {
 		return inputs;
 	}
+	/**
+	 * @return the name of the treshold.
+	 */
 	public String getName() {
 		return name;
 	}
+	/**
+	 * Setter for the name of the treshold
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+	/**
+	 * @return if rule1(LOC) is active
+	 */
 	public boolean isRule1() {
 		return rule1;
 	}
+	/**
+	 * Setter for rule1(LOC)
+	 */
 	public void setRule1(boolean rule1) {
 		this.rule1 = rule1;
 	}
+	/**
+	 * @return if rule2(CYCLO) is active
+	 */
 	public boolean isRule2() {
 		return rule2;
 	}
+	/**
+	 * Setter for rule2(CYCLO)
+	 */
 	public void setRule2(boolean rule2) {
 		this.rule2 = rule2;
 	}
+	/**
+	 * @return if rule3(AFTD) is active
+	 */
 	public boolean isRule3() {
 		return rule3;
 	}
+	/**
+	 * Setter for rule3(AFTD)
+	 */
 	public void setRule3(boolean rule3) {
 		this.rule3 = rule3;
 	}
+	/**
+	 * @return if rule4(LAA) is active
+	 */
 	public boolean isRule4() {
 		return rule4;
 	}
+	/**
+	 * Setter for rule4(LAA)
+	 */
 	public void setRule4(boolean rule4) {
 		this.rule4 = rule4;
 	}
+	/**
+	 * @return logicalOperator1 AND(true) or OR(false) for is_long_method
+	 */
 	public boolean isLogicalOperator1() {
 		return logicalOperator1;
 	}
+	/**
+	 * Setter for setLogicalOperator1
+	 */
 	public void setLogicalOperator1(boolean logicalOperator1) {
 		this.logicalOperator1 = logicalOperator1;
 	}
+	/**
+	 * @return logicalOperator2 AND or OR for is_feature_envy.
+	 */
 	public boolean isLogicalOperator2() {
 		return logicalOperator2;
 	}
+	/**
+	 * Setter for setLogicalOperator2
+	 */
 	public void setLogicalOperator2(boolean logicalOperator2) {
 		this.logicalOperator2 = logicalOperator2;
 	}
+	/**
+	 * @return LOC
+	 */
 	public int getLOCVal() {
 		return LOCVal;
 	}
+	/**
+	 * Setter for LOC
+	 */
 	public void setLOCVal(int lOCVal) {
 		LOCVal = lOCVal;
 	}
+	/**
+	 * @return CYCLO
+	 */
 	public int getCYCLOVal() {
 		return CYCLOVal;
 	}
+	/**
+	 * Setter for CYCLO
+	 */
 	public void setCYCLOVal(int cYCLOVal) {
 		CYCLOVal = cYCLOVal;
 	}
+	/**
+	 * @return AFTD
+	 */
 	public int getAFTDVal() {
 		return AFTDVal;
 	}
+	/**
+	 * Setter for AFTD
+	 */
 	public void setAFTDVal(int aFTDVal) {
 		AFTDVal = aFTDVal;
 	}
+	/**
+	 * @return LAA
+	 */
 	public float getLAAVal() {
 		return LAAVal;
 	}
+	/**
+	 * Setter for LAA
+	 */
 	public void setLAAVal(float lAAVal) {
 		LAAVal = lAAVal;
 	}
