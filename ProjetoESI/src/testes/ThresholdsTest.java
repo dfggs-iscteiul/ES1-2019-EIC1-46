@@ -1,5 +1,8 @@
 package testes;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 import code.BuildObjectsFromExcel;
@@ -31,6 +34,34 @@ class ThresholdsTest {
 		th5.calcThresholds();
 		th6.calcThresholds();
 
+	}
+	
+	@Test
+	void testGettersSetters() {
+		setUp();
+		th1.calcThresholds();
+		th1.setName("Teste");
+		assertEquals("Teste", th1.getName());
+		th1.setRule1(true);
+		assertTrue(th1.isRule1());
+		th1.setRule2(true);
+		assertTrue(th1.isRule2());
+		th1.setRule3(true);
+		assertTrue(th1.isRule3());
+		th1.setRule4(true);
+		assertTrue(th1.isRule4());
+		th1.setLogicalOperator1(true);
+		assertTrue(th1.isLogicalOperator1());
+		th1.setLogicalOperator2(true);
+		assertTrue(th1.isLogicalOperator2());
+		th1.setLOCVal(0);
+		th1.setCYCLOVal(0);
+		th1.setLAAVal(0);
+		th1.setAFTDVal(0);
+		assertEquals(0,th1.getAFTDVal());
+		assertEquals(0,th1.getLAAVal());
+		assertEquals(0,th1.getCYCLOVal());
+		assertEquals(0,th1.getLOCVal());
 	}
 
 }

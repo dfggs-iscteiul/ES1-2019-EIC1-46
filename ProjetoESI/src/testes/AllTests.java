@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @SelectClasses({ BuildObjectsFromExcelTest.class, ExcelAccuracyTest.class, RuleAccuracyTest.class, 
 	CustomDataEntryTest.class, CustomRuleTest.class, DetectedDefectTest.class , DefectCalculatorTest.class, 
 	DataEntryTableModelTest.class, DetectedDefectTableModelTest.class, CustomDataEntryTableModelTest.class,
-	ThresholdsTest.class})
+	ThresholdsTest.class, MainTest.class})
 public class AllTests {
 
 }
