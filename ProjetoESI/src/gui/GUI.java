@@ -115,6 +115,8 @@ public class GUI {
 	private ArrayList<CustomRule> customRules;
 	private DefaultListModel<CustomRule> listModel = new DefaultListModel<>();
 	private JList<CustomRule> rulesList = new JList<>(listModel);
+	private DefaultListModel<Thresholds> listThresholds = new DefaultListModel<>();
+	private JList <Thresholds> threhsoldsList = new JList<>(listThresholds);
 
 	/**
 	 * Builds the structure of the interface and adds button listeners.
@@ -137,23 +139,35 @@ public class GUI {
 
 		gbc.insets = new Insets(5, 5, 5, 5);
 
+
+		//////////
+		////////////////////// TAB1 ---- VISUALIZAR DADOS
+		//////////
+		
+		fileStatus = new JLabel("FICHEIRO AINDA NÃO IMPORTADO");
+		fileStatus.setForeground(Color.RED);
+		JButton button = new JButton("Importar ficheiro");
+		labelmedia = new JLabel();
+		labelpercent = new JLabel();
+
+		gbc.gridx = 0; gbc.gridy = 1; jPanel1.add(labelmedia, gbc);
+		gbc.gridx = 0; gbc.gridy = 2; jPanel1.add(labelpercent, gbc);
+		gbc.gridx = 0; gbc.gridy = 3; jPanel1.add(button, gbc);
+		gbc.gridx = 0; gbc.gridy = 4; jPanel1.add(fileStatus,gbc); 
+		
 		////////////////
 		////////////////////// TAB1 ---- CRIAR THRESHOLDS
 		////////////////
 
 		JLabel label00 = new JLabel("Regra ativa");
-		JLabel label01 = new JLabel("Threshold");
 		JLabel label03 = new JLabel("Valor");
-		JLabel label10 = new JLabel("Regra ativa");
-		JLabel label11 = new JLabel("Threshold");
-		JLabel label13 = new JLabel("Valor");
 		JLabel label1 = new JLabel("LOC");
 		JLabel label2 = new JLabel("CYCLO");
 		JLabel label3 = new JLabel("AFTD");
 		JLabel label4 = new JLabel("LAA");
 		JLabel labelOp1 = new JLabel("Operador Long Method");
 		JLabel labelOp2 = new JLabel("Operador Feature Envy");
-
+		JLabel labelName = new JLabel("Nome do Threshold");
 		JCheckBox c1 = new JCheckBox();
 		JCheckBox c2 = new JCheckBox();
 		JCheckBox c3 = new JCheckBox();
@@ -164,65 +178,48 @@ public class GUI {
 		String operadorLM = (String) listaOperadoresMethod1.getSelectedItem();
 		String operadorFE = (String) listaOperadoresMethod2.getSelectedItem();
 
-		fileStatus = new JLabel("FICHEIRO AINDA NÃO IMPORTADO");
-		fileStatus.setForeground(Color.RED);
-		
-		
-		JButton button = new JButton("Importar ficheiro");
 		JButton button2 = new JButton("Criar threshold");
-		
 		button2.setEnabled(false);
 
 		JTextField tField1 = new JTextField();
 		JTextField tField2 = new JTextField();
 		JTextField tField3 = new JTextField();
 		JTextField tField4 = new JTextField();
+		JTextField tField5 = new JTextField();
 		
 		tField1.setPreferredSize(new Dimension(80, 20));
 		tField2.setPreferredSize(new Dimension(80, 20));
 		tField3.setPreferredSize(new Dimension(80, 20));
 		tField4.setPreferredSize(new Dimension(80, 20));
+		tField5.setPreferredSize(new Dimension(80, 20));
 		
-		gbc.gridx = 0; gbc.gridy = 0; jPanel1.add(label00, gbc);
-		gbc.gridx = 1; gbc.gridy = 0; jPanel1.add(label01, gbc);
-		gbc.gridx = 2; gbc.gridy = 0; jPanel1.add(label03, gbc);
-		gbc.gridx = 4; gbc.gridy = 0; jPanel1.add(label10, gbc);
-		gbc.gridx = 5; gbc.gridy = 0; jPanel1.add(label11, gbc);
-		gbc.gridx = 7; gbc.gridy = 0; jPanel1.add(label13, gbc);
-		gbc.gridx = 1; gbc.gridy = 1; jPanel1.add(label1, gbc);
-		gbc.gridx = 1; gbc.gridy = 2; jPanel1.add(label2, gbc);
-		gbc.gridx = 5; gbc.gridy = 1; jPanel1.add(label3, gbc);
-		gbc.gridx = 5; gbc.gridy = 2; jPanel1.add(label4, gbc);
-		gbc.gridx = 0; gbc.gridy = 3; jPanel1.add(labelOp1, gbc);
-		gbc.gridx = 4; gbc.gridy = 3; jPanel1.add(labelOp2, gbc);
-		gbc.gridx = 2; gbc.gridy = 1; jPanel1.add(tField1, gbc);
-		gbc.gridx = 2; gbc.gridy = 2; jPanel1.add(tField2, gbc);
-		gbc.gridx = 7; gbc.gridy = 1; jPanel1.add(tField3, gbc);
-		gbc.gridx = 7; gbc.gridy = 2; jPanel1.add(tField4, gbc);
-		gbc.gridx = 0; gbc.gridy = 1; jPanel1.add(c1, gbc);
-		gbc.gridx = 0; gbc.gridy = 2; jPanel1.add(c2, gbc);
-		gbc.gridx = 4; gbc.gridy = 1; jPanel1.add(c3, gbc);
-		gbc.gridx = 4; gbc.gridy = 2; jPanel1.add(c4, gbc);
-		gbc.gridx = 1; gbc.gridy = 3; jPanel1.add(listaOperadoresMethod1, gbc);
-		gbc.gridx = 5; gbc.gridy = 3; jPanel1.add(listaOperadoresMethod2, gbc); 
-		gbc.gridx = 2; gbc.gridy = 4; jPanel1.add(fileStatus, gbc);
-		gbc.gridx = 1; gbc.gridy = 4; jPanel1.add(button, gbc);
-		gbc.gridx = 0; gbc.gridy = 4;jPanel1.add(button2, gbc);
-
+		gbc.gridx = 2; gbc.gridy = 0; jPanel2.add(label00, gbc);
+		gbc.gridx = 1; gbc.gridy = 0; jPanel2.add(label03, gbc);
+		gbc.gridx = 0; gbc.gridy = 3; jPanel2.add(label1, gbc);
+		gbc.gridx = 0; gbc.gridy = 4; jPanel2.add(label2, gbc);
+		gbc.gridx = 0; gbc.gridy = 6; jPanel2.add(label3, gbc);
+		gbc.gridx = 0; gbc.gridy = 7; jPanel2.add(label4, gbc);
+		gbc.gridx = 0; gbc.gridy = 5; jPanel2.add(labelOp1, gbc);
+		gbc.gridx = 0; gbc.gridy = 8; jPanel2.add(labelOp2, gbc);
+		gbc.gridx = 0; gbc.gridy = 1; jPanel2.add(labelName, gbc);
+		gbc.gridx = 1; gbc.gridy = 3; jPanel2.add(tField1, gbc);
+		gbc.gridx = 1; gbc.gridy = 4; jPanel2.add(tField2, gbc);
+		gbc.gridx = 1; gbc.gridy = 6; jPanel2.add(tField3, gbc);
+		gbc.gridx = 1; gbc.gridy = 7; jPanel2.add(tField4, gbc);
+		gbc.gridx = 1; gbc.gridy = 1; jPanel2.add(tField5, gbc);
+		gbc.gridx = 2; gbc.gridy = 3; jPanel2.add(c1, gbc);
+		gbc.gridx = 2; gbc.gridy = 4; jPanel2.add(c2, gbc);
+		gbc.gridx = 2; gbc.gridy = 6; jPanel2.add(c3, gbc);
+		gbc.gridx = 2; gbc.gridy = 7; jPanel2.add(c4, gbc);
+		gbc.gridx = 1; gbc.gridy = 5; jPanel2.add(listaOperadoresMethod1, gbc);
+		gbc.gridx = 1; gbc.gridy = 8; jPanel2.add(listaOperadoresMethod2, gbc); 
+		gbc.gridx = 1; gbc.gridy = 9; jPanel2.add(button2, gbc);
+		gbc.gridx = 3; gbc.gridy = 6; jPanel2.add(new JScrollPane(threhsoldsList),gbc);
+		
 		list.add(tField1);
 		list.add(tField2);
 		list.add(tField3);
 		list.add(tField4);
-
-		//////////
-		////////////////////// TAB2 ---- VISUALIZAR DADOS
-		//////////
-
-		labelmedia = new JLabel();
-		labelpercent = new JLabel();
-
-		gbc.gridx = 0; gbc.gridy = 1; jPanel2.add(labelmedia, gbc);
-		gbc.gridx = 0; gbc.gridy = 2; jPanel2.add(labelpercent, gbc);
 
 		///////////////
 		///////////////////////////////// TAB3 -- DEFEITOS
@@ -410,8 +407,8 @@ public class GUI {
 		gbc.gridx = 2; gbc.gridy = 1; jPanel5.add(new JScrollPane(table1), gbc);
 		gbc.gridx = 1; gbc.gridy = 2; jPanel5.add(labelmedia1, gbc);
 
-		jTabbedPane.addTab("Criar Threshold", jPanel1);
-		jTabbedPane.addTab("Visualizar dados", jPanel2);
+		jTabbedPane.addTab("Visualizar dados", jPanel1);
+		jTabbedPane.addTab("Criar Threshold", jPanel2);
 		jTabbedPane.addTab("Defeitos", jPanel3);
 		jTabbedPane.addTab("Criar Regra", jPanel4);
 		jTabbedPane.addTab("Ver Regra", jPanel5);
@@ -453,11 +450,11 @@ public class GUI {
 					JTable table = new JTable(model);
 					jScrollPane = new JScrollPane(table);
 
-					gbc.gridx = 0; gbc.gridy = 0; jPanel2.add(jScrollPane, gbc);
+					gbc.gridx = 0; gbc.gridy = 0; jPanel1.add(jScrollPane, gbc);
 
 					calculator = new DefectCalculator(entries);
 					calculator.CalculateDefects();
-					jPanel2.add(jScrollPane, gbc);
+					jPanel1.add(jScrollPane, gbc);
 
 					modelDefect = new DetectedDefectTableModel(calculator.getDefects());
 					JTable tableDefect = new JTable(modelDefect);
@@ -539,16 +536,17 @@ public class GUI {
 							logicalOperator2 = true;
 						else
 							logicalOperator2 = false;
-						Thresholds th = new Thresholds(bofe, c1.isSelected(), c2.isSelected(), c3.isSelected(),
+						Thresholds th = new Thresholds(bofe,tField5.getText(), c1.isSelected(), c2.isSelected(), c3.isSelected(),
 								c4.isSelected(), logicalOperator1, logicalOperator2, text1, text2, text3, text4);
 						th.calcThresholds();
-						jPanel2.remove(jScrollPane);
+						listThresholds.addElement(th);
+						jPanel1.remove(jScrollPane);
 						entries = th.getInputs();
 						TableModel model = new DataEntryTableModel(entries);
 						JTable table = new JTable(model);
 						jScrollPane = new JScrollPane(table);
 						
-						gbc.gridx = 0; gbc.gridy = 0; jPanel2.add(jScrollPane, gbc);
+						gbc.gridx = 0; gbc.gridy = 0; jPanel1.add(jScrollPane, gbc);
 						calculator = new DefectCalculator(entries);
 						calculator.CalculateDefects();
 						// TODO

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Thresholds {
 
 	private ArrayList<DataEntry> inputs;
+	private String name;
 	private boolean rule1;
 	private boolean rule2;
 	private boolean rule3;
@@ -23,6 +24,7 @@ public class Thresholds {
 /**
  * Creates the Threshold with the specific parameters.
  * @param bofe Is an object of type BuildObjetsFromExcel that helps reading the excel file
+ * @param name Is the name of the Threshold.
  * @param rule1 Active(true) or inactive(false) for LOC.
  * @param rule2 Active or inactive for CYCLO.
  * @param rule3 Active or inactive for AFTD.
@@ -34,10 +36,11 @@ public class Thresholds {
  * @param AFTDVal value of AFTD threshold.
  * @param LAAVal value of LAA threshold.
  */
-	public Thresholds(BuildObjectsFromExcel bofe, boolean rule1, boolean rule2, boolean rule3,
+	public Thresholds(BuildObjectsFromExcel bofe,String name, boolean rule1, boolean rule2, boolean rule3,
 			boolean rule4, boolean logicalOperator1, boolean logicalOperator2, int LOCVal, int CYCLOVal,
 			int AFTDVal, float LAAVal) {
 		inputs = bofe.objects();
+		this.name=name;
 		this.rule1=rule1;
 		this.rule2=rule2;
 		this.rule3=rule3;

@@ -12,12 +12,12 @@ class ThresholdsTest {
 	protected void setUp() {
 		BuildObjectsFromExcel bofe = new BuildObjectsFromExcel();
 
-		th1 = new Thresholds(bofe,false,false,false,false,false,false,10,5,4,0.3f);
-		th2 = new Thresholds(bofe,true,true,true,true,true,true,10,5,4,0.3f);
-		th3 = new Thresholds(bofe,true,true,false,false,true,false,10,5,4,0.3f);
-		th4 = new Thresholds(bofe,true,true,false,false,true,false,10,5,4,0.3f);
-		th5 = new Thresholds(bofe,true,true,true,false,false,true,10,5,4,0.3f);
-		th6 = new Thresholds(bofe,false,true,false,true,true,true,10,5,4,0.3f);
+		th1 = new Thresholds(bofe,"a",false,false,false,false,false,false,10,5,4,0.3f);
+		th2 = new Thresholds(bofe,"b",true,true,true,true,true,true,10,5,4,0.3f);
+		th3 = new Thresholds(bofe,"c",true,true,false,false,true,false,10,5,4,0.3f);
+		th4 = new Thresholds(bofe,"d",true,true,false,false,true,false,10,5,4,0.3f);
+		th5 = new Thresholds(bofe,"e",true,true,true,false,false,true,10,5,4,0.3f);
+		th6 = new Thresholds(bofe,"f",false,true,false,true,true,true,10,5,4,0.3f);
 
 	}
 
