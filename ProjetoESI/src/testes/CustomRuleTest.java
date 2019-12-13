@@ -66,4 +66,8 @@ class CustomRuleTest {
 		cr.getCustomRuleData();
 		cr10.getCustomRuleData();
 	}
+	@Test
+	void getNameTest() {
+		cr.getName();
+	}
 }
